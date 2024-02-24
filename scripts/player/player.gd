@@ -104,5 +104,8 @@ func apply_gravity(gravity_value: float) -> void:
 	if not is_on_floor():
 		velocity.y -= gravity_value;
 
+func damage(amount: float):
+	pass;
+
 func CoreHealthChangedListener(oldValue: float, newValue: float):
 	core_health_changed.emit(oldValue, newValue);

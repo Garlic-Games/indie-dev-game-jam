@@ -12,14 +12,15 @@ var _forceBackwardDirection = Vector3(0, 0.08, -1);
 func _ready():
 	magnetWrench.push_pull_force_applied.connect(_weaponAppliesKnockBack);
 
-
-func _input(event):
-	if event.is_action_pressed("action_primary"):
+func _process(delta):
+	if Input.is_action_pressed("action_primary"):
+		magnetWrench.Shoot();
+		
+	if Input.is_action_pressed("action_secondary"):
 		magnetWrench.Melee();
 
-	if event.is_action_pressed("action_secondary"):
-		magnetWrench.Shoot();
 
+func _input(event: InputEvent):
 	if event.is_action_pressed("scroll"):
 		magnetWrench.ToogleMode();
 
