@@ -1,8 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://cvm7erjms6aje"]
+[gd_scene load_steps=6 format=3 uid="uid://cvm7erjms6aje"]
 
 [ext_resource type="PackedScene" uid="uid://c8n6fvm4iot6m" path="res://prefabs/world/terrain.tscn" id="1_jdpei"]
+[ext_resource type="PackedScene" uid="uid://gli4qu8qcdb4" path="res://prefabs/player/player.tscn" id="2_ia05s"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_oq5vq"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_qrb7q"]
+sky_material = SubResource("ProceduralSkyMaterial_oq5vq")
+
+[sub_resource type="Environment" id="Environment_81k2x"]
+background_mode = 2
+sky = SubResource("Sky_qrb7q")
+tonemap_mode = 2
 
 [node name="Guillem" type="Node3D"]
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_81k2x")
+
 [node name="Terrain" parent="." instance=ExtResource("1_jdpei")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.485682, 0, 1.58403)
+
+[node name="Player" parent="." instance=ExtResource("2_ia05s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.36818, 0.125, -1.90568)
