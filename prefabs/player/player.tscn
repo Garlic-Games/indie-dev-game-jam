@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://gli4qu8qcdb4"]
+[gd_scene load_steps=13 format=3 uid="uid://gli4qu8qcdb4"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_pa3ln"]
 [ext_resource type="Script" path="res://scripts/player/player_camera.gd" id="2_g3eqh"]
 [ext_resource type="PackedScene" uid="uid://cuyh01p314qxu" path="res://art/models/weapon/magnet_wrench_scene.tscn" id="2_u8ekd"]
 [ext_resource type="Script" path="res://scripts/player/steps.gd" id="3_5dhcn"]
 [ext_resource type="Script" path="res://scripts/player/mouse_capture_input.gd" id="4_bbpdd"]
+[ext_resource type="Script" path="res://scripts/player/weapon_action.gd" id="4_fxg3s"]
 [ext_resource type="PackedScene" uid="uid://4xwpnxm4pnpi" path="res://prefabs/player_hud.tscn" id="5_ojnom"]
 [ext_resource type="Script" path="res://scripts/player/viewport_camera.gd" id="5_w1ppr"]
 
@@ -43,6 +44,9 @@ script = ExtResource("3_5dhcn")
 
 [node name="MouseCaptureInput" type="Node" parent="."]
 script = ExtResource("4_bbpdd")
+
+[node name="WeaponAction" type="Node" parent="."]
+script = ExtResource("4_fxg3s")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 10

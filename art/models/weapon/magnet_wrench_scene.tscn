@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://cuyh01p314qxu"]
+[gd_scene load_steps=3 format=3 uid="uid://cuyh01p314qxu"]
 
 [ext_resource type="PackedScene" uid="uid://d1fs22shg0acj" path="res://art/models/weapon/magnet_wrench.glb" id="1_0oegk"]
+[ext_resource type="Script" path="res://scripts/weapons/magnet_wrench_weapon.gd" id="2_tym7w"]
 
 [node name="magnet_wrench" instance=ExtResource("1_0oegk")]
+script = ExtResource("2_tym7w")
 
 [node name="Magnet" parent="." index="0"]
 layers = 4
@@ -14,4 +16,3 @@ gi_mode = 0
 
 [node name="Spring" parent="." index="2"]
 layers = 4
-gi_mode = 0

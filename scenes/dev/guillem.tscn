@@ -17,4 +17,4 @@ environment = ExtResource("1_8q7bv")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.485682, 0, 1.58403)
 
 [node name="Player" parent="." instance=ExtResource("2_ia05s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.485682, 4.35459, 1.58403)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.486, 0.223912, 1.584)
