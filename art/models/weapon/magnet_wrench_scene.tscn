@@ -3,3 +3,15 @@
 [ext_resource type="PackedScene" uid="uid://d1fs22shg0acj" path="res://art/models/weapon/magnet_wrench.glb" id="1_0oegk"]
 
 [node name="magnet_wrench" instance=ExtResource("1_0oegk")]
+
+[node name="Magnet" parent="." index="0"]
+layers = 4
+gi_mode = 0
+
+[node name="Shaft" parent="." index="1"]
+layers = 4
+gi_mode = 0
+
+[node name="Spring" parent="." index="2"]
+layers = 4
+gi_mode = 0

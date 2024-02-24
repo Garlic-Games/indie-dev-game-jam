@@ -1,27 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://cvm7erjms6aje"]
+[gd_scene load_steps=4 format=3 uid="uid://cvm7erjms6aje"]
 
+[ext_resource type="Environment" uid="uid://celdecb2ba0qm" path="res://art/environment/main_environment.tres" id="1_8q7bv"]
 [ext_resource type="PackedScene" uid="uid://c8n6fvm4iot6m" path="res://prefabs/world/terrain.tscn" id="1_jdpei"]
 [ext_resource type="PackedScene" uid="uid://gli4qu8qcdb4" path="res://prefabs/player/player.tscn" id="2_ia05s"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_oq5vq"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-
-[sub_resource type="Sky" id="Sky_qrb7q"]
-sky_material = SubResource("ProceduralSkyMaterial_oq5vq")
-
-[sub_resource type="Environment" id="Environment_81k2x"]
-background_mode = 2
-sky = SubResource("Sky_qrb7q")
-tonemap_mode = 2
-
 [node name="Guillem" type="Node3D"]
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 36.7578, 0)
+shadow_enabled = true
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_81k2x")
+environment = ExtResource("1_8q7bv")
 
 [node name="Terrain" parent="." instance=ExtResource("1_jdpei")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.485682, 0, 1.58403)
 
 [node name="Player" parent="." instance=ExtResource("2_ia05s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.36818, 0.125, -1.90568)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.485682, 4.35459, 1.58403)

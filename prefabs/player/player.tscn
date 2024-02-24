@@ -1,14 +1,25 @@
-[gd_scene load_steps=8 format=3 uid="uid://gli4qu8qcdb4"]
+[gd_scene load_steps=12 format=3 uid="uid://gli4qu8qcdb4"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_pa3ln"]
 [ext_resource type="Script" path="res://scripts/player/player_camera.gd" id="2_g3eqh"]
+[ext_resource type="PackedScene" uid="uid://cuyh01p314qxu" path="res://art/models/weapon/magnet_wrench_scene.tscn" id="2_u8ekd"]
 [ext_resource type="Script" path="res://scripts/player/steps.gd" id="3_5dhcn"]
 [ext_resource type="Script" path="res://scripts/player/mouse_capture_input.gd" id="4_bbpdd"]
 [ext_resource type="PackedScene" uid="uid://4xwpnxm4pnpi" path="res://prefabs/player_hud.tscn" id="5_ojnom"]
+[ext_resource type="Script" path="res://scripts/player/viewport_camera.gd" id="5_w1ppr"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_r6sdq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_neenp"]
+
+[sub_resource type="Environment" id="Environment_y8kv6"]
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 2.0
+reflected_light_source = 1
+
+[sub_resource type="World3D" id="World3D_w6hpw"]
+environment = SubResource("Environment_y8kv6")
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("steps")]
 script = ExtResource("1_pa3ln")
@@ -16,15 +27,12 @@ steps = NodePath("Steps")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.999982, 0.00602135, 0, -0.00602135, 0.999982, 0, 0, 0, 1, 0, 1, 0)
+layers = 3
 mesh = SubResource("CapsuleMesh_r6sdq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_neenp")
-
-[node name="PlayerCamera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
-script = ExtResource("2_g3eqh")
 
 [node name="Steps" type="Node3D" parent="."]
 script = ExtResource("3_5dhcn")
@@ -36,9 +44,49 @@ script = ExtResource("3_5dhcn")
 [node name="MouseCaptureInput" type="Node" parent="."]
 script = ExtResource("4_bbpdd")
 
-[node name="PlayerHud" parent="." instance=ExtResource("5_ojnom")]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 10
 
-[connection signal="ammo_changed" from="." to="PlayerHud" method="AmmoChangedListener"]
-[connection signal="core_health_changed" from="." to="PlayerHud" method="CoreHealthChangedListener"]
-[connection signal="health_changed" from="." to="PlayerHud" method="PlayerHealthChangedListener"]
-[connection signal="stamina_changed" from="." to="PlayerHud" method="StaminaChangedListener"]
+[node name="PlayerCamera" type="Camera3D" parent="CanvasLayer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+cull_mask = 1048571
+current = true
+script = ExtResource("2_g3eqh")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
+own_world_3d = true
+world_3d = SubResource("World3D_w6hpw")
+transparent_bg = true
+handle_input_locally = false
+canvas_cull_mask = 4294966272
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+cull_mask = 4
+current = true
+script = ExtResource("5_w1ppr")
+
+[node name="WeaponHolder" type="Node3D" parent="CanvasLayer/SubViewportContainer/SubViewport/Camera3D"]
+
+[node name="magnet_wrench" parent="CanvasLayer/SubViewportContainer/SubViewport/Camera3D/WeaponHolder" instance=ExtResource("2_u8ekd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, -0.35, -1.11)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="CanvasLayer/SubViewportContainer/SubViewport/Camera3D"]
+transform = Transform3D(0.481019, -0.87671, 0, 0.87671, 0.481019, 0, 0, 0, 1, -7.68163, 6.22082, 0)
+
+[node name="PlayerHud" parent="CanvasLayer" instance=ExtResource("5_ojnom")]
+
+[connection signal="ammo_changed" from="." to="CanvasLayer/PlayerHud" method="AmmoChangedListener"]
+[connection signal="core_health_changed" from="." to="CanvasLayer/PlayerHud" method="CoreHealthChangedListener"]
+[connection signal="health_changed" from="." to="CanvasLayer/PlayerHud" method="PlayerHealthChangedListener"]
+[connection signal="stamina_changed" from="." to="CanvasLayer/PlayerHud" method="StaminaChangedListener"]
