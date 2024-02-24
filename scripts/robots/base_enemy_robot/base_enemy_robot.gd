@@ -1,5 +1,7 @@
+class_name BaseEnemyRobot;
 extends CharacterBody3D
 
+@export var focus_player: bool = false;
 @export var max_hp: float = 10;
 @onready var current_hp: float = max_hp :
 	get:
@@ -16,6 +18,7 @@ extends CharacterBody3D
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity");
 var loaded: bool = false;
 
+signal damaged(dmg: float);
 signal dead;
 
 func _ready():
@@ -53,6 +56,7 @@ func _physics_process(_delta):
 	
 func damage(ammount: float):
 	current_hp -= ammount;
+	damaged.emit(ammount);
 
 func die():
 	dead.emit();
