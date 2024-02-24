@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://cuyh01p314qxu"]
+
+[ext_resource type="PackedScene" uid="uid://d1fs22shg0acj" path="res://art/models/weapon/magnet_wrench.glb" id="1_0oegk"]
+
+[node name="magnet_wrench" instance=ExtResource("1_0oegk")]

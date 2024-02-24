@@ -2,20 +2,55 @@ class_name Player;
 extends CharacterBody3D
 
 @export_group("Player playersettings")
-@export var speed: float = 5.0;
+@export var walk_speed: float = 5.0;
+@export var run_speed: float = 7.5;
 @export var jump_speed: float = 5.0;
 @export var sensitivity: float = 2.0;
+@export_group("Stamina settings")
+@export var stamina_increase_ratio: float = 15.0;
+@export var stamina_decrease_ratio: float = 30.0;
+
 @export_group("Dependencies")
 @export var model: MaleBody = null;
 @export var steps: Steps = null;
-signal player_hurt;
+
+signal stamina_changed(before: float, after: float);
+signal health_changed(before: float, after: float);
+signal ammo_changed(before: float, after: float);
+signal core_health_changed(before: float, after: float);
+
+var _currentStamina: float = 100;
+var _currentHealth: float = 100;
+var _currentAmmo: float = 250;
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity");
 
+func _ready():
+	stamina_changed.emit(0, _currentStamina);
+	health_changed.emit(0, _currentHealth);
+	ammo_changed.emit(0, _currentAmmo);
+	
 
 func _physics_process(delta):
 	# Add the gravity.
 	apply_gravity(gravity * delta);
+	var mov_speed = walk_speed;
+	var newStamina = _currentStamina;
+	if Input.is_action_pressed("sprint"):
+		newStamina -= stamina_decrease_ratio * delta;
+		if(newStamina > 0):
+			mov_speed = run_speed;
+		if(newStamina < 0):
+			newStamina = 0;
+	else:
+		newStamina += stamina_increase_ratio * delta;
+		if newStamina > 100:
+			newStamina = 100;
+	if(newStamina != _currentStamina):
+		stamina_changed.emit(_currentStamina, newStamina);
+		_currentStamina = newStamina	
+	
 	if is_on_floor() && Input.is_action_just_pressed("jump"):
 		velocity.y = jump_speed;
 
@@ -27,7 +62,7 @@ func _physics_process(delta):
 			_walk();
 		else:
 			_stop();
-	apply_velocity(direction);
+	apply_velocity(direction, mov_speed);
 	move_and_slide();
 
 
@@ -45,7 +80,7 @@ func _stop():
 		steps.stop();
 
 
-func apply_velocity(direction: Vector3) -> void:
+func apply_velocity(direction: Vector3, speed: float) -> void:
 	if direction:
 		velocity.x = move_toward(velocity.x, direction.x * speed, speed);
 		velocity.z = move_toward(velocity.z, direction.z * speed, speed);
@@ -64,6 +99,5 @@ func apply_gravity(gravity_value: float) -> void:
 	if not is_on_floor():
 		velocity.y -= gravity_value;
 
-
-func ouch():
-	player_hurt.emit();
+func CoreHealthChangedListener(oldValue: float, newValue: float):
+	core_health_changed.emit(oldValue, newValue);

@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://gli4qu8qcdb4"]
+[gd_scene load_steps=8 format=3 uid="uid://gli4qu8qcdb4"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_pa3ln"]
 [ext_resource type="Script" path="res://scripts/player/player_camera.gd" id="2_g3eqh"]
 [ext_resource type="Script" path="res://scripts/player/steps.gd" id="3_5dhcn"]
 [ext_resource type="Script" path="res://scripts/player/mouse_capture_input.gd" id="4_bbpdd"]
+[ext_resource type="PackedScene" uid="uid://4xwpnxm4pnpi" path="res://prefabs/player_hud.tscn" id="5_ojnom"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_r6sdq"]
 
@@ -34,3 +35,10 @@ script = ExtResource("3_5dhcn")
 
 [node name="MouseCaptureInput" type="Node" parent="."]
 script = ExtResource("4_bbpdd")
+
+[node name="PlayerHud" parent="." instance=ExtResource("5_ojnom")]
+
+[connection signal="ammo_changed" from="." to="PlayerHud" method="AmmoChangedListener"]
+[connection signal="core_health_changed" from="." to="PlayerHud" method="CoreHealthChangedListener"]
+[connection signal="health_changed" from="." to="PlayerHud" method="PlayerHealthChangedListener"]
+[connection signal="stamina_changed" from="." to="PlayerHud" method="StaminaChangedListener"]

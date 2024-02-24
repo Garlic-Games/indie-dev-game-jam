@@ -1,0 +1,96 @@
+[gd_scene load_steps=4 format=3 uid="uid://4xwpnxm4pnpi"]
+
+[ext_resource type="Texture2D" uid="uid://c135qafciujvo" path="res://art/gradient/blue_progress_bar.tres" id="1_4o41m"]
+[ext_resource type="Script" path="res://scripts/player/player_hud.gd" id="1_mihol"]
+[ext_resource type="Texture2D" uid="uid://dmemd26vs0v0y" path="res://art/gradient/green_progress_bar.tres" id="2_agry7"]
+
+[node name="PlayerHud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mihol")
+
+[node name="BottomRight" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -176.0
+offset_top = -109.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="AmmoLabel" type="Label" parent="BottomRight"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 62.0
+grow_vertical = 0
+text = "30/3000
+"
+
+[node name="StaminaProgressBar" type="TextureProgressBar" parent="BottomRight"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -76.0
+offset_top = -154.0
+offset_right = -12.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+min_value = 1.0
+value = 100.0
+fill_mode = 3
+texture_under = ExtResource("1_4o41m")
+texture_progress = ExtResource("2_agry7")
+
+[node name="BottomLeft" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -248.0
+offset_right = 142.0
+grow_vertical = 0
+
+[node name="CoreHealthProgressBar" type="TextureProgressBar" parent="BottomLeft"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -150.0
+offset_right = 64.0
+grow_vertical = 0
+min_value = 1.0
+value = 100.0
+fill_mode = 3
+texture_under = ExtResource("1_4o41m")
+texture_progress = ExtResource("2_agry7")
+
+[node name="PlayerHealthProgressBar" type="TextureProgressBar" parent="BottomLeft"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -150.0
+grow_horizontal = 0
+grow_vertical = 0
+min_value = 1.0
+value = 100.0
+fill_mode = 3
+texture_under = ExtResource("1_4o41m")
+texture_progress = ExtResource("2_agry7")
