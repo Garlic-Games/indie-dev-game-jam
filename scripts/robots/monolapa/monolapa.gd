@@ -1,11 +1,22 @@
 extends CharacterBody3D
 
+@export var max_hp: float = 10;
+@onready var current_hp: float = max_hp :
+	get:
+		return current_hp;
+	set(value):
+		current_hp = value;
+		if current_hp <= 0:
+			die();
+
 @export var movement_speed: float = 5;
 @export var movement_target_position: Node3D;
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 @onready var agent: NavigationAgent3D = %Agent;
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity");
-var loaded = false;
+var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity");
+var loaded: bool = false;
+
+signal dead;
 
 func _ready():
 	loaded = false;
@@ -17,6 +28,8 @@ func _ready():
 	call_deferred("actor_setup");
 
 func actor_setup():
+	if !movement_target_position:
+		return;
 	# Wait for the first physics frame so the NavigationServer can sync.
 	await get_tree().physics_frame;
 	loaded = true;
@@ -27,6 +40,8 @@ func set_movement_target(movement_target: Vector3):
 	agent.set_target_position(movement_target)
 
 func _physics_process(_delta):
+	if !movement_target_position:
+		return;
 	if loaded:
 		set_movement_target(movement_target_position.global_position);
 	
@@ -36,3 +51,10 @@ func _physics_process(_delta):
 	
 	move_and_slide()
 	
+func damage(ammount: float):
+	current_hp -= ammount;
+
+func die():
+	dead.emit();
+	queue_free();	
+
