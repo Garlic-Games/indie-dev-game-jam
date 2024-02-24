@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dop0nlsoshcok"]
+
+[ext_resource type="PackedScene" uid="uid://dn7qh60xl6w73" path="res://art/models/enemies/monolapa/Robot.glb" id="1_3ikow"]
+[ext_resource type="Script" path="res://scripts/robots/monolapa/monolapa.gd" id="1_r5ftg"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ecrys"]
+radius = 0.792699
+height = 3.19736
+
+[node name="Monolapa" type="CharacterBody3D"]
+collision_layer = 8
+collision_mask = 17
+script = ExtResource("1_r5ftg")
+
+[node name="Mesh" parent="." instance=ExtResource("1_3ikow")]
+
+[node name="Agent" type="NavigationAgent3D" parent="."]
+unique_name_in_owner = true
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.59409, 0)
+shape = SubResource("CapsuleShape3D_ecrys")

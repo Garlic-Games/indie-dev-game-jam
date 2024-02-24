@@ -1,17 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://c8n6fvm4iot6m"]
+[gd_scene load_steps=4 format=3 uid="uid://c8n6fvm4iot6m"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_5gda6"]
+vertices = PackedVector3Array(-49.5, 0.625, -49.5, -49.5, 0.625, 49.5, 49.5, 0.625, 49.5, 49.5, 0.625, -49.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tkanc"]
-size = Vector3(50, 0.25, 50)
+size = Vector3(100, 0.25, 100)
 
 [sub_resource type="BoxMesh" id="BoxMesh_hvnoa"]
-size = Vector3(50, 0.25, 50)
+size = Vector3(100, 0.25, 100)
 
 [node name="Terrain" type="Node3D"]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_5gda6")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D"]
 shape = SubResource("BoxShape3D_tkanc")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D"]
 mesh = SubResource("BoxMesh_hvnoa")
+skeleton = NodePath("../../..")
