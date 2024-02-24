@@ -12,7 +12,8 @@ extends CharacterBody3D
 
 @export_group("Dependencies")
 @export var model: MaleBody = null;
-@export var steps: Steps = null;
+@export var stepsSfx: SFXRandomPlayer = null;
+@export var pickupSfx: SFXRandomPlayer = null;
 
 signal stamina_changed(before: float, after: float);
 signal health_changed(before: float, after: float);
@@ -73,15 +74,15 @@ func _physics_process(delta):
 func _walk():
 	if model:
 		model.walk();
-	if steps:
-		steps.walk();
+	if stepsSfx:
+		stepsSfx.reproduce();
 
 
 func _stop():
 	if model:
 		model.idle();
-	if steps:
-		steps.stop();
+	if stepsSfx:
+		stepsSfx.stop();
 
 
 func apply_velocity(direction: Vector3, speed: float) -> void:
@@ -111,6 +112,7 @@ func AddAmmo():
 	var newAmmo = _currentAmmo + 1;
 	ammo_changed.emit(_currentAmmo, newAmmo);
 	_currentAmmo = newAmmo;
+	pickupSfx.reproduce();
 
 func CoreHealthChangedListener(oldValue: float, newValue: float):
 	core_health_changed.emit(oldValue, newValue);

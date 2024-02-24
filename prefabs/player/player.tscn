@@ -1,13 +1,17 @@
-[gd_scene load_steps=13 format=3 uid="uid://gli4qu8qcdb4"]
+[gd_scene load_steps=17 format=3 uid="uid://gli4qu8qcdb4"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_pa3ln"]
 [ext_resource type="Script" path="res://scripts/player/player_camera.gd" id="2_g3eqh"]
 [ext_resource type="PackedScene" uid="uid://cuyh01p314qxu" path="res://art/models/weapon/magnet_wrench_scene.tscn" id="2_u8ekd"]
-[ext_resource type="Script" path="res://scripts/player/steps.gd" id="3_5dhcn"]
+[ext_resource type="AudioStream" uid="uid://bpu04sv8fkr1v" path="res://art/sounds/step1.wav" id="3_keqn8"]
 [ext_resource type="Script" path="res://scripts/player/mouse_capture_input.gd" id="4_bbpdd"]
 [ext_resource type="Script" path="res://scripts/player/weapon_action.gd" id="4_fxg3s"]
+[ext_resource type="AudioStream" uid="uid://c6bomhxmmyvoe" path="res://art/sounds/step2.wav" id="4_ht1sk"]
 [ext_resource type="PackedScene" uid="uid://4xwpnxm4pnpi" path="res://prefabs/player_hud.tscn" id="5_ojnom"]
 [ext_resource type="Script" path="res://scripts/player/viewport_camera.gd" id="5_w1ppr"]
+[ext_resource type="Script" path="res://scripts/player/sfx_random_player.gd" id="8_4qvy0"]
+[ext_resource type="AudioStream" uid="uid://qgisqpjnwe1y" path="res://art/sounds/pickup/pickup_1.wav" id="11_jqfms"]
+[ext_resource type="AudioStream" uid="uid://c8r3rsu53ydad" path="res://art/sounds/pickup/pickup_2.wav" id="12_nyq0f"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_r6sdq"]
 
@@ -22,11 +26,12 @@ reflected_light_source = 1
 [sub_resource type="World3D" id="World3D_w6hpw"]
 environment = SubResource("Environment_y8kv6")
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("steps")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("stepsSfx", "pickupSfx")]
 collision_layer = 2
 collision_mask = 63
 script = ExtResource("1_pa3ln")
-steps = NodePath("Steps")
+stepsSfx = NodePath("SFX/StepPlayer")
+pickupSfx = NodePath("SFX/PickupPlayer")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.999982, 0.00602135, 0, -0.00602135, 0.999982, 0, 0, 0, 1, 0, 1, 0)
@@ -36,13 +41,6 @@ mesh = SubResource("CapsuleMesh_r6sdq")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_neenp")
-
-[node name="Steps" type="Node3D" parent="."]
-script = ExtResource("3_5dhcn")
-
-[node name="step1" type="AudioStreamPlayer3D" parent="Steps"]
-
-[node name="step2" type="AudioStreamPlayer3D" parent="Steps"]
 
 [node name="MouseCaptureInput" type="Node" parent="."]
 script = ExtResource("4_bbpdd")
@@ -74,7 +72,7 @@ world_3d = SubResource("World3D_w6hpw")
 transparent_bg = true
 handle_input_locally = false
 canvas_cull_mask = 4294966272
-size = Vector2i(1152, 648)
+size = Vector2i(1280, 720)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
@@ -92,6 +90,33 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, -0.35, -0.259448)
 transform = Transform3D(0.481019, -0.87671, 0, 0.87671, 0.481019, 0, 0, 0, 1, -7.68163, 6.22082, 0)
 
 [node name="PlayerHud" parent="CanvasLayer" instance=ExtResource("5_ojnom")]
+
+[node name="SFX" type="Node3D" parent="."]
+
+[node name="StepPlayer" type="Node3D" parent="SFX" node_paths=PackedStringArray("audioSources")]
+script = ExtResource("8_4qvy0")
+audioSources = [NodePath("step1"), NodePath("step2")]
+
+[node name="step1" type="AudioStreamPlayer3D" parent="SFX/StepPlayer"]
+stream = ExtResource("3_keqn8")
+bus = &"SFX"
+
+[node name="step2" type="AudioStreamPlayer3D" parent="SFX/StepPlayer"]
+stream = ExtResource("4_ht1sk")
+bus = &"SFX"
+
+[node name="PickupPlayer" type="Node3D" parent="SFX" node_paths=PackedStringArray("audioSources")]
+script = ExtResource("8_4qvy0")
+audioSources = [NodePath("pickup_1"), NodePath("pìckup_2")]
+uniquePlay = false
+
+[node name="pickup_1" type="AudioStreamPlayer3D" parent="SFX/PickupPlayer"]
+stream = ExtResource("11_jqfms")
+bus = &"SFX"
+
+[node name="pìckup_2" type="AudioStreamPlayer3D" parent="SFX/PickupPlayer"]
+stream = ExtResource("12_nyq0f")
+bus = &"SFX"
 
 [connection signal="ammo_changed" from="." to="CanvasLayer/PlayerHud" method="AmmoChangedListener"]
 [connection signal="core_health_changed" from="." to="CanvasLayer/PlayerHud" method="CoreHealthChangedListener"]
