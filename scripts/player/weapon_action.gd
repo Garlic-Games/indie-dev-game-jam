@@ -1,15 +1,31 @@
 extends Node
 
 @onready var player: Player = $"..";
-@onready var magnetWrench: MagnetWrench = $"../CanvasLayer/SubViewportContainer/SubViewport/Camera3D/WeaponHolder/magnet_wrench";
+
+@export var magnet_push_force: float = 10.0;
+@export var magnetWrench: MagnetWrench;
+
+var _forceForwardDirection = Vector3(0, 0.08, 1);
+var _forceBackwardDirection = Vector3(0, 0.08, -1);
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _ready():
+	magnetWrench.push_pull_force_applied.connect(_weaponAppliesKnockBack);
+
+
 func _input(event):
 	if event.is_action_pressed("action_primary"):
-		magnetWrench.StartShootAnimation();
-	else:
-		magnetWrench.StopShootAnimation();
-		
-	if event.is_action("scroll") and event.is_pressed():
+		magnetWrench.Melee();
+
+	if event.is_action_pressed("action_secondary"):
+		magnetWrench.Shoot();
+
+	if event.is_action_pressed("scroll"):
 		magnetWrench.ToogleMode();
+
+
+func _weaponAppliesKnockBack(forward: bool):
+	var direction = _forceBackwardDirection;
+	if forward:
+		direction = _forceForwardDirection;
+	player._knockBack = direction * magnet_push_force;

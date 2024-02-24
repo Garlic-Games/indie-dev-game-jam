@@ -2,8 +2,8 @@ class_name Player;
 extends CharacterBody3D
 
 @export_group("Player playersettings")
-@export var walk_speed: float = 5.0;
-@export var run_speed: float = 7.5;
+@export var walk_speed: float = 7.0;
+@export var run_speed: float = 12.0;
 @export var jump_speed: float = 5.0;
 @export var sensitivity: float = 2.0;
 @export_group("Stamina settings")
@@ -22,6 +22,7 @@ signal core_health_changed(before: float, after: float);
 var _currentStamina: float = 100;
 var _currentHealth: float = 100;
 var _currentAmmo: float = 250;
+var _knockBack: Vector3 = Vector3.ZERO;
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity");
@@ -64,6 +65,9 @@ func _physics_process(delta):
 			_stop();
 	apply_velocity(direction, mov_speed);
 	move_and_slide();
+	_knockBack.x = lerp(_knockBack.x, 0.0, 0.2);
+	_knockBack.y = lerp(_knockBack.y, 0.0, 0.5);
+	_knockBack.z = lerp(_knockBack.z, 0.0, 0.2);
 
 
 func _walk():
@@ -82,11 +86,12 @@ func _stop():
 
 func apply_velocity(direction: Vector3, speed: float) -> void:
 	if direction:
-		velocity.x = move_toward(velocity.x, direction.x * speed, speed);
-		velocity.z = move_toward(velocity.z, direction.z * speed, speed);
+		velocity.x = direction.x * speed;
+		velocity.z = direction.z * speed;
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed);
 		velocity.z = move_toward(velocity.z, 0, speed);
+	velocity = velocity + _knockBack;
 
 
 func get_direction() -> Vector3:

@@ -45,8 +45,9 @@ script = ExtResource("3_5dhcn")
 [node name="MouseCaptureInput" type="Node" parent="."]
 script = ExtResource("4_bbpdd")
 
-[node name="WeaponAction" type="Node" parent="."]
+[node name="WeaponAction" type="Node" parent="." node_paths=PackedStringArray("magnetWrench")]
 script = ExtResource("4_fxg3s")
+magnetWrench = NodePath("../CanvasLayer/SubViewportContainer/SubViewport/Camera3D/WeaponHolder/magnet_wrench")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 10
