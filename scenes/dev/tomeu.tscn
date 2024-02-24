@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://ds3oo16ms1e62"]
+
+[ext_resource type="PackedScene" uid="uid://c8n6fvm4iot6m" path="res://prefabs/world/terrain.tscn" id="1_33ynw"]
+[ext_resource type="PackedScene" uid="uid://dop0nlsoshcok" path="res://prefabs/enemies/monolapa/monolapa.tscn" id="2_gpkjg"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nsegu"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_xpfri"]
+sky_material = SubResource("ProceduralSkyMaterial_nsegu")
+
+[sub_resource type="Environment" id="Environment_1xskn"]
+background_mode = 2
+sky = SubResource("Sky_xpfri")
+tonemap_mode = 2
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_a4sax"]
+emission_shape = 3
+emission_box_extents = Vector3(20, 2, 20)
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8sgx2"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="Tomeu" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1xskn")
+
+[node name="Terrain" parent="." instance=ExtResource("1_33ynw")]
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.0654, 0, 22)
+
+[node name="Monolapa" parent="." node_paths=PackedStringArray("movement_target_position") instance=ExtResource("2_gpkjg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.32734, 0.125, -13.8328)
+movement_target_position = NodePath("../Node3D")
+
+[node name="Camera3D" type="Camera3D" parent="Monolapa"]
+transform = Transform3D(-0.989078, 0.130911, -0.067733, 0.147395, 0.87846, -0.454514, 0, -0.459533, -0.888161, 0, 2.99952, -3.91722)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25242, 2.5339, 10.0419)
+amount = 50
+visibility_aabb = AABB(-44.2051, -4.80709, -45.5721, 89.0508, 16.9831, 84.3597)
+process_material = SubResource("ParticleProcessMaterial_a4sax")
+draw_pass_1 = SubResource("BoxMesh_8sgx2")
