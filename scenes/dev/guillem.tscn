@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvm7erjms6aje"]
+
+[ext_resource type="PackedScene" uid="uid://c8n6fvm4iot6m" path="res://prefabs/world/terrain.tscn" id="1_jdpei"]
+
+[node name="Guillem" type="Node3D"]
+
+[node name="Terrain" parent="." instance=ExtResource("1_jdpei")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.485682, 0, 1.58403)

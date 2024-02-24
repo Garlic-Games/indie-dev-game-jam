@@ -17,10 +17,15 @@ config/icon="res://icon.svg"
 [autoload]
 
 SceneLoader="*res://scripts/autoloads/scene_loader.gd"
+CyclopsAutoload="*res://addons/cyclops_level_builder/cyclops_global_scene.tscn"
 
 [dotnet]
 
 project/assembly_name="Indie Dev Gamejam"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/cyclops_level_builder/plugin.cfg")
 
 [input]
 
