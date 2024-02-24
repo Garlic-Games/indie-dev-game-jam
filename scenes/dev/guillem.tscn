@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cvm7erjms6aje"]
+[gd_scene load_steps=5 format=3 uid="uid://cvm7erjms6aje"]
 
 [ext_resource type="Environment" uid="uid://celdecb2ba0qm" path="res://art/environment/main_environment.tres" id="1_8q7bv"]
 [ext_resource type="PackedScene" uid="uid://c8n6fvm4iot6m" path="res://prefabs/world/terrain.tscn" id="1_jdpei"]
 [ext_resource type="PackedScene" uid="uid://gli4qu8qcdb4" path="res://prefabs/player/player.tscn" id="2_ia05s"]
+[ext_resource type="PackedScene" uid="uid://d3gkvcv3k28p5" path="res://prefabs/pickup/nut_bolt_pickup.tscn" id="4_lkiby"]
 
 [node name="Guillem" type="Node3D"]
 
@@ -18,3 +19,63 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.485682, 0, 1.58403)
 
 [node name="Player" parent="." instance=ExtResource("2_ia05s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.486, 0.223912, 1.584)
+
+[node name="NutBoltPickup" parent="." instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup2" parent="." instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup3" parent="." instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup4" parent="." instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup5" parent="." instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup6" parent="." instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup7" parent="." instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup8" parent="." instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup9" parent="." instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup10" parent="." instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup11" parent="." instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup12" parent="." instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup13" parent="." instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup14" parent="." instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup15" parent="." instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup16" parent="." instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup17" parent="." instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup18" parent="." instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup19" parent="." instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup20" parent="." instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)

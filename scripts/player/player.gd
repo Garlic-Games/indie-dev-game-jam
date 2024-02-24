@@ -106,6 +106,11 @@ func apply_gravity(gravity_value: float) -> void:
 
 func damage(amount: float):
 	pass;
+	
+func AddAmmo():
+	var newAmmo = _currentAmmo + 1;
+	ammo_changed.emit(_currentAmmo, newAmmo);
+	_currentAmmo = newAmmo;
 
 func CoreHealthChangedListener(oldValue: float, newValue: float):
 	core_health_changed.emit(oldValue, newValue);

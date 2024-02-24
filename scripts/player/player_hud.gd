@@ -1,9 +1,9 @@
 extends Control
 
-@onready var _ammoLabel: Label = $BottomRight/AmmoLabel;
-@onready var _staminaPB: TextureProgressBar = $BottomRight/StaminaProgressBar;
-@onready var _coreHealthPB: TextureProgressBar = $BottomLeft/CoreHealthProgressBar;
-@onready var _playerHealthPB: TextureProgressBar = $BottomLeft/PlayerHealthProgressBar;
+@onready var _ammoLabel: Label = $Right/BottomRight/AmmoLabel;
+@onready var _staminaPB: TextureProgressBar = $Right/BottomRight/StaminaProgressBar;
+@onready var _coreHealthPB: TextureProgressBar = $Left/BottomLeft/CoreHealthProgressBar;
+@onready var _playerHealthPB: TextureProgressBar = $Left/BottomLeft/PlayerHealthProgressBar;
 
 
 var _actualAmmo = 150;

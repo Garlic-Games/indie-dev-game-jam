@@ -19,6 +19,11 @@ config/icon="res://icon.svg"
 SceneLoader="*res://scripts/autoloads/scene_loader.gd"
 CyclopsAutoload="*res://addons/cyclops_level_builder/cyclops_global_scene.tscn"
 
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+
 [dotnet]
 
 project/assembly_name="Indie Dev Gamejam"
@@ -93,6 +98,7 @@ sprint={
 3d_physics/layer_3="Turret"
 3d_physics/layer_4="Enemy"
 3d_physics/layer_5="Core"
+3d_physics/layer_6="Pickup"
 
 [rendering]
 

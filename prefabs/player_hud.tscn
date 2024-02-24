@@ -13,7 +13,17 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mihol")
 
-[node name="BottomRight" type="Control" parent="."]
+[node name="Right" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -640.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="BottomRight" type="Control" parent="Right"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -21,22 +31,26 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -176.0
-offset_top = -109.0
+offset_top = -176.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="AmmoLabel" type="Label" parent="BottomRight"]
+[node name="AmmoLabel" type="Label" parent="Right/BottomRight"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -23.0
-offset_right = 62.0
+offset_left = 21.0001
+offset_top = -30.0
+offset_right = 96.0001
+offset_bottom = -5.0
 grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.658824, 0.588235, 0.243137, 1)
 text = "30/3000
 "
 
-[node name="StaminaProgressBar" type="TextureProgressBar" parent="BottomRight"]
+[node name="StaminaProgressBar" type="TextureProgressBar" parent="Right/BottomRight"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -44,33 +58,43 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -76.0
-offset_top = -154.0
+offset_top = -161.0
 offset_right = -12.0
-offset_bottom = -4.0
+offset_bottom = -11.0
 grow_horizontal = 0
 grow_vertical = 0
+pivot_offset = Vector2(1, 1)
 min_value = 1.0
 value = 100.0
 fill_mode = 3
 texture_under = ExtResource("1_4o41m")
 texture_progress = ExtResource("2_agry7")
 
-[node name="BottomLeft" type="Control" parent="."]
+[node name="Left" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 640.0
+grow_vertical = 2
+
+[node name="BottomLeft" type="Control" parent="Left"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -248.0
-offset_right = 142.0
+offset_top = -176.001
+offset_right = 176.0
 grow_vertical = 0
 
-[node name="CoreHealthProgressBar" type="TextureProgressBar" parent="BottomLeft"]
+[node name="CoreHealthProgressBar" type="TextureProgressBar" parent="Left/BottomLeft"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -150.0
-offset_right = 64.0
+offset_left = 14.0
+offset_top = -162.001
+offset_right = 78.0
+offset_bottom = -12.0007
 grow_vertical = 0
 min_value = 1.0
 value = 100.0
@@ -78,15 +102,17 @@ fill_mode = 3
 texture_under = ExtResource("1_4o41m")
 texture_progress = ExtResource("2_agry7")
 
-[node name="PlayerHealthProgressBar" type="TextureProgressBar" parent="BottomLeft"]
+[node name="PlayerHealthProgressBar" type="TextureProgressBar" parent="Left/BottomLeft"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -64.0
-offset_top = -150.0
+offset_left = -84.0
+offset_top = -162.001
+offset_right = -20.0
+offset_bottom = -12.0007
 grow_horizontal = 0
 grow_vertical = 0
 min_value = 1.0
