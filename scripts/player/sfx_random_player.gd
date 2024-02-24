@@ -1,4 +1,4 @@
-class_name SFXRandomPlayer;
+class_name SFXRandomPlayer
 extends Node3D
 
 @export var audioSources: Array[AudioStreamPlayer3D] = [];

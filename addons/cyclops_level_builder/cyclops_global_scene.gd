@@ -75,15 +75,14 @@ signal xray_mode_changed(value:bool)
 var unit_sphere:GeometryMesh
 var builder:CyclopsLevelBuilder
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	init_settings()
 	
 	unit_sphere = MathGeometry.unit_sphere()
 	
-	tool_mesh = ImmediateMesh.new()
-	$ToolInstance3D.mesh = tool_mesh
+	#tool_mesh = ImmediateMesh.new()
+	#toolInstance.mesh = tool_mesh
 	
 	if FileAccess.file_exists(settings_file):
 		settings.load_from_file(settings_file)

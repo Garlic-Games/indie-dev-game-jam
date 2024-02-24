@@ -1,25 +1,55 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8n6fvm4iot6m"]
+[gd_scene load_steps=10 format=3 uid="uid://c8n6fvm4iot6m"]
+
+[ext_resource type="Texture2D" uid="uid://dokwpkdyqnh86" path="res://prefabs/world/world_reference.jpg" id="1_n1nfb"]
+[ext_resource type="Material" uid="uid://co6kcx0ud4gn8" path="res://art/materials/water_shader_material.tres" id="5_us5v3"]
+[ext_resource type="PackedScene" uid="uid://lpi8w5e874y8" path="res://prefabs/world/basic_terrain_with_rb.tscn" id="6_ekw7f"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_5gda6"]
 vertices = PackedVector3Array(-49.5, 0.625, -49.5, -49.5, 0.625, 49.5, 49.5, 0.625, 49.5, 49.5, 0.625, -49.5)
 polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_tkanc"]
-size = Vector3(100, 0.25, 100)
+[sub_resource type="PlaneMesh" id="PlaneMesh_ql8s5"]
+size = Vector2(200, 200)
 
-[sub_resource type="BoxMesh" id="BoxMesh_hvnoa"]
-size = Vector3(100, 0.25, 100)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ll0ee"]
+albedo_texture = ExtResource("1_n1nfb")
+
+[sub_resource type="BoxMesh" id="BoxMesh_hb6gd"]
+material = ExtResource("5_us5v3")
+size = Vector3(31.74, 10.75, 177.585)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pir37"]
+material = ExtResource("5_us5v3")
+size = Vector3(100, 13.585, 80)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ewjjq"]
+material = ExtResource("5_us5v3")
+size = Vector3(50, 50, 50)
 
 [node name="Terrain" type="Node3D"]
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+visible = false
 navigation_mesh = SubResource("NavigationMesh_5gda6")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("PlaneMesh_ql8s5")
+surface_material_override/0 = SubResource("StandardMaterial3D_ll0ee")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D"]
-shape = SubResource("BoxShape3D_tkanc")
+[node name="indie_dev_jam_3_terrain" parent="." instance=ExtResource("6_ekw7f")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D"]
-mesh = SubResource("BoxMesh_hvnoa")
-skeleton = NodePath("../../..")
+[node name="Water" type="Node3D" parent="."]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Water"]
+transform = Transform3D(0.819162, 0, 0.573562, 0, 1, 0, -0.573562, 0, 0.819162, 19.6183, -13.0685, -16.9742)
+mesh = SubResource("BoxMesh_hb6gd")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Water"]
+transform = Transform3D(0.816128, 0, 0.577872, 0, 1, 0, -0.577872, 0, 0.816128, 78.2971, -14.6991, 81.3895)
+mesh = SubResource("BoxMesh_pir37")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Water"]
+transform = Transform3D(0.498033, 0.069986, 0.15136, 0.0192507, 0.791498, -0.634886, -0.0801975, 0.624611, 0.787559, 0.488558, -28.3449, -73.9682)
+mesh = SubResource("BoxMesh_ewjjq")
