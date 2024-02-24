@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://gli4qu8qcdb4"]
+[gd_scene load_steps=16 format=3 uid="uid://gli4qu8qcdb4"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_pa3ln"]
 [ext_resource type="Script" path="res://scripts/player/player_camera.gd" id="2_g3eqh"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" path="res://scripts/player/weapon_action.gd" id="4_fxg3s"]
 [ext_resource type="AudioStream" uid="uid://c6bomhxmmyvoe" path="res://art/sounds/step2.wav" id="4_ht1sk"]
 [ext_resource type="PackedScene" uid="uid://4xwpnxm4pnpi" path="res://prefabs/player_hud.tscn" id="5_ojnom"]
-[ext_resource type="Script" path="res://scripts/player/viewport_camera.gd" id="5_w1ppr"]
 [ext_resource type="Script" path="res://scripts/player/sfx_random_player.gd" id="8_4qvy0"]
 [ext_resource type="AudioStream" uid="uid://qgisqpjnwe1y" path="res://art/sounds/pickup/pickup_1.wav" id="11_jqfms"]
 [ext_resource type="AudioStream" uid="uid://c8r3rsu53ydad" path="res://art/sounds/pickup/pickup_2.wav" id="12_nyq0f"]
@@ -33,6 +32,14 @@ script = ExtResource("1_pa3ln")
 stepsSfx = NodePath("SFX/StepPlayer")
 pickupSfx = NodePath("SFX/PickupPlayer")
 
+[node name="PlayerCamera" type="Camera3D" parent="."]
+process_priority = -2
+process_physics_priority = -2
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+cull_mask = 1048571
+current = true
+script = ExtResource("2_g3eqh")
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.999982, 0.00602135, 0, -0.00602135, 0.999982, 0, 0, 0, 1, 0, 1, 0)
 layers = 3
@@ -51,12 +58,6 @@ magnetWrench = NodePath("../CanvasLayer/SubViewportContainer/SubViewport/Camera3
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 10
-
-[node name="PlayerCamera" type="Camera3D" parent="CanvasLayer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
-cull_mask = 1048571
-current = true
-script = ExtResource("2_g3eqh")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
 anchors_preset = 15
@@ -79,7 +80,6 @@ render_target_update_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
 cull_mask = 4
 current = true
-script = ExtResource("5_w1ppr")
 
 [node name="WeaponHolder" type="Node3D" parent="CanvasLayer/SubViewportContainer/SubViewport/Camera3D"]
 
