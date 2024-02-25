@@ -1,59 +1,72 @@
-[gd_scene load_steps=5 format=3 uid="uid://bms34wbd0mko4"]
+[gd_scene load_steps=10 format=3 uid="uid://bms34wbd0mko4"]
 
 [ext_resource type="Script" path="res://scripts/main_menu/settings.gd" id="1_nvrcs"]
+[ext_resource type="FontFile" uid="uid://dqudbxqp2cj2c" path="res://art/fonts/junegull.ttf" id="2_47r7s"]
 [ext_resource type="PackedScene" uid="uid://cmar8mw2p47nb" path="res://prefabs/menu/settings_buttons.tscn" id="2_knyp1"]
 
-[sub_resource type="Gradient" id="Gradient_o5ph7"]
-offsets = PackedFloat32Array(0, 0.538961, 1)
-colors = PackedColorArray(1, 0.576471, 1, 1, 0.917647, 0.227451, 0.780392, 1, 1, 0.498039, 1, 1)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nhyy1"]
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_47rpu"]
-gradient = SubResource("Gradient_o5ph7")
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e31tb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rjsgx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0llrq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0x6lr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cpj8i"]
 
 [node name="SettingsMenu" type="PanelContainer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 45.0
+offset_top = -341.0
+offset_right = 322.0
+offset_bottom = 289.0
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_nhyy1")
 script = ExtResource("1_nvrcs")
 
-[node name="SettingsMargin" type="MarginContainer" parent="."]
+[node name="SettingsLayout" type="VBoxContainer" parent="."]
 layout_mode = 2
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_top = 100
-theme_override_constants/margin_right = 100
-theme_override_constants/margin_bottom = 100
+theme_override_constants/separation = 25
 
-[node name="SettingsBackground" type="TextureRect" parent="SettingsMargin"]
+[node name="Title" type="Label" parent="SettingsLayout"]
 layout_mode = 2
-texture = SubResource("GradientTexture2D_47rpu")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_47r7s")
+theme_override_font_sizes/font_size = 41
+text = "Settings"
 
-[node name="SettingsPadding" type="MarginContainer" parent="SettingsMargin"]
+[node name="HSeparator" type="HSeparator" parent="SettingsLayout"]
 layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
+theme_override_styles/separator = SubResource("StyleBoxEmpty_e31tb")
 
-[node name="SettingsLayout" type="VBoxContainer" parent="SettingsMargin/SettingsPadding"]
-layout_mode = 2
-
-[node name="Title" type="Label" parent="SettingsMargin/SettingsPadding/SettingsLayout"]
-layout_mode = 2
-text = "SETTINGS"
-horizontal_alignment = 1
-
-[node name="SettingsButtons" parent="SettingsMargin/SettingsPadding/SettingsLayout" instance=ExtResource("2_knyp1")]
+[node name="SettingsButtons" parent="SettingsLayout" instance=ExtResource("2_knyp1")]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_constants/separation = 25
 
-[node name="Fill" type="Control" parent="SettingsMargin/SettingsPadding/SettingsLayout"]
+[node name="Fill" type="Control" parent="SettingsLayout"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Close" type="Button" parent="SettingsMargin/SettingsPadding/SettingsLayout" groups=["MenuButtons"]]
+[node name="Back" type="Button" parent="SettingsLayout" groups=["MenuButtons"]]
 layout_mode = 2
-text = "Close"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.603922, 1, 0.996078, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_47r7s")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rjsgx")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_0llrq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_0x6lr")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cpj8i")
+text = "Back"
+alignment = 0
 
-[connection signal="pressed" from="SettingsMargin/SettingsPadding/SettingsLayout/Close" to="." method="close"]
+[connection signal="pressed" from="SettingsLayout/Back" to="." method="close"]

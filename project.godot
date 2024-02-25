@@ -29,7 +29,7 @@ project/assembly_name="Indie Dev Gamejam"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/cyclops_level_builder/plugin.cfg")
+enabled=PackedStringArray()
 
 [input]
 

@@ -1,86 +1,287 @@
-[gd_scene load_steps=9 format=3 uid="uid://c0kysbw474wqn"]
+[gd_scene load_steps=28 format=3 uid="uid://c0kysbw474wqn"]
 
+[ext_resource type="Environment" uid="uid://celdecb2ba0qm" path="res://art/environment/main_environment.tres" id="1_4aiub"]
 [ext_resource type="Script" path="res://scripts/main_menu/main_menu.gd" id="1_7w5a6"]
 [ext_resource type="PackedScene" uid="uid://bms34wbd0mko4" path="res://prefabs/menu/settings_menu.tscn" id="2_eli5e"]
+[ext_resource type="PackedScene" path="res://prefabs/world/basic_terrain_with_rb.tscn" id="2_hr3g3"]
 [ext_resource type="AudioStream" uid="uid://dny66k8gw1dwu" path="res://art/music/main_menu/Intro options screen .mp3" id="3_hng3u"]
 [ext_resource type="PackedScene" uid="uid://crxdwuvlnrsuk" path="res://prefabs/menu/credits.tscn" id="3_juipk"]
+[ext_resource type="Material" uid="uid://co6kcx0ud4gn8" path="res://art/materials/water_shader_material.tres" id="3_kqxmd"]
+[ext_resource type="PackedScene" path="res://art/models/props/Viga.tscn" id="4_0tbih"]
 [ext_resource type="PackedScene" uid="uid://dk0dddmpl201" path="res://prefabs/stream_utilities/button_group_sound_when_signal.tscn" id="4_nwlex"]
+[ext_resource type="PackedScene" path="res://art/models/props/uralita.tscn" id="5_65v8f"]
 [ext_resource type="PackedScene" uid="uid://dcxkowmduxb5y" path="res://prefabs/menu/loading_panel.tscn" id="7_y4405"]
+[ext_resource type="FontFile" uid="uid://dqudbxqp2cj2c" path="res://art/fonts/junegull.ttf" id="8_tvqj4"]
+[ext_resource type="PackedScene" uid="uid://dafbkuh5h26yx" path="res://prefabs/core/core.tscn" id="12_ei3cb"]
 
-[sub_resource type="Gradient" id="Gradient_fm03v"]
-colors = PackedColorArray(0.815686, 0, 0, 1, 1, 1, 1, 1)
+[sub_resource type="NavigationMesh" id="NavigationMesh_5gda6"]
+sample_partition_type = 2
+agent_max_climb = 1.0
+agent_max_slope = 70.4
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_obgld"]
-gradient = SubResource("Gradient_fm03v")
-fill = 1
-fill_from = Vector2(0.5, 0)
+[sub_resource type="BoxMesh" id="BoxMesh_hb6gd"]
+material = ExtResource("3_kqxmd")
+size = Vector3(31.74, 10.75, 177.585)
 
-[node name="MainMenu" type="CanvasLayer"]
+[sub_resource type="BoxMesh" id="BoxMesh_pir37"]
+material = ExtResource("3_kqxmd")
+size = Vector3(100, 13.585, 80)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ewjjq"]
+material = ExtResource("3_kqxmd")
+size = Vector3(50, 50, 50)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rjjbv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xj2x8"]
+albedo_color = Color(0.219608, 0.0823529, 0.0313726, 1)
+metallic_specular = 0.16
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xxcmc"]
+size = Vector3(30.3227, 0.475922, 7.67651)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3pxg6"]
+size = Vector3(30.3227, 0.475922, 7.67651)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8cwer"]
+size = Vector3(3.55566, 0.402466, 8.18982)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ix0w4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7fyjm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tbdb0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qnth0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dycrv"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.838671, 0.0474684, 0.542567, 0, 0.996195, -0.0871557, -0.544639, -0.0730949, -0.835479, 40.3168, -3.66473, -50.8884)
+fov = 35.1
+
+[node name="Scene" type="Node3D" parent="."]
+
+[node name="Core" parent="Scene" instance=ExtResource("12_ei3cb")]
+transform = Transform3D(2.85141, 0, 0, 0, 2.85141, 0, 0, 0, 2.85141, -15.5033, 0.839465, 39.6084)
+min_rotation_speed = 10.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Scene"]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 36.7578, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Scene"]
+environment = ExtResource("1_4aiub")
+
+[node name="Terrain" type="Node3D" parent="Scene"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.485682, 0, 1.58403)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Scene/Terrain"]
+navigation_mesh = SubResource("NavigationMesh_5gda6")
+
+[node name="indie_dev_jam_3_terrain" parent="Scene/Terrain/NavigationRegion3D" instance=ExtResource("2_hr3g3")]
+
+[node name="Water" type="Node3D" parent="Scene/Terrain"]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Scene/Terrain/Water"]
+transform = Transform3D(0.819162, 0, 0.573562, 0, 1, 0, -0.573562, 0, 0.819162, 19.6266, -13.0685, -16.9723)
+mesh = SubResource("BoxMesh_hb6gd")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scene/Terrain/Water"]
+transform = Transform3D(0.816128, 0, 0.577872, 0, 1, 0, -0.577872, 0, 0.816128, 78.2971, -14.6991, 81.3895)
+mesh = SubResource("BoxMesh_pir37")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Scene/Terrain/Water"]
+transform = Transform3D(0.498033, 0.069986, 0.15136, 0.0192507, 0.791498, -0.634886, -0.0801975, 0.624611, 0.787559, 0.488558, -28.3449, -73.9682)
+mesh = SubResource("BoxMesh_ewjjq")
+
+[node name="Bridge" type="Node3D" parent="Scene/Terrain"]
+
+[node name="Floor" type="MeshInstance3D" parent="Scene/Terrain/Bridge"]
+transform = Transform3D(25.5946, -0.0146485, 3.80903, -0.990007, -0.479198, -0.0352664, -15.7937, 0.00629916, 6.17497, 14.4158, -5.30028, -33.0482)
+mesh = SubResource("BoxMesh_rjjbv")
+surface_material_override/0 = SubResource("StandardMaterial3D_xj2x8")
+metadata/_edit_lock_ = true
+
+[node name="Transversales" type="Node3D" parent="Scene/Terrain/Bridge"]
+
+[node name="Viga" parent="Scene/Terrain/Bridge/Transversales" instance=ExtResource("4_0tbih")]
+transform = Transform3D(0.695156, 12.9056, 0.644994, -1.97506, 5.56978, 0.0799403, -0.259263, -7.82678, 1.12043, 8.49833, -5.5489, -25.355)
+
+[node name="Viga2" parent="Scene/Terrain/Bridge/Transversales" instance=ExtResource("4_0tbih")]
+transform = Transform3D(0.731648, 12.9004, 0.630289, -1.96955, 5.55723, 0.124457, -0.19207, -7.84426, 1.12473, 3.74123, -5.75627, -30.6079)
+
+[node name="Viga3" parent="Scene/Terrain/Bridge/Transversales" instance=ExtResource("4_0tbih")]
+transform = Transform3D(-0.828496, -15.5367, -0.732248, -2.14806, 7.26452, 0.112861, 0.285663, 9.56568, -1.27504, 26.2748, -7.06379, -36.2302)
+
+[node name="Viga4" parent="Scene/Terrain/Bridge/Transversales" instance=ExtResource("4_0tbih")]
+transform = Transform3D(-0.819058, -13.4724, -0.648823, -2.00005, 6.33863, 0.150516, 0.197587, 8.31509, -1.16598, 20.9519, -6.15693, -40.523)
+
+[node name="Verticales" type="Node3D" parent="Scene/Terrain/Bridge"]
+
+[node name="Viga5" parent="Scene/Terrain/Bridge/Verticales" instance=ExtResource("4_0tbih")]
+transform = Transform3D(1.76016, 0, 0, 0, 5.36467, 0, 0, 0, 1, 7.12074, -5.1579, -25.412)
+
+[node name="Viga6" parent="Scene/Terrain/Bridge/Verticales" instance=ExtResource("4_0tbih")]
+transform = Transform3D(1.76016, 0, 0, 0, 5.36467, 0, 0, 0, 1, 24.746, -5.79916, -43.025)
+
+[node name="Viga7" parent="Scene/Terrain/Bridge/Verticales" instance=ExtResource("4_0tbih")]
+transform = Transform3D(1.76016, 0, 0, 0, 5.36467, 0, 0, 0, 1, 27.829, -5.79916, -37.822)
+
+[node name="Viga8" parent="Scene/Terrain/Bridge/Verticales" instance=ExtResource("4_0tbih")]
+transform = Transform3D(1.76016, 0, 0, 0, 5.36467, 0, 0, 0, 1, 4.354, -5.15745, -29.98)
+
+[node name="Uralitas" type="Node3D" parent="Scene/Terrain/Bridge"]
+
+[node name="Uralita" parent="Scene/Terrain/Bridge/Uralitas" instance=ExtResource("5_65v8f")]
+transform = Transform3D(2.25288, 0, 1.01378, 0, 1, 0, -1.34891, 0, 1.69317, 4.11561, -0.012424, -28.959)
+
+[node name="Uralita2" parent="Scene/Terrain/Bridge/Uralitas" instance=ExtResource("5_65v8f")]
+transform = Transform3D(2.69955, 0, 1.08922, 0, 1, 0, -1.61635, 0, 1.81915, 8.84667, -0.0122447, -32.0313)
+
+[node name="Uralita3" parent="Scene/Terrain/Bridge/Uralitas" instance=ExtResource("5_65v8f")]
+transform = Transform3D(2.38587, 0, 1.04962, 0, 1, 0, -1.42854, 0, 1.75302, 13.9321, -0.272298, -34.8079)
+
+[node name="Uralita4" parent="Scene/Terrain/Bridge/Uralitas" instance=ExtResource("5_65v8f")]
+transform = Transform3D(2.558, 0, 1.09599, 0, 1, 0, -1.5316, 0, 1.83047, 18.9635, -0.305335, -37.5266)
+
+[node name="Uralita5" parent="Scene/Terrain/Bridge/Uralitas" instance=ExtResource("5_65v8f")]
+transform = Transform3D(2.25288, 0, 1.01378, 0, 1, 0, -1.34891, 0, 1.69317, 23.5785, -0.701287, -40.4048)
+
+[node name="Rampitas" type="Node3D" parent="Scene/Terrain/Bridge"]
+
+[node name="Uralita" parent="Scene/Terrain/Bridge/Rampitas" instance=ExtResource("5_65v8f")]
+transform = Transform3D(0.497225, 0.171224, -0.850558, -0.0864131, 0.985232, 0.147819, 0.863307, 0, 0.504678, 1.20925, -4.94331, -27.509)
+
+[node name="Uralita2" parent="Scene/Terrain/Bridge/Rampitas" instance=ExtResource("5_65v8f")]
+transform = Transform3D(0.497225, 0.171224, -0.850558, -0.0864131, 0.985232, 0.147819, 0.863307, 0, 0.504678, 2.14732, -5.01009, -25.6979)
+
+[node name="Uralita3" parent="Scene/Terrain/Bridge/Rampitas" instance=ExtResource("5_65v8f")]
+transform = Transform3D(0.497225, 0.171224, -0.850558, 0.0362868, 0.975372, 0.217563, 0.866862, -0.139042, 0.478766, 3.17856, -5.12946, -24.0153)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Scene/Terrain/Bridge"]
+
+[node name="Floor" type="CollisionShape3D" parent="Scene/Terrain/Bridge/StaticBody3D"]
+transform = Transform3D(-0.850556, 0.0305519, -0.524996, 0.0328998, 0.999447, 0.00486072, 0.524854, -0.013138, -0.851091, 14.3305, -5.29795, -32.9955)
+shape = SubResource("BoxShape3D_xxcmc")
+
+[node name="Ceiling" type="CollisionShape3D" parent="Scene/Terrain/Bridge/StaticBody3D"]
+transform = Transform3D(-0.850556, 0.0305519, -0.524996, 0.0328998, 0.999447, 0.00486072, 0.524854, -0.013138, -0.851091, 14.3305, 0.0971437, -32.9955)
+shape = SubResource("BoxShape3D_3pxg6")
+
+[node name="Ramps" type="CollisionShape3D" parent="Scene/Terrain/Bridge/StaticBody3D"]
+transform = Transform3D(-0.85167, 0.10395, -0.513666, 0.124479, 0.992207, -0.00559732, 0.50908, -0.0687078, -0.857973, 1.05821, -5.12765, -24.99)
+shape = SubResource("BoxShape3D_8cwer")
+
+[node name="MainMenu" type="CanvasLayer" parent="."]
 script = ExtResource("1_7w5a6")
 gameplay_scene = "res://scenes/gameplay.tscn"
 
-[node name="MainContainer" type="PanelContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
+[node name="MainContainer" type="PanelContainer" parent="MainMenu"]
+unique_name_in_owner = true
+anchors_preset = 9
 anchor_bottom = 1.0
-grow_horizontal = 2
+offset_right = 300.0
+offset_bottom = -70.0
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ix0w4")
 
-[node name="MainBackground" type="TextureRect" parent="MainContainer"]
-layout_mode = 2
-texture = SubResource("GradientTexture2D_obgld")
-
-[node name="MainMargin" type="MarginContainer" parent="MainContainer"]
+[node name="MainMargin" type="MarginContainer" parent="MainMenu/MainContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Buttons" type="VBoxContainer" parent="MainContainer/MainMargin"]
+[node name="Buttons" type="VBoxContainer" parent="MainMenu/MainContainer/MainMargin"]
 layout_mode = 2
+theme_override_constants/separation = 15
 
-[node name="Spacer" type="Control" parent="MainContainer/MainMargin/Buttons"]
+[node name="Spacer" type="Control" parent="MainMenu/MainContainer/MainMargin/Buttons"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Play" type="Button" parent="MainContainer/MainMargin/Buttons" groups=["MenuButtons"]]
+[node name="Play" type="Button" parent="MainMenu/MainContainer/MainMargin/Buttons" groups=["MenuButtons"]]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.603922, 1, 0.996078, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("8_tvqj4")
+theme_override_font_sizes/font_size = 41
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7fyjm")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_tbdb0")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qnth0")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dycrv")
 text = "Play"
 
-[node name="Settings" type="Button" parent="MainContainer/MainMargin/Buttons" groups=["MenuButtons"]]
+[node name="Settings" type="Button" parent="MainMenu/MainContainer/MainMargin/Buttons" groups=["MenuButtons"]]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.603922, 1, 0.996078, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("8_tvqj4")
+theme_override_font_sizes/font_size = 41
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7fyjm")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_tbdb0")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qnth0")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dycrv")
 text = "Settings"
 
-[node name="Credits" type="Button" parent="MainContainer/MainMargin/Buttons" groups=["MenuButtons"]]
+[node name="Credits" type="Button" parent="MainMenu/MainContainer/MainMargin/Buttons" groups=["MenuButtons"]]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.603922, 1, 0.996078, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("8_tvqj4")
+theme_override_font_sizes/font_size = 41
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7fyjm")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_tbdb0")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qnth0")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dycrv")
 text = "Credits"
 
-[node name="Exit" type="Button" parent="MainContainer/MainMargin/Buttons" groups=["MenuButtons"]]
+[node name="Exit" type="Button" parent="MainMenu/MainContainer/MainMargin/Buttons" groups=["MenuButtons"]]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.603922, 1, 0.996078, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("8_tvqj4")
+theme_override_font_sizes/font_size = 41
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7fyjm")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_tbdb0")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qnth0")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dycrv")
 text = "Exit"
 
-[node name="Credits" parent="." instance=ExtResource("3_juipk")]
+[node name="Credits" parent="MainMenu" instance=ExtResource("3_juipk")]
 unique_name_in_owner = true
 
-[node name="SettingsMenu" parent="." instance=ExtResource("2_eli5e")]
+[node name="SettingsMenu" parent="MainMenu" instance=ExtResource("2_eli5e")]
 unique_name_in_owner = true
+visible = false
 
-[node name="MainMenuMusic" type="AudioStreamPlayer" parent="."]
+[node name="MainMenuMusic" type="AudioStreamPlayer" parent="MainMenu"]
 stream = ExtResource("3_hng3u")
 autoplay = true
 bus = &"Music"
 
-[node name="ButtonSounds" type="Node" parent="."]
+[node name="ButtonSounds" type="Node" parent="MainMenu"]
 
-[node name="ButtonsMouseEnteredSound" parent="ButtonSounds" instance=ExtResource("4_nwlex")]
+[node name="ButtonsMouseEnteredSound" parent="MainMenu/ButtonSounds" instance=ExtResource("4_nwlex")]
 button_group_name = "MenuButtons"
 signal_name = "mouse_entered"
 
-[node name="LoadingPanel" parent="." instance=ExtResource("7_y4405")]
+[node name="LoadingPanel" parent="MainMenu" instance=ExtResource("7_y4405")]
 unique_name_in_owner = true
 
-[connection signal="pressed" from="MainContainer/MainMargin/Buttons/Play" to="." method="start_game"]
-[connection signal="pressed" from="MainContainer/MainMargin/Buttons/Settings" to="." method="open_settings"]
-[connection signal="pressed" from="MainContainer/MainMargin/Buttons/Credits" to="." method="open_credits"]
-[connection signal="pressed" from="MainContainer/MainMargin/Buttons/Exit" to="." method="close_game"]
+[connection signal="pressed" from="MainMenu/MainContainer/MainMargin/Buttons/Play" to="MainMenu" method="start_game"]
+[connection signal="pressed" from="MainMenu/MainContainer/MainMargin/Buttons/Settings" to="MainMenu" method="open_settings"]
+[connection signal="pressed" from="MainMenu/MainContainer/MainMargin/Buttons/Credits" to="MainMenu" method="open_credits"]
+[connection signal="pressed" from="MainMenu/MainContainer/MainMargin/Buttons/Exit" to="MainMenu" method="close_game"]
