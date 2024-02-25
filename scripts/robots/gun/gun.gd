@@ -12,11 +12,12 @@ const FLOOR_MASK = 1;
 
 signal shoot(impact: Vector3);
 
-func _process(delta: float):
+	
+func _process(_delta: float):
 	if !target:
 		return;
 
-	look_at(target.global_position);
+	look_at(target.global_position, Vector3.UP);
 
 func _on_detection_sensor_body_entered(body: Node3D) -> void:
 	target = body;# Replace with function body.

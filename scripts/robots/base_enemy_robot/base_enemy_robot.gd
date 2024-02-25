@@ -13,6 +13,8 @@ extends CharacterBody3D
 @export var movement_speed: float = 5;
 @export var movement_target_position: Node3D;
 
+@export var body: Node3D;
+
 @onready var agent: NavigationAgent3D = %Agent;
 var loaded: bool = false;
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity");
@@ -39,7 +41,6 @@ func set_movement_target(movement_target: Vector3):
 	agent.set_target_position(movement_target)
 
 func _physics_process(_delta):
-	apply_gravity(gravity);
 	if !movement_target_position:
 		return;
 	if loaded:
@@ -47,7 +48,14 @@ func _physics_process(_delta):
 	
 	if agent.is_navigation_finished():
 		return;
-	agent.velocity = global_position.direction_to(agent.get_next_path_position()) * movement_speed;	
+	var next_pos = agent.get_next_path_position();
+	if body:
+		var x = body.rotation.x;
+		var z = body.rotation.z;
+		body.look_at(next_pos);
+		body.rotation.x = x;
+		body.rotation.z = z;
+	agent.velocity = global_position.direction_to(next_pos) * movement_speed;	
 	
 func damage(ammount: float):
 	current_hp -= ammount;
@@ -57,11 +65,11 @@ func die():
 	dead.emit();
 	queue_free();	
 
-func apply_gravity(gravity_value: float) -> void:
-	if not is_on_floor():
-		velocity.y -= gravity_value;
-
-
 func _on_agent_velocity_computed(safe_velocity: Vector3):
-	velocity = safe_velocity;
+	velocity = velocity.move_toward(safe_velocity, 0.75);
+	if not is_on_floor():
+		velocity.y -= gravity;
 	move_and_slide();
+
+func _on_agent_target_reached():
+	velocity = Vector3.ZERO;

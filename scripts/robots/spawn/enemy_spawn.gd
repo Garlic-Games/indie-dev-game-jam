@@ -5,10 +5,18 @@ extends Node3D
 @export var target: Node3D;
 signal spawned;
 	
+func set_target(targ: Node3D):
+	target = targ;
+	
 func _ready():
 	assert(enemy_asset, name.get_basename());
-	assert(target, name.get_basename());
 	assert(resource_preloader.has_resource(enemy_asset), name.get_basename());
+	if !is_in_group("player_chaser"):
+		assert(target, name.get_basename());
+
+func burst_spawn(ammount: int) -> void:
+	for i in ammount:
+		spawn();
 
 func spawn() -> void:
 	var scene = resource_preloader.get_resource(enemy_asset) as PackedScene;

@@ -1,5 +1,32 @@
-[gd_scene load_steps=2 format=3 uid="uid://b7ihwbvlp8rc4"]
+[gd_scene load_steps=4 format=3 uid="uid://b7ihwbvlp8rc4"]
 
 [ext_resource type="PackedScene" uid="uid://b5ggt16q3pi5h" path="res://art/models/enemies/grunt/WalkingRobot.glb" id="1_wc1f4"]
+[ext_resource type="Script" path="res://scripts/robots/gun/gun.gd" id="2_7l3fn"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ge6hb"]
+height = 50.0
+radius = 0.933
 
 [node name="WalkingRobot" instance=ExtResource("1_wc1f4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+
+[node name="legs" parent="." index="0"]
+transform = Transform3D(-1, 8.74228e-08, 0, 3.82137e-15, 4.37114e-08, -1, -8.74228e-08, -1, -4.37114e-08, 0, 0, 0)
+
+[node name="hand_L" parent="." index="1"]
+transform = Transform3D(-1, 8.74228e-08, 0, 3.82137e-15, 4.37114e-08, -1, -8.74228e-08, -1, -4.37114e-08, 0, 0, 0)
+
+[node name="hand_R" parent="." index="2"]
+transform = Transform3D(-1, 8.74228e-08, 0, 3.82137e-15, 4.37114e-08, -1, -8.74228e-08, -1, -4.37114e-08, 0, 0, 0)
+
+[node name="body" parent="." index="3"]
+transform = Transform3D(-1, 8.74228e-08, 0, 3.82137e-15, 4.37114e-08, -1, -8.74228e-08, -1, -4.37114e-08, 0, 0, 0)
+script = ExtResource("2_7l3fn")
+
+[node name="ShootArea" type="Area3D" parent="body" index="0"]
+collision_layer = 4
+collision_mask = 6
+
+[node name="ShootCollision" type="CollisionShape3D" parent="body/ShootArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, 0)
+shape = SubResource("CylinderShape3D_ge6hb")

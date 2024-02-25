@@ -6,10 +6,15 @@
 
 [node name="Tomeu" type="Node3D"]
 
-[node name="MainLevel" parent="." instance=ExtResource("2_c4lrf")]
+[node name="MainLevel" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_c4lrf")]
+level_start_timer = 1
+player = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("4_804ew")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.5296, -9.91821e-05, 48.1642)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("5_plcfs")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.80537, 0.592772, 0, -0.592772, 0.80537, 0, 0, 0)

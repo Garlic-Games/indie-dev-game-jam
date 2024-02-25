@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dq36w1s8eda55"]
+
+[ext_resource type="PackedScene" uid="uid://cdq1yo5a84fv6" path="res://prefabs/enemies/spawn/base_enemy_spawn.tscn" id="1_t3xga"]
+[ext_resource type="PackedScene" uid="uid://cx7em277qlni2" path="res://prefabs/enemies/walkers/spider.tscn" id="2_1phdb"]
+
+[node name="SpiderSpawn" instance=ExtResource("1_t3xga")]
+enemy_asset = "spider"
+
+[node name="ResourcePreloader" parent="." index="0"]
+resources = [PackedStringArray("spider"), [ExtResource("2_1phdb")]]

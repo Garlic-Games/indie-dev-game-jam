@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://cx7em277qlni2"]
+
+[ext_resource type="PackedScene" uid="uid://dop0nlsoshcok" path="res://prefabs/enemies/base_enemy.tscn" id="1_sjf7b"]
+[ext_resource type="PackedScene" uid="uid://g5pe0v4jgi0m" path="res://art/models/enemies/spider/Spider.glb" id="2_a7yy7"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cnpqn"]
+radius = 0.573867
+height = 1.14773
+
+[node name="Spider" node_paths=PackedStringArray("body") instance=ExtResource("1_sjf7b")]
+movement_speed = 15.0
+body = NodePath("BodyContainer")
+
+[node name="Agent" parent="." index="0"]
+target_desired_distance = 2.0
+path_height_offset = -0.1
+path_max_distance = 20.01
+
+[node name="Collider" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.254011, -0.967201, 0, 0.967201, 0.254011, 0, 0.40495, 0)
+shape = SubResource("CapsuleShape3D_cnpqn")
+
+[node name="BodyContainer" type="Node3D" parent="." index="2"]
+
+[node name="Spider" parent="BodyContainer" index="0" instance=ExtResource("2_a7yy7")]
+transform = Transform3D(-0.5, 0, -4.37114e-08, 0, 0.5, 0, 4.37114e-08, 0, -0.5, 0, 0, 0)

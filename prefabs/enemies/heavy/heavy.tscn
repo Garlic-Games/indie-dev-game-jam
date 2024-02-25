@@ -2,76 +2,72 @@
 
 [ext_resource type="PackedScene" uid="uid://dop0nlsoshcok" path="res://prefabs/enemies/base_enemy.tscn" id="1_dsr0k"]
 [ext_resource type="Script" path="res://scripts/robots/gun/gun.gd" id="2_jionj"]
+[ext_resource type="ArrayMesh" uid="uid://bssdoa3udrx3i" path="res://art/models/enemies/grunt/walking/WalkingRobot_Robot_robot_003.res" id="3_fj3fa"]
+[ext_resource type="ArrayMesh" uid="uid://81sa35tewd04" path="res://art/models/enemies/grunt/walking/WalkingRobot_Robot_robot_001.res" id="4_3unna"]
+[ext_resource type="ArrayMesh" uid="uid://13w2fj21mvfd" path="res://art/models/enemies/grunt/walking/WalkingRobot_Robot_robot_002.res" id="5_8fn8r"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_hvm0l"]
-size = Vector3(2, 1, 2)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_u2tq2"]
-
-[sub_resource type="TorusMesh" id="TorusMesh_641nt"]
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_j8jj0"]
-top_radius = 0.1
-bottom_radius = 0.1
-height = 1.0
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ryi5s"]
+radius = 1.13392
+height = 5.68768
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_armmf"]
 height = 50.0
 radius = 0.933
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ye3ep"]
-height = 10.0
-radius = 50.0
+height = 16.7042
+radius = 49.374
 
-[node name="Heavy" instance=ExtResource("1_dsr0k")]
+[node name="Heavy" node_paths=PackedStringArray("body") instance=ExtResource("1_dsr0k")]
+body = NodePath("BodyContainer")
+
+[node name="Agent" parent="." index="0"]
+path_height_offset = 1.0
+debug_path_custom_color = Color(1, 0, 1, 1)
 
 [node name="Collider" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.25068, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.59409, 0)
+shape = SubResource("CapsuleShape3D_ryi5s")
 
-[node name="BodyMesh" type="Node3D" parent="." index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.31806, 0)
+[node name="BodyContainer" type="Node3D" parent="." index="2"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.1, 0)
 
-[node name="loweBody" type="MeshInstance3D" parent="BodyMesh" index="0"]
-mesh = SubResource("BoxMesh_hvm0l")
-skeleton = NodePath("../..")
-
-[node name="Connector" type="MeshInstance3D" parent="BodyMesh" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.08321, 0)
-mesh = SubResource("CapsuleMesh_u2tq2")
-skeleton = NodePath("../..")
-
-[node name="HeadMesh" type="Node3D" parent="." index="3"]
+[node name="HeadMesh" type="Node3D" parent="BodyContainer" index="0"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0199609, 2.42689, -0.00359058)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0399218, 3.41051, -0.00718116)
 script = ExtResource("2_jionj")
 rotation_speed = 100.0
 
-[node name="Head" type="MeshInstance3D" parent="HeadMesh" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.638, 0)
-mesh = SubResource("TorusMesh_641nt")
-skeleton = NodePath("../..")
+[node name="Head" type="MeshInstance3D" parent="BodyContainer/HeadMesh" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.638, 0)
+mesh = ExtResource("3_fj3fa")
+skeleton = NodePath("../../..")
 
-[node name="Cannon" type="MeshInstance3D" parent="HeadMesh/Head" index="0"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.0421489, 0, -1.38024)
-mesh = SubResource("CylinderMesh_j8jj0")
-
-[node name="ShootArea" type="Area3D" parent="HeadMesh/Head/Cannon" index="0"]
+[node name="ShootArea" type="Area3D" parent="BodyContainer/HeadMesh/Head" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 collision_layer = 4
 collision_mask = 6
 
-[node name="ShootCollision" type="CollisionShape3D" parent="HeadMesh/Head/Cannon/ShootArea" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -23.8139, 9.53674e-07)
+[node name="ShootCollision" type="CollisionShape3D" parent="BodyContainer/HeadMesh/Head/ShootArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25, 0)
 shape = SubResource("CylinderShape3D_armmf")
 
-[node name="DetectionSensor" type="Area3D" parent="." index="4"]
+[node name="ArmR" type="MeshInstance3D" parent="BodyContainer/HeadMesh/Head" index="1"]
+mesh = ExtResource("4_3unna")
+
+[node name="ArmL" type="MeshInstance3D" parent="BodyContainer/HeadMesh/Head" index="2"]
+mesh = ExtResource("5_8fn8r")
+
+[node name="DetectionSensor" type="Area3D" parent="." index="3"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 5.35727, 0)
 collision_layer = 12
 collision_mask = 2
 
 [node name="DetectionReach" type="CollisionShape3D" parent="DetectionSensor" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, 0)
 shape = SubResource("CylinderShape3D_ye3ep")
 
-[connection signal="body_entered" from="HeadMesh/Head/Cannon/ShootArea" to="HeadMesh" method="_on_shoot_area_body_entered"]
-[connection signal="body_exited" from="HeadMesh/Head/Cannon/ShootArea" to="HeadMesh" method="_on_shoot_area_body_exited"]
-[connection signal="body_entered" from="DetectionSensor" to="HeadMesh" method="_on_detection_sensor_body_entered"]
-[connection signal="body_exited" from="DetectionSensor" to="HeadMesh" method="_on_detection_sensor_body_exited"]
+[connection signal="body_entered" from="BodyContainer/HeadMesh/Head/ShootArea" to="BodyContainer/HeadMesh" method="_on_shoot_area_body_entered"]
+[connection signal="body_exited" from="BodyContainer/HeadMesh/Head/ShootArea" to="BodyContainer/HeadMesh" method="_on_shoot_area_body_exited"]
+[connection signal="body_entered" from="DetectionSensor" to="BodyContainer/HeadMesh" method="_on_detection_sensor_body_entered"]
+[connection signal="body_exited" from="DetectionSensor" to="BodyContainer/HeadMesh" method="_on_detection_sensor_body_exited"]
