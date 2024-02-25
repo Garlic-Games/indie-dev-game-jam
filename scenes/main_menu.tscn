@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c0kysbw474wqn"]
+[gd_scene load_steps=29 format=3 uid="uid://c0kysbw474wqn"]
 
 [ext_resource type="Environment" uid="uid://celdecb2ba0qm" path="res://art/environment/main_environment.tres" id="1_4aiub"]
 [ext_resource type="Script" path="res://scripts/main_menu/main_menu.gd" id="1_7w5a6"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dcxkowmduxb5y" path="res://prefabs/menu/loading_panel.tscn" id="7_y4405"]
 [ext_resource type="FontFile" uid="uid://dqudbxqp2cj2c" path="res://art/fonts/junegull.ttf" id="8_tvqj4"]
 [ext_resource type="PackedScene" uid="uid://dafbkuh5h26yx" path="res://prefabs/core/core.tscn" id="12_ei3cb"]
+[ext_resource type="Script" path="res://scripts/transition/fade_manager.gd" id="14_vo6dw"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_5gda6"]
 sample_partition_type = 2
@@ -262,6 +263,7 @@ text = "Exit"
 
 [node name="Credits" parent="MainMenu" instance=ExtResource("3_juipk")]
 unique_name_in_owner = true
+visible = false
 
 [node name="SettingsMenu" parent="MainMenu" instance=ExtResource("2_eli5e")]
 unique_name_in_owner = true
@@ -280,6 +282,29 @@ signal_name = "mouse_entered"
 
 [node name="LoadingPanel" parent="MainMenu" instance=ExtResource("7_y4405")]
 unique_name_in_owner = true
+
+[node name="FadeManager" type="Control" parent="MainMenu"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("14_vo6dw")
+
+[node name="FadeBackground" type="ColorRect" parent="MainMenu/FadeManager"]
+unique_name_in_owner = true
+z_index = 205
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
 
 [connection signal="pressed" from="MainMenu/MainContainer/MainMargin/Buttons/Play" to="MainMenu" method="start_game"]
 [connection signal="pressed" from="MainMenu/MainContainer/MainMargin/Buttons/Settings" to="MainMenu" method="open_settings"]

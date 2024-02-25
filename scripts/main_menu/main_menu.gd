@@ -4,6 +4,8 @@ extends CanvasLayer;
 @onready var settings_menu: SettingsContainer = %SettingsMenu;
 @onready var credits: Credits = %Credits;
 @onready var loading_panel: LoadingPanel = %LoadingPanel;
+@onready var fade_manager: FadeManager = %FadeManager;
+
 @export_file("*.tscn") var gameplay_scene: String;
 
 
@@ -12,6 +14,9 @@ func _ready():
 	
 	settings_menu.connect("closed", open);
 	credits.connect("closed", open);
+	fade_manager.connect("on_fade_out_ended", load_game);
+	
+	fade_manager.fade_in(2);
 
 
 func open():
@@ -22,8 +27,12 @@ func close():
 	main_menu.hide();
 
 
-func start_game() -> void:
+func load_game():
 	SceneLoader.load_scene(gameplay_scene);
+
+
+func start_game() -> void:
+	fade_manager.fade_out(2);
 
 
 func open_settings() -> void:
