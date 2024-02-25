@@ -422,11 +422,14 @@ shadow_mesh = SubResource("ArrayMesh_ho5h4")
 height = 5.48473
 radius = 2.93451
 
-[node name="Core" type="Node3D" node_paths=PackedStringArray("sphere", "rotary_item", "wings")]
+[node name="Core" type="Node3D" node_paths=PackedStringArray("collider", "sphere", "rotary_item", "wings", "endgame_camera_transform")]
 script = ExtResource("1_p6ywm")
+collider = NodePath("Area3D")
 sphere = NodePath("Model/pelotita")
 rotary_item = NodePath("Model/base_brazo")
 wings = [NodePath("Model/base_brazo/brazo_1"), NodePath("Model/base_brazo/brazo_2"), NodePath("Model/base_brazo/brazo_3"), NodePath("Model/base_brazo/brazo_4"), NodePath("Model/base_brazo/brazo_5")]
+endgame_camera_transform = NodePath("EndgameTransform")
+debug_mode = true
 
 [node name="Model" type="Node3D" parent="."]
 
@@ -471,11 +474,14 @@ transform = Transform3D(0.0303215, 0, -0.0933199, 0, 0.380166, 0, 0.0933199, 0, 
 mesh = SubResource("ArrayMesh_7qfs3")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="."]
 collision_mask = 8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.72842, 0)
 shape = SubResource("CylinderShape3D_nc67j")
 
-[connection signal="body_entered" from="StaticBody3D" to="." method="on_body_entered"]
+[node name="EndgameTransform" type="Node3D" parent="."]
+transform = Transform3D(0.707107, -0.40558, -0.579228, 0, 0.819152, -0.573576, 0.707107, 0.40558, 0.579228, -2.5361, 0, 2.33018)
+
+[connection signal="body_entered" from="Area3D" to="." method="on_body_entered"]

@@ -1,7 +1,9 @@
+class_name Core
 extends Node3D
 
-signal on_core_destroyed();
 signal on_core_damaged(lives_remaining : int);
+signal on_core_destroy_started();
+signal on_core_destroyed();
 
 @export_group("Core settings")
 @export var lives : int = 5;
@@ -9,10 +11,13 @@ signal on_core_damaged(lives_remaining : int);
 @export var max_rotation_speed : float = 720.0;
 
 @export_group("Core structure")
-@export var collider : StaticBody3D = null;
+@export var collider : Area3D = null;
 @export var sphere : MeshInstance3D = null;
 @export var rotary_item : MeshInstance3D = null;
 @export var wings : Array[MeshInstance3D] = [];
+
+@export_group("Core settings")
+@export var endgame_camera_transform : Node3D = null;
 
 @export_group("Debug")
 @export var debug_mode : bool = false;
@@ -44,7 +49,7 @@ func damage():
 	check_wing_integrity();
 
 	if (current_lives < 0):
-		destroy_core();
+		emit_signal("on_core_destroy_started");
 
 
 func check_wing_integrity():
@@ -57,13 +62,19 @@ func check_wing_integrity():
 		wings.pop_at(wing_rnd_index).queue_free();
 
 
+func start_core_destroy_animation(camera : Camera3D):
+	var tween_camera = get_tree().create_tween();
+	tween_camera.tween_property(camera, "transform", endgame_camera_transform.transform, 3.0);
+	tween_camera.tween_callback(destroy_core);
+
+
 func destroy_core():
 	var tween_core_sphere = get_tree().create_tween();
-	tween_core_sphere.tween_property(sphere.get_surface_override_material(0), "shader_parameter/Saturation", 0.0, 8);
+	tween_core_sphere.tween_property(sphere.get_surface_override_material(0), "shader_parameter/Saturation", 0.0, 8.0);
 
 	var tween_core_base = get_tree().create_tween();
-	tween_core_base.tween_property(self, "current_rotation_speed", 0.0, 4);
-	tween_core_base.tween_callback(func() : emit_signal("on_core_destroyed"));
+	tween_core_base.tween_property(self, "current_rotation_speed", 0.0, 4.0);
+	tween_core_base.tween_callback(func(): emit_signal("on_core_destroyed"));
 
 
 func on_body_entered(body):
