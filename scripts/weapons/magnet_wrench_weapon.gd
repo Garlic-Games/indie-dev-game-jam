@@ -6,6 +6,8 @@ extends Node3D
 @export var melee_swing: float = 1.5;
 @export var range_swing: float = 1;
 
+@export var player: Player;
+
 
 @onready var magnet: MeshInstance3D = $Magnet;
 @onready var shaft: MeshInstance3D = $Shaft;
@@ -127,10 +129,18 @@ func LookAt(position: Vector3):
 	_oldLookAtPosition = position;
 
 func _AttractPickups():
-	print(beamArea.get_overlapping_bodies());
-	pass;
+	var impulse = 150;
+	if player:
+		impulse = player.global_transform.basis.z * impulse;
+	else:
+		impulse = global_transform.basis.z * impulse;
+	for body in beamArea.get_overlapping_bodies():
+		if body is RigidBody3D:
+			body.apply_central_impulse(impulse)
 	
 func _DealDamageToEnemies(damage: float):
 	for body in beamArea.get_overlapping_bodies():
 		if body is BaseEnemyRobot:
 			body.damage(damage);
+		if body is TurretPlacement:
+			body.build();
