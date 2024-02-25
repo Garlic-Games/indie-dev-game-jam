@@ -1,7 +1,8 @@
-[gd_scene load_steps=23 format=3 uid="uid://dafbkuh5h26yx"]
+[gd_scene load_steps=25 format=3 uid="uid://dafbkuh5h26yx"]
 
 [ext_resource type="Script" path="res://scripts/core/core.gd" id="1_p6ywm"]
 [ext_resource type="Texture2D" uid="uid://c3fw4bhrbqcey" path="res://art/models/core/core_base_core.png" id="2_kumrg"]
+[ext_resource type="Shader" path="res://art/shaders/core_sphere.gdshader" id="3_b4as1"]
 [ext_resource type="Texture2D" uid="uid://chn5nmvt2dbf" path="res://art/models/core/core_metal_base.png" id="3_wsew6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vgx6c"]
@@ -86,6 +87,15 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_h64yo")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wvb83"]
+render_priority = 0
+shader = ExtResource("3_b4as1")
+shader_parameter/albedo = Color(0, 1, 1, 1)
+shader_parameter/Saturation = 1.0
+shader_parameter/PulseRate = 0.2
+shader_parameter/PulseIntensity = 0.1
+shader_parameter/Opacity = 0.922
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qwrvq"]
 resource_name = "metal_base"
@@ -408,8 +418,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ho5h4")
 
-[node name="Core" type="Node3D" node_paths=PackedStringArray("rotary_item", "wings")]
+[node name="Core" type="Node3D" node_paths=PackedStringArray("sphere", "rotary_item", "wings")]
 script = ExtResource("1_p6ywm")
+sphere = NodePath("Model/pelotita")
 rotary_item = NodePath("Model/base_brazo")
 wings = [NodePath("Model/base_brazo/brazo_1"), NodePath("Model/base_brazo/brazo_2"), NodePath("Model/base_brazo/brazo_3"), NodePath("Model/base_brazo/brazo_4"), NodePath("Model/base_brazo/brazo_5")]
 
@@ -421,9 +432,10 @@ mesh = SubResource("ArrayMesh_j52eg")
 skeleton = NodePath("")
 
 [node name="pelotita" type="MeshInstance3D" parent="Model"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.30161, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00447607, 3.30161, -0.0124706)
 mesh = SubResource("ArrayMesh_mlkmb")
 skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_wvb83")
 
 [node name="base_brazo" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(0.662258, 0, 0, 0, 0.170932, 0, 0, 0, 0.662258, 0, 0.848568, 0)

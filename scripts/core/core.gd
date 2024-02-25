@@ -9,6 +9,7 @@ signal on_core_damaged(lives_remaining : int);
 @export var max_rotation_speed : float = 720.0;
 
 @export_group("Core structure")
+@export var sphere : MeshInstance3D = null;
 @export var rotary_item : MeshInstance3D = null;
 @export var wings : Array[MeshInstance3D] = [];
 
@@ -19,6 +20,7 @@ var current_rotation_speed : float;
 func _ready():
 	current_lives = lives;
 	current_rotation_speed = min_rotation_speed;
+	print(sphere.get_surface_override_material(0).get("shader_parameter/Saturation"));
 
 
 func _process(delta):
@@ -30,6 +32,7 @@ func damage():
 	check_wing_integrity();
 	
 	if (current_lives < 0):
+		destroy_core();
 		emit_signal("on_core_destroyed");
 
 
@@ -40,3 +43,8 @@ func check_wing_integrity():
 	while (wings.size() > wings_remaining):
 		# @TODO: animar la rotura del ala?
 		wings.pop_back().queue_free();
+
+
+func destroy_core():
+	var tween = get_tree().create_tween()
+	tween.tween_property(sphere.get_surface_override_material(0), "shader_parameter/Saturation", 0.0, 3)
