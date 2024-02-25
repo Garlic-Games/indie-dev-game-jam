@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfv8h8uc3ue0b"
-path.s3tc="res://.godot/imported/turret_base_metal.png-e710b69a5f48a79d5b4279fce967446e.s3tc.ctex"
+uid="uid://drr2j6vy1kif4"
+path.s3tc="res://.godot/imported/turret_gustav_metal.png-a76ef6014abbf50cfc27a819bd433435.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ generator_parameters={}
 
 [deps]
 
-source_file="res://art/models/turrets/turret_base_metal.png"
-dest_files=["res://.godot/imported/turret_base_metal.png-e710b69a5f48a79d5b4279fce967446e.s3tc.ctex"]
+source_file="res://art/models/turrets/gustav/turret_gustav_metal.png"
+dest_files=["res://.godot/imported/turret_gustav_metal.png-a76ef6014abbf50cfc27a819bd433435.s3tc.ctex"]
 
 [params]
 

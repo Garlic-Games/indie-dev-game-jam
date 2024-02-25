@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bkk6dwovst3vh"
-path="res://.godot/imported/turret_base.glb-bcf201390784b9f7a3ee62e509dc5de7.scn"
+uid="uid://dn3aietkiv3fm"
+path="res://.godot/imported/turret_gustav.glb-4e4ffce64f86a142fd0cb51203fad418.scn"
 
 [deps]
 
-source_file="res://art/models/turrets/turret_base.glb"
-dest_files=["res://.godot/imported/turret_base.glb-bcf201390784b9f7a3ee62e509dc5de7.scn"]
+source_file="res://art/models/turrets/gustav/turret_gustav.glb"
+dest_files=["res://.godot/imported/turret_gustav.glb-4e4ffce64f86a142fd0cb51203fad418.scn"]
 
 [params]
 
