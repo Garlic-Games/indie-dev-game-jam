@@ -1,0 +1,98 @@
+[gd_scene load_steps=8 format=3 uid="uid://du3xv4l5n6wqs"]
+
+[ext_resource type="PackedScene" path="res://art/models/props/uralita.tscn" id="1_oiq1i"]
+[ext_resource type="PackedScene" path="res://art/models/props/Viga.tscn" id="2_6tmij"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_rjjbv"]
+size = Vector3(30.3227, 0.475922, 7.67651)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xj2x8"]
+albedo_color = Color(0.219608, 0.0823529, 0.0313726, 1)
+metallic_specular = 0.16
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xxcmc"]
+size = Vector3(30.3227, 0.475922, 7.67651)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3pxg6"]
+size = Vector3(30.3227, 0.475922, 7.67651)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8cwer"]
+size = Vector3(3.55566, 0.402466, 8.18982)
+
+[node name="Bridge" type="Node3D"]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, -1.42219, -0.355038, 1.98259)
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.850556, 0.0305519, -0.524996, 0.0328998, 0.999447, 0.00486072, 0.524854, -0.0131379, -0.851091, 14.4158, -5.30028, -33.0482)
+mesh = SubResource("BoxMesh_rjjbv")
+surface_material_override/0 = SubResource("StandardMaterial3D_xj2x8")
+
+[node name="Rampitas" type="Node3D" parent="."]
+
+[node name="Uralita" parent="Rampitas" instance=ExtResource("1_oiq1i")]
+transform = Transform3D(0.497225, 0.171224, -0.850558, -0.0864131, 0.985232, 0.147819, 0.863307, 0, 0.504678, 1.20925, -4.94331, -27.509)
+
+[node name="Uralita2" parent="Rampitas" instance=ExtResource("1_oiq1i")]
+transform = Transform3D(0.497225, 0.171224, -0.850558, -0.0864131, 0.985232, 0.147819, 0.863307, 0, 0.504678, 2.14732, -5.01009, -25.6979)
+
+[node name="Uralita3" parent="Rampitas" instance=ExtResource("1_oiq1i")]
+transform = Transform3D(0.497225, 0.171224, -0.850558, 0.0362868, 0.975372, 0.217563, 0.866862, -0.139042, 0.478766, 3.17856, -5.12946, -24.0153)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="Floor" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(-0.850556, 0.0305519, -0.524996, 0.0328998, 0.999447, 0.00486072, 0.524854, -0.013138, -0.851091, 14.3305, -5.29795, -32.9955)
+shape = SubResource("BoxShape3D_xxcmc")
+
+[node name="Ceiling" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(-0.850556, 0.0305519, -0.524996, 0.0328998, 0.999447, 0.00486072, 0.524854, -0.013138, -0.851091, 14.3305, 1.54679, -32.9955)
+shape = SubResource("BoxShape3D_3pxg6")
+
+[node name="Ramps" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(-0.85167, 0.10395, -0.513666, 0.124479, 0.992207, -0.00559732, 0.50908, -0.0687078, -0.857973, 1.05821, -4.58555, -24.99)
+shape = SubResource("BoxShape3D_8cwer")
+
+[node name="Transversales" type="Node3D" parent="."]
+
+[node name="Viga" parent="Transversales" instance=ExtResource("2_6tmij")]
+transform = Transform3D(0.695156, 12.9056, 0.644994, -1.97506, 5.56978, 0.0799403, -0.259263, -7.82678, 1.12043, 8.49833, -4.33279, -25.355)
+
+[node name="Viga2" parent="Transversales" instance=ExtResource("2_6tmij")]
+transform = Transform3D(0.731648, 12.9004, 0.630289, -1.96955, 5.55723, 0.124457, -0.19207, -7.84426, 1.12473, 3.74123, -4.64575, -30.6079)
+
+[node name="Viga3" parent="Transversales" instance=ExtResource("2_6tmij")]
+transform = Transform3D(-0.828496, -15.5367, -0.732248, -2.14806, 7.26452, 0.112861, 0.285663, 9.56568, -1.27504, 26.2748, -5.44047, -36.2302)
+
+[node name="Viga4" parent="Transversales" instance=ExtResource("2_6tmij")]
+transform = Transform3D(-0.819058, -13.4724, -0.648823, -2.00005, 6.33863, 0.150516, 0.197587, 8.31509, -1.16598, 20.9519, -5.08339, -40.523)
+
+[node name="Verticales" type="Node3D" parent="."]
+
+[node name="Viga5" parent="Verticales" instance=ExtResource("2_6tmij")]
+transform = Transform3D(2.163, 0, 0, 0, 6.595, 0, 0, 0, 1.23, 7.12074, -4.79603, -25.412)
+
+[node name="Viga6" parent="Verticales" instance=ExtResource("2_6tmij")]
+transform = Transform3D(1.76016, 0, 0, 0, 5.36467, 0, 0, 0, 1, 24.746, -5.79916, -43.025)
+
+[node name="Viga7" parent="Verticales" instance=ExtResource("2_6tmij")]
+transform = Transform3D(1.76016, 0, 0, 0, 5.36467, 0, 0, 0, 1, 27.829, -5.79916, -37.822)
+
+[node name="Viga8" parent="Verticales" instance=ExtResource("2_6tmij")]
+transform = Transform3D(1.76016, 0, 0, 0, 5.36467, 0, 0, 0, 1, 4.354, -4.72325, -30.6443)
+
+[node name="Uralitas" type="Node3D" parent="."]
+
+[node name="Uralita" parent="Uralitas" instance=ExtResource("1_oiq1i")]
+transform = Transform3D(2.25288, 0, 1.01378, 0, 1, 0, -1.34891, 0, 1.69317, 4.11561, 1.3978, -28.959)
+
+[node name="Uralita2" parent="Uralitas" instance=ExtResource("1_oiq1i")]
+transform = Transform3D(2.69955, 0, 1.08922, 0, 1, 0, -1.61635, 0, 1.81915, 8.84667, 1.39798, -32.0313)
+
+[node name="Uralita3" parent="Uralitas" instance=ExtResource("1_oiq1i")]
+transform = Transform3D(2.38587, 0, 1.04962, 0, 1, 0, -1.42854, 0, 1.75302, 13.9321, 1.13793, -34.8079)
+
+[node name="Uralita4" parent="Uralitas" instance=ExtResource("1_oiq1i")]
+transform = Transform3D(2.558, 0, 1.09599, 0, 1, 0, -1.5316, 0, 1.83047, 18.9635, 1.10489, -37.5266)
+
+[node name="Uralita5" parent="Uralitas" instance=ExtResource("1_oiq1i")]
+transform = Transform3D(2.25288, 0, 1.01378, 0, 1, 0, -1.34891, 0, 1.69317, 23.5785, 1.31401, -40.4048)

@@ -1,35 +1,39 @@
-[gd_scene load_steps=4 format=3 uid="uid://3crgms634w30"]
+[gd_scene load_steps=5 format=3 uid="uid://3crgms634w30"]
 
 [ext_resource type="PackedScene" uid="uid://c8n6fvm4iot6m" path="res://prefabs/world/terrain.tscn" id="1_w7dvw"]
 [ext_resource type="PackedScene" uid="uid://11ncfu1k86ha" path="res://prefabs/turrets/turret_placement/turret_placement.tscn" id="2_chggi"]
 [ext_resource type="PackedScene" uid="uid://dafbkuh5h26yx" path="res://prefabs/core/core.tscn" id="3_7thnq"]
+[ext_resource type="PackedScene" uid="uid://byjru80pgt0m2" path="res://prefabs/enemies/spawn/heavy_enemy_spawn.tscn" id="5_lchtv"]
 
 [node name="MainLevel" type="Node3D"]
 
 [node name="Terrain" parent="." instance=ExtResource("1_w7dvw")]
 
+[node name="Core" parent="." instance=ExtResource("3_7thnq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.41, -9.91821e-05, 45.2742)
+
 [node name="TurretPlacements" type="Node3D" parent="."]
 
 [node name="TurretPlacement" parent="TurretPlacements" instance=ExtResource("2_chggi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.2577, -0.0237656, -4.86202)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.2577, -0.0237656, -3.11565)
 
 [node name="TurretPlacement2" parent="TurretPlacements" instance=ExtResource("2_chggi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64.3857, -9.91821e-05, 12.9253)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -67.3814, -9.91821e-05, 6.08098)
 
 [node name="TurretPlacement3" parent="TurretPlacements" instance=ExtResource("2_chggi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.4616, -1.58467, -36.2605)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.6747, -0.41685, -34.4168)
 
 [node name="TurretPlacement4" parent="TurretPlacements" instance=ExtResource("2_chggi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.6641, -0.00497437, 31.9662)
 
 [node name="TurretPlacement5" parent="TurretPlacements" instance=ExtResource("2_chggi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.943, -9.91821e-05, 48.5061)
+transform = Transform3D(1, 0, 0, 0, 0.982454, 0.186507, 0, -0.186507, 0.982454, -22.6058, 1.20697, 48.5061)
 
 [node name="TurretPlacement6" parent="TurretPlacements" instance=ExtResource("2_chggi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.7467, -9.91821e-05, 29.953)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.7467, 1.0884, 26.6405)
 
 [node name="TurretPlacement7" parent="TurretPlacements" instance=ExtResource("2_chggi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.0936, 0.328434, 64.0025)
+transform = Transform3D(1, 0, 0, 0, 0.963905, 0.266246, 0, -0.266246, 0.963905, -41.0936, 1.40176, 67.8841)
 
 [node name="TurretPlacement8" parent="TurretPlacements" instance=ExtResource("2_chggi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -62.6913, 0.16272, 31.5671)
@@ -37,5 +41,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -62.6913, 0.16272, 31.5671)
 [node name="TurretPlacement9" parent="TurretPlacements" instance=ExtResource("2_chggi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.0332, -3.88304, 3.05376)
 
-[node name="Core" parent="." instance=ExtResource("3_7thnq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47.1646, -9.91821e-05, 45.2742)
+[node name="Spawns" type="Node3D" parent="."]
+
+[node name="HeavyEnemySpawn" parent="Spawns" node_paths=PackedStringArray("target") instance=ExtResource("5_lchtv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.6794, 0.517664, -20.2447)
+target = NodePath("../../Core")
+
+[node name="Timer" type="Timer" parent="Spawns"]
+autostart = true
+
+[connection signal="timeout" from="Spawns/Timer" to="Spawns/HeavyEnemySpawn" method="spawn"]

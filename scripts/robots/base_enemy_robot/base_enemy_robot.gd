@@ -1,7 +1,6 @@
 class_name BaseEnemyRobot;
 extends CharacterBody3D
 
-@export var focus_player: bool = false;
 @export var max_hp: float = 10;
 @onready var current_hp: float = max_hp :
 	get:
@@ -13,10 +12,10 @@ extends CharacterBody3D
 
 @export var movement_speed: float = 5;
 @export var movement_target_position: Node3D;
-# Get the gravity from the project settings to be synced with RigidBody nodes.
+
 @onready var agent: NavigationAgent3D = %Agent;
 var loaded: bool = false;
-
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity");
 signal damaged(dmg: float);
 signal dead;
 
@@ -42,6 +41,7 @@ func set_movement_target(movement_target: Vector3):
 	agent.set_target_position(movement_target)
 
 func _physics_process(_delta):
+	apply_gravity(gravity);
 	if !movement_target_position:
 		return;
 	if loaded:
@@ -61,3 +61,6 @@ func die():
 	dead.emit();
 	queue_free();	
 
+func apply_gravity(gravity_value: float) -> void:
+	if not is_on_floor():
+		velocity.y -= gravity_value;

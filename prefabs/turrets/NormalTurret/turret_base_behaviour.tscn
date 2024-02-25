@@ -8,6 +8,7 @@ height = 50.0
 radius = 0.933
 
 [node name="turret_base" instance=ExtResource("1_kint5")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="Head" parent="." index="0"]
 script = ExtResource("2_bxq44")

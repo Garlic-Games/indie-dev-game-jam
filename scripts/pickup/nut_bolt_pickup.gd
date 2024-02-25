@@ -29,6 +29,5 @@ func _ready():
 func _on_area_3d_body_entered(body):
 	if body as Player:
 		body.AddAmmo();
-		get_parent().remove_child(self);
 		queue_free();
 
