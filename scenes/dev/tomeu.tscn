@@ -1,28 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://ds3oo16ms1e62"]
+[gd_scene load_steps=4 format=3 uid="uid://ds3oo16ms1e62"]
 
 [ext_resource type="PackedScene" uid="uid://3crgms634w30" path="res://prefabs/levels/main_level.tscn" id="2_c4lrf"]
 [ext_resource type="PackedScene" uid="uid://gli4qu8qcdb4" path="res://prefabs/player/player.tscn" id="4_804ew"]
 [ext_resource type="Environment" uid="uid://celdecb2ba0qm" path="res://art/environment/main_environment.tres" id="5_plcfs"]
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_a4sax"]
-emission_shape = 3
-emission_box_extents = Vector3(20, 2, 20)
-gravity = Vector3(0, 0, 0)
-
-[sub_resource type="BoxMesh" id="BoxMesh_8sgx2"]
-size = Vector3(0.1, 0.1, 0.1)
-
 [node name="Tomeu" type="Node3D"]
-
-[node name="Node3D2" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.1849, 0.512375, -20.9014)
-
-[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25242, 2.5339, 10.0419)
-amount = 50
-visibility_aabb = AABB(-44.2051, -4.80709, -45.5721, 89.0508, 16.9831, 84.3597)
-process_material = SubResource("ParticleProcessMaterial_a4sax")
-draw_pass_1 = SubResource("BoxMesh_8sgx2")
 
 [node name="MainLevel" parent="." instance=ExtResource("2_c4lrf")]
 

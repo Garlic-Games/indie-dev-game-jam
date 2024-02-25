@@ -21,10 +21,6 @@ signal dead;
 
 func _ready():
 	loaded = false;
-	agent.avoidance_enabled = true;
-	agent.path_desired_distance = 0.5
-	agent.target_desired_distance = 0.5
-
 	# Make sure to not await during _ready.
 	call_deferred("actor_setup");
 
@@ -38,6 +34,8 @@ func actor_setup():
 	set_movement_target(movement_target_position.global_position);
 
 func set_movement_target(movement_target: Vector3):
+	if agent.target_position == movement_target:
+		return;
 	agent.set_target_position(movement_target)
 
 func _physics_process(_delta):
@@ -49,9 +47,7 @@ func _physics_process(_delta):
 	
 	if agent.is_navigation_finished():
 		return;
-	velocity = global_position.direction_to(agent.get_next_path_position()) * movement_speed;	
-	
-	move_and_slide()
+	agent.velocity = global_position.direction_to(agent.get_next_path_position()) * movement_speed;	
 	
 func damage(ammount: float):
 	current_hp -= ammount;
@@ -64,3 +60,8 @@ func die():
 func apply_gravity(gravity_value: float) -> void:
 	if not is_on_floor():
 		velocity.y -= gravity_value;
+
+
+func _on_agent_velocity_computed(safe_velocity: Vector3):
+	velocity = safe_velocity;
+	move_and_slide();
