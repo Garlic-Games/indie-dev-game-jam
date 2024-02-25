@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7bjmikn02g2g"]
+
+[ext_resource type="PackedScene" uid="uid://bq0rkcomj6wjv" path="res://prefabs/turrets/base_turret/base_turret.tscn" id="1_job2p"]
+[ext_resource type="PackedScene" uid="uid://b43qhnxayx4oy" path="res://prefabs/turrets/NormalTurret/turret_base_behaviour.tscn" id="2_5a0eb"]
+
+[node name="NormalTurret" instance=ExtResource("1_job2p")]
+
+[node name="turret_base" parent="." index="1" instance=ExtResource("2_5a0eb")]

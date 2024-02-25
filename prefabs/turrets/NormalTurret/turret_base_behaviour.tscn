@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://b43qhnxayx4oy"]
+
+[ext_resource type="PackedScene" uid="uid://bkk6dwovst3vh" path="res://art/models/turrets/turret_base.glb" id="1_kint5"]
+[ext_resource type="Script" path="res://scripts/robots/gun/gun.gd" id="2_bxq44"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_dqcau"]
+height = 50.0
+radius = 0.933
+
+[node name="turret_base" instance=ExtResource("1_kint5")]
+
+[node name="Head" parent="." index="0"]
+script = ExtResource("2_bxq44")
+
+[node name="ShootArea" type="Area3D" parent="Head" index="1"]
+collision_layer = 4
+collision_mask = 8
+
+[node name="ShootCollision" type="CollisionShape3D" parent="Head/ShootArea" index="0"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 25, 0, 0)
+shape = SubResource("CylinderShape3D_dqcau")
