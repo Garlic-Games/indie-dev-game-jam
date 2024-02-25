@@ -5,6 +5,7 @@ extends RigidBody3D
 @onready var _boltMesh: MeshInstance3D = $BoltMesh;
 @onready var _nutMesh: MeshInstance3D = $NutMesh;
 
+@export var ammo_per_pickup: float = 7;
 @export var _colorOverride: Array[String] = ["9e9e9e", "9e9eff", "9eff9e", "ff9e9e"];
 @export var baseMaterial: StandardMaterial3D = null;
 
@@ -28,6 +29,6 @@ func _ready():
 
 func _on_area_3d_body_entered(body):
 	if body as Player:
-		body.AddAmmo();
+		body.AddAmmo(ammo_per_pickup);
 		queue_free();
 

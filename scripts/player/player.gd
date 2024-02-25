@@ -121,12 +121,22 @@ func apply_gravity(gravity_value: float) -> void:
 
 func damage(amount: float):
 	pass;
+
+func LooseAmmo(amount: float):
+	var newAmmo = _currentAmmo - amount;
+	ammo_changed.emit(_currentAmmo, newAmmo);
+	_currentAmmo = newAmmo;
 	
-func AddAmmo():
-	var newAmmo = _currentAmmo + 1;
+
+func AddAmmo(amount: float):
+	var newAmmo = _currentAmmo + amount;
 	ammo_changed.emit(_currentAmmo, newAmmo);
 	_currentAmmo = newAmmo;
 	pickupSfx.reproduce();
 
 func CoreHealthChangedListener(oldValue: float, newValue: float):
 	core_health_changed.emit(oldValue, newValue);
+	
+
+func HasEnoughAmmo(amount: float) -> bool:
+	return _currentAmmo > amount;

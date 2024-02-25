@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cvm7erjms6aje"]
+[gd_scene load_steps=6 format=3 uid="uid://cvm7erjms6aje"]
 
 [ext_resource type="Environment" uid="uid://celdecb2ba0qm" path="res://art/environment/main_environment.tres" id="1_8q7bv"]
 [ext_resource type="PackedScene" uid="uid://c8n6fvm4iot6m" path="res://prefabs/world/terrain.tscn" id="1_jdpei"]
 [ext_resource type="PackedScene" uid="uid://gli4qu8qcdb4" path="res://prefabs/player/player.tscn" id="2_ia05s"]
 [ext_resource type="PackedScene" uid="uid://d3gkvcv3k28p5" path="res://prefabs/pickup/nut_bolt_pickup.tscn" id="4_lkiby"]
+[ext_resource type="PackedScene" uid="uid://drk5m5iq065e3" path="res://prefabs/enemies/heavy/heavy.tscn" id="5_3n8bb"]
 
 [node name="Guillem" type="Node3D"]
 
@@ -81,3 +82,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
 
 [node name="NutBoltPickup20" parent="DezzNuts" instance=ExtResource("4_lkiby")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="Heavy" parent="." instance=ExtResource("5_3n8bb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.59138, -9.72748e-05, 27.3588)

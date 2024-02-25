@@ -2,6 +2,7 @@ class_name MagnetWrench;
 
 extends Node3D
 
+
 @export var melee_swing: float = 1.5;
 @export var range_swing: float = 1;
 
@@ -10,7 +11,8 @@ extends Node3D
 @onready var shaft: MeshInstance3D = $Shaft;
 @onready var spring: MeshInstance3D = $Spring;
 @onready var beamSfx: AudioStreamPlayer3D = $BeamSFX;
-
+@onready var nutsNBolts: NutsBoltsEmitter = $NutsBoltsEmitter;
+@onready var beamArea: Area3D = $BeamArea;
 
 var _animationDuration: float = 0.4;
 var _shootAnimation: Tween = null;
@@ -42,28 +44,28 @@ func ToogleMode():
 	mode_changed.emit(oldMode, _mode);
 
 
-func Shoot():
+func Shoot(damage: float) -> bool:
 	if !_weaponReady:
-		return;
+		return false;
 	_weaponReady = false;
 	if(_mode == Mode.VERTICAL):
-		_AttackRangedVertical();
+		_AttackRangedVertical(damage);
 	else:
 		_AttackRangedHorizontal();
-	pass;
+	return true;
 
 
-func Melee():
+func Melee(damage: float) -> bool:
 	if !_weaponReady:
-		return;
+		return false;
 	_weaponReady = false;
 	if(_mode == Mode.VERTICAL):
-		_AttackMeleeVertical();
+		_AttackMeleeVertical(damage);
 	else:
-		_AttackMeleeHorizontal();
-	pass;
+		_AttackMeleeHorizontal(damage);
+	return true;
 
-func _AttackMeleeHorizontal():
+func _AttackMeleeHorizontal(damage: float):
 	push_pull_force_applied.emit(true);
 	var tween = get_tree().create_tween();
 	tween.tween_property(magnet, "position:x", -melee_swing, _animationDuration/4);
@@ -71,7 +73,7 @@ func _AttackMeleeHorizontal():
 	tween.tween_property(magnet, "position:x", _initialMagnetPosition.x, _animationDuration/4);
 	tween.finished.connect(_animationFinished);
 
-func _AttackMeleeVertical():
+func _AttackMeleeVertical(damage: float):
 	var tween = get_tree().create_tween();
 	tween.tween_property(magnet, "position:y", -melee_swing, _animationDuration/4);
 	tween.tween_property(magnet, "position:y", melee_swing, _animationDuration/2);
@@ -82,9 +84,11 @@ func _AttackMeleeVertical():
 func _verticalAttackTwinFinish():
 	push_pull_force_applied.emit(false);
 
-func _AttackRangedVertical():
+func _AttackRangedVertical(damage: float):
 	beamSfx.play();
+	nutsNBolts.play();
 	beamSfx.pitch_scale = 1;
+	_DealDamageToEnemies(damage);
 	var tween = get_tree().create_tween();
 	tween.tween_property(magnet, "position:z", _initialMagnetPosition.z - range_swing, _animationDuration/5);
 	tween.tween_property(magnet, "position:z", _initialMagnetPosition.z, _animationDuration);
@@ -93,6 +97,7 @@ func _AttackRangedVertical():
 func _AttackRangedHorizontal():
 	beamSfx.play();
 	beamSfx.pitch_scale = 1.6;
+	_AttractPickups();
 	var tween = get_tree().create_tween();
 	tween.tween_property(magnet, "position:z", _initialMagnetPosition.z - range_swing, _animationDuration);
 	tween.tween_property(magnet, "position:z", _initialMagnetPosition.z, _animationDuration/5);
@@ -111,6 +116,7 @@ func _animateMagnetToPosition(newPositionDegrees):
 	tween.finished.connect(_animationFinished);
 	
 func _animationFinished():
+	nutsNBolts.stop();
 	_weaponReady = true;
 	beamSfx.stop();
 
@@ -119,3 +125,12 @@ func LookAt(position: Vector3):
 		position = lerp(_oldLookAtPosition, position, 0.08);
 	look_at(position);
 	_oldLookAtPosition = position;
+
+func _AttractPickups():
+	print(beamArea.get_overlapping_bodies());
+	pass;
+	
+func _DealDamageToEnemies(damage: float):
+	for body in beamArea.get_overlapping_bodies():
+		if body is BaseEnemyRobot:
+			body.damage(damage);

@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://cuyh01p314qxu"]
+[gd_scene load_steps=6 format=3 uid="uid://cuyh01p314qxu"]
 
 [ext_resource type="PackedScene" uid="uid://d1fs22shg0acj" path="res://art/models/weapon/magnet_wrench.glb" id="1_0oegk"]
 [ext_resource type="Script" path="res://scripts/weapons/magnet_wrench_weapon.gd" id="2_tym7w"]
 [ext_resource type="AudioStream" uid="uid://c1scphdns08ca" path="res://art/sounds/weapon/beam.wav" id="3_jbswl"]
+[ext_resource type="PackedScene" uid="uid://cx5b0bdvrgjeo" path="res://art/particles/nuts_bolts_emitter.tscn" id="4_h2a0c"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_kix61"]
+height = 100.0
+radius = 0.7
 
 [node name="magnet_wrench" instance=ExtResource("1_0oegk")]
 script = ExtResource("2_tym7w")
@@ -15,4 +20,16 @@ gi_mode = 0
 
 [node name="BeamSFX" type="AudioStreamPlayer3D" parent="." index="3"]
 stream = ExtResource("3_jbswl")
+volume_db = -15.0
 bus = &"SFX"
+
+[node name="BeamArea" type="Area3D" parent="." index="4"]
+collision_layer = 0
+collision_mask = 124
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BeamArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -50)
+shape = SubResource("CylinderShape3D_kix61")
+
+[node name="NutsBoltsEmitter" parent="." index="5" instance=ExtResource("4_h2a0c")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -2.305)

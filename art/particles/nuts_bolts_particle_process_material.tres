@@ -3,7 +3,9 @@
 [resource]
 emission_shape = 3
 emission_box_extents = Vector3(1, 1, 1)
-spread = 90.542
-initial_velocity_min = 5.0
-initial_velocity_max = 15.0
-collision_mode = 2
+spread = 0.0
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_max = 0.2
