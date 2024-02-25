@@ -22,6 +22,7 @@ enum Mode {HORIZONTAL = 270, VERTICAL = 0}
 
 var _mode: Mode = Mode.VERTICAL;
 var _weaponReady = true;
+var _oldLookAtPosition = Vector3.ZERO;
 
 signal push_pull_force_applied(forward: bool)
 
@@ -109,3 +110,9 @@ func _animateMagnetToPosition(newPositionDegrees):
 func _animationFinished():
 	_weaponReady = true;
 	beamSfx.stop();
+
+func LookAt(position: Vector3):
+	if _oldLookAtPosition != Vector3.ZERO:
+		position = lerp(_oldLookAtPosition, position, 0.08);
+	look_at(position);
+	_oldLookAtPosition = position;

@@ -5,7 +5,6 @@ extends Control
 @onready var _coreHealthPB: TextureProgressBar = $Left/BottomLeft/CoreHealthProgressBar;
 @onready var _playerHealthPB: TextureProgressBar = $Left/BottomLeft/PlayerHealthProgressBar;
 
-
 var _actualAmmo = 150;
 var _maxAmmo = 3000;
 var _staminaLevel = 100;
