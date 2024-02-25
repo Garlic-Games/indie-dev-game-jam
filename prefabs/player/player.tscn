@@ -93,3 +93,4 @@ bus = &"SFX"
 [connection signal="health_changed" from="." to="CanvasLayer/PlayerHud" method="PlayerHealthChangedListener"]
 [connection signal="stamina_changed" from="." to="CanvasLayer/PlayerHud" method="StaminaChangedListener"]
 [connection signal="aim_point_physics_update" from="PlayerCamera" to="PlayerCamera/WeaponHolder/magnet_wrench" method="LookAt"]
+[connection signal="mode_changed" from="PlayerCamera/WeaponHolder/magnet_wrench" to="CanvasLayer/PlayerHud" method="WeaponPositionChanged"]

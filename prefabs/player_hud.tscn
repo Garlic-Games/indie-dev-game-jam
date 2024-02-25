@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://4xwpnxm4pnpi"]
+[gd_scene load_steps=6 format=3 uid="uid://4xwpnxm4pnpi"]
 
 [ext_resource type="Texture2D" uid="uid://c135qafciujvo" path="res://art/gradient/blue_progress_bar.tres" id="1_4o41m"]
 [ext_resource type="Script" path="res://scripts/player/player_hud.gd" id="1_mihol"]
 [ext_resource type="Texture2D" uid="uid://dmemd26vs0v0y" path="res://art/gradient/green_progress_bar.tres" id="2_agry7"]
 [ext_resource type="Texture2D" uid="uid://3f00m4x3dq4l" path="res://art/images/crosshair/crosshair.png" id="4_o4ch6"]
+[ext_resource type="Texture2D" uid="uid://drrfxsrtmdf3e" path="res://art/images/crosshair/crosshair_vertical.png" id="5_cxx4x"]
 
 [node name="PlayerHud" type="Control"]
 layout_mode = 3
@@ -137,5 +138,10 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Crosshair" type="Sprite2D" parent="Center"]
+visible = false
 texture = ExtResource("4_o4ch6")
+centered = false
+
+[node name="CrosshairVertical" type="Sprite2D" parent="Center"]
+texture = ExtResource("5_cxx4x")
 centered = false

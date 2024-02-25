@@ -25,6 +25,7 @@ var _weaponReady = true;
 var _oldLookAtPosition = Vector3.ZERO;
 
 signal push_pull_force_applied(forward: bool)
+signal mode_changed(oldPosition: Mode, newPosition: Mode)
 
 func _ready():
 	_initialMagnetPosition = magnet.get_position();
@@ -33,10 +34,12 @@ func ToogleMode():
 	if !_weaponReady:
 		return;
 	_weaponReady = false;
+	var oldMode = _mode;
 	if(_mode == Mode.VERTICAL):
 		_changeMode(Mode.HORIZONTAL);
 	else:
 		_changeMode(Mode.VERTICAL);
+	mode_changed.emit(oldMode, _mode);
 
 
 func Shoot():
