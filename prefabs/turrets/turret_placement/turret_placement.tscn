@@ -1,0 +1,95 @@
+[gd_scene load_steps=16 format=3 uid="uid://11ncfu1k86ha"]
+
+[ext_resource type="Shader" path="res://art/shaders/smoke.gdshader" id="1_1u32d"]
+[ext_resource type="Script" path="res://scripts/turret/turret_placement.gd" id="1_j5u5m"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_tdeel"]
+size = Vector3(2, 1, 2)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_8xntj"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_u55pc"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_w57s6"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 1.0
+
+[sub_resource type="Gradient" id="Gradient_iqkcm"]
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_mta5s"]
+gradient = SubResource("Gradient_iqkcm")
+
+[sub_resource type="Curve" id="Curve_ffjux"]
+_data = [Vector2(0.0129199, 0.0382324), 0.0, 6.06661, 0, 0, Vector2(0.191214, 0.877359), 0.0, 0.0, 0, 0, Vector2(0.945736, 0.928997), -0.987587, -0.987587, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_2idn5"]
+curve = SubResource("Curve_ffjux")
+
+[sub_resource type="Curve" id="Curve_orxub"]
+max_value = 3.0
+_data = [Vector2(0, 0.230884), 0.0, 13.1146, 0, 0, Vector2(0.191214, 2.98064), 0.0, 0.0, 0, 0, Vector2(0.801034, 2.98064), 0.0, 0.0, 0, 0, Vector2(0.997416, 0.0759683), -15.8697, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_d2q0t"]
+curve = SubResource("Curve_orxub")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xcaid"]
+gravity = Vector3(0, 0, 0)
+scale_min = 0.0
+scale_curve = SubResource("CurveTexture_2idn5")
+scale_over_velocity_curve = SubResource("CurveTexture_d2q0t")
+color_ramp = SubResource("GradientTexture1D_mta5s")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_saj0q"]
+render_priority = 0
+shader = ExtResource("1_1u32d")
+shader_parameter/scale = 1.0
+shader_parameter/tex_speed = Vector3(0, -2.2, 0.5)
+shader_parameter/mokomoko = Vector2(0.1, 0.1)
+shader_parameter/smoke_volume = 0.8
+shader_parameter/smoke_aperture = 0.28
+shader_parameter/smoke_color = Color(0.185, 0.185, 0.185, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1lhgn"]
+material = SubResource("ShaderMaterial_saj0q")
+top_radius = 3.0
+bottom_radius = 2.0
+height = 20.0
+cap_top = false
+
+[node name="TurretPlacement" type="Node3D"]
+script = ExtResource("1_j5u5m")
+
+[node name="BodyMesh" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="loweBody" type="MeshInstance3D" parent="BodyMesh"]
+mesh = SubResource("BoxMesh_tdeel")
+skeleton = NodePath("../..")
+
+[node name="Connector" type="MeshInstance3D" parent="BodyMesh"]
+transform = Transform3D(1, 0, 0, 0, 0.878817, -0.477159, 0, 0.477159, 0.878817, 0, 1.08321, 0)
+mesh = SubResource("CapsuleMesh_8xntj")
+skeleton = NodePath("../..")
+
+[node name="Head" type="MeshInstance3D" parent="BodyMesh"]
+transform = Transform3D(0.858531, 0.512762, 0, -0.512762, 0.858531, 0, 0, 0, 1, 0, 1.638, 0)
+mesh = SubResource("TorusMesh_u55pc")
+skeleton = NodePath("../..")
+
+[node name="Cannon" type="MeshInstance3D" parent="BodyMesh/Head"]
+transform = Transform3D(0.935857, -0.351741, -0.0212238, 0, 0.0602297, -0.998185, 0.352381, 0.934158, 0.0563664, 0.0421489, 0, -1.38024)
+mesh = SubResource("CylinderMesh_w57s6")
+
+[node name="Smoke" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.65486, 0)
+amount = 10
+lifetime = 2.0
+visibility_aabb = AABB(-0.319745, -0.600452, -0.503115, 0.639491, 1.2009, 1.00623)
+draw_order = 1
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_xcaid")
+draw_pass_1 = SubResource("CylinderMesh_1lhgn")
