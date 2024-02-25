@@ -26,7 +26,7 @@ radius = 50.0
 [node name="Heavy" instance=ExtResource("1_dsr0k")]
 
 [node name="Collider" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.567341, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.25068, 0)
 
 [node name="BodyMesh" type="Node3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.31806, 0)
@@ -40,12 +40,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.08321, 0)
 mesh = SubResource("CapsuleMesh_u2tq2")
 skeleton = NodePath("../..")
 
-[node name="HeadMesh" type="Node3D" parent="." index="3" node_paths=PackedStringArray("enemy")]
+[node name="HeadMesh" type="Node3D" parent="." index="3"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0199609, 2.42689, -0.00359058)
 script = ExtResource("2_jionj")
 rotation_speed = 100.0
-enemy = NodePath("..")
 
 [node name="Head" type="MeshInstance3D" parent="HeadMesh" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.638, 0)

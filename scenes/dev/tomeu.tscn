@@ -1,21 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://ds3oo16ms1e62"]
+[gd_scene load_steps=6 format=3 uid="uid://ds3oo16ms1e62"]
 
-[ext_resource type="PackedScene" uid="uid://c8n6fvm4iot6m" path="res://prefabs/world/terrain.tscn" id="1_33ynw"]
-[ext_resource type="PackedScene" uid="uid://vc5rxouxaeca" path="res://prefabs/enemies/monolapa/monolapa.tscn" id="2_gpkjg"]
-[ext_resource type="Script" path="res://scripts/test_scripts/camera_click.gd" id="4_pvpqr"]
-[ext_resource type="PackedScene" uid="uid://drk5m5iq065e3" path="res://prefabs/enemies/heavy/heavy.tscn" id="4_qd5w7"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nsegu"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-
-[sub_resource type="Sky" id="Sky_xpfri"]
-sky_material = SubResource("ProceduralSkyMaterial_nsegu")
-
-[sub_resource type="Environment" id="Environment_1xskn"]
-background_mode = 2
-sky = SubResource("Sky_xpfri")
-tonemap_mode = 2
+[ext_resource type="PackedScene" uid="uid://3crgms634w30" path="res://prefabs/levels/main_level.tscn" id="2_c4lrf"]
+[ext_resource type="PackedScene" uid="uid://gli4qu8qcdb4" path="res://prefabs/player/player.tscn" id="4_804ew"]
+[ext_resource type="Environment" uid="uid://celdecb2ba0qm" path="res://art/environment/main_environment.tres" id="5_plcfs"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_a4sax"]
 emission_shape = 3
@@ -27,11 +14,6 @@ size = Vector3(0.1, 0.1, 0.1)
 
 [node name="Tomeu" type="Node3D"]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_1xskn")
-
-[node name="Terrain" parent="." instance=ExtResource("1_33ynw")]
-
 [node name="Node3D2" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.1849, 0.512375, -20.9014)
 
@@ -42,14 +24,10 @@ visibility_aabb = AABB(-44.2051, -4.80709, -45.5721, 89.0508, 16.9831, 84.3597)
 process_material = SubResource("ParticleProcessMaterial_a4sax")
 draw_pass_1 = SubResource("BoxMesh_8sgx2")
 
-[node name="Monolapa" parent="." node_paths=PackedStringArray("movement_target_position") instance=ExtResource("2_gpkjg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.2136, 0, 13.6989)
-collision_layer = 2
-movement_target_position = NodePath("../Heavy")
+[node name="MainLevel" parent="." instance=ExtResource("2_c4lrf")]
 
-[node name="Heavy" parent="." node_paths=PackedStringArray("movement_target_position") instance=ExtResource("4_qd5w7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.6659, 0, 25.9659)
-movement_target_position = NodePath("../Monolapa")
+[node name="Player" parent="." instance=ExtResource("4_804ew")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.5296, -9.91821e-05, 48.1642)
 
-[node name="Camera3D" type="Camera3D" parent="."]
-script = ExtResource("4_pvpqr")
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("5_plcfs")
