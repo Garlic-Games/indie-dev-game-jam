@@ -4,15 +4,13 @@ extends Node
 @export var range_damage: float = 2.7;
 @export var melee_damage: float = 5;
 @export var ammo_wasted_per_shoot: float = 5;
-@export var magnet_push_force: float = 7.0;
+@export var magnet_push_force: float = 3.0;
 
 @export_group("Dependencies")
 @export var magnetWrench: MagnetWrench;
 
 @onready var player: Player = $"..";
 
-var _forceForwardDirection = Vector3(0, 0.08, 1);
-var _forceBackwardDirection = Vector3(0, 0.08, -1);
 
 
 func _ready():
@@ -22,7 +20,9 @@ func _process(delta):
 	if Input.is_action_pressed("action_primary"):
 		if player.HasEnoughAmmo(ammo_wasted_per_shoot):
 			if magnetWrench.Shoot(range_damage):
-				player.LooseAmmo(ammo_wasted_per_shoot);
+				if magnetWrench._mode == MagnetWrench.Mode.VERTICAL:
+					#I don't like this condition but I won't refactor it
+					player.LooseAmmo(ammo_wasted_per_shoot);
 		
 	if Input.is_action_pressed("action_secondary"):
 		magnetWrench.Melee(melee_damage);
@@ -34,7 +34,8 @@ func _input(event: InputEvent):
 
 
 func _weaponAppliesKnockBack(forward: bool):
-	var direction = _forceBackwardDirection;
+	var playerRotation = player.global_rotation.y;
 	if forward:
-		direction = _forceForwardDirection;
+		playerRotation += deg_to_rad(180);
+	var direction = Vector3(sin(playerRotation), 0.6, cos(playerRotation));
 	player._knockBack = direction * magnet_push_force;

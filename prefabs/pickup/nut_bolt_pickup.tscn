@@ -15,7 +15,7 @@ collision_layer = 64
 collision_mask = 93
 mass = 5.0
 center_of_mass_mode = 1
-center_of_mass = Vector3(1.72, 1.72, -2.76)
+center_of_mass = Vector3(0.25, 0.25, 0.25)
 script = ExtResource("1_gjcpd")
 baseMaterial = ExtResource("2_f4qh6")
 
