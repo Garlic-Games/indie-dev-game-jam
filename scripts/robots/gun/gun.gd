@@ -41,6 +41,5 @@ func open_fire():
 		return; 
 	if fire && target:
 		shoot.emit();
-		print("pium");
 		cooldown = get_tree().create_timer(shoot_cooldown, false);
 		cooldown.timeout.connect(open_fire);

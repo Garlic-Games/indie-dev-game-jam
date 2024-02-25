@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://doob1b8uciujo"]
 
-[ext_resource type="PackedScene" uid="uid://d1fs22shg0acj" path="res://art/models/weapon/magnet_wrench.glb" id="1_fbxcc"]
+[ext_resource type="PackedScene" uid="uid://dafbkuh5h26yx" path="res://prefabs/core/core.tscn" id="1_gvujq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7is8t"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -12,7 +12,6 @@ sky_material = SubResource("ProceduralSkyMaterial_7is8t")
 [sub_resource type="Environment" id="Environment_5qius"]
 background_mode = 2
 sky = SubResource("Sky_jhr1p")
-tonemap_mode = 2
 sdfgi_enabled = true
 glow_enabled = true
 
@@ -25,7 +24,8 @@ environment = SubResource("Environment_5qius")
 transform = Transform3D(0.0564479, -0.311102, -0.948699, 0.877062, 0.469474, -0.101767, 0.477049, -0.826323, 0.299357, -3.00704, -0.424081, 0)
 shadow_enabled = true
 
-[node name="magnetwrench" parent="." instance=ExtResource("1_fbxcc")]
-
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.443744, 0, -0.896154, 0, 1, 0, 0.896154, 0, -0.443744, -2.11603, 0, -1.83115)
+transform = Transform3D(-0.605609, 0.280006, -0.744872, -0.0548795, 0.919124, 0.390128, 0.793867, 0.277143, -0.541264, -5.42841, 4.60832, -4.79601)
+
+[node name="Core" parent="." instance=ExtResource("1_gvujq")]
+debug_mode = true

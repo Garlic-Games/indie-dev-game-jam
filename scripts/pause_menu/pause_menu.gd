@@ -3,7 +3,7 @@ extends CanvasLayer;
 
 signal opened;
 signal closed;
-@onready var settings_menu: Settings = %SettingsMenu;
+@onready var settings_menu: SettingsContainer = %SettingsMenu;
 @onready var exit_game_confirm_menu: ConfirmMenu = %ExitGameConfirmMenu;
 @onready var main_menu_confirm_menu: ConfirmMenu = %MainMenuConfirmMenu ;
 @export_file("*.tscn") var main_menu_scene: String;

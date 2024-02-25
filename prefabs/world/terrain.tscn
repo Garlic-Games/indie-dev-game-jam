@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://c8n6fvm4iot6m"]
+[gd_scene load_steps=5 format=3 uid="uid://c8n6fvm4iot6m"]
 
+[ext_resource type="PackedScene" uid="uid://11ncfu1k86ha" path="res://prefabs/turrets/turret_placement/turret_placement.tscn" id="1_i48ah"]
 [ext_resource type="Texture2D" uid="uid://dokwpkdyqnh86" path="res://prefabs/world/world_reference.jpg" id="1_n1nfb"]
 [ext_resource type="Material" uid="uid://co6kcx0ud4gn8" path="res://art/materials/water_shader_material.tres" id="5_us5v3"]
 [ext_resource type="PackedScene" uid="uid://lpi8w5e874y8" path="res://prefabs/world/basic_terrain_with_rb.tscn" id="6_ekw7f"]
@@ -53,3 +54,5 @@ mesh = SubResource("BoxMesh_pir37")
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Water"]
 transform = Transform3D(0.498033, 0.069986, 0.15136, 0.0192507, 0.791498, -0.634886, -0.0801975, 0.624611, 0.787559, 0.488558, -28.3449, -73.9682)
 mesh = SubResource("BoxMesh_ewjjq")
+
+[node name="TurretPlacement" parent="." instance=ExtResource("1_i48ah")]

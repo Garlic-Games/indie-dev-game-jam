@@ -22,8 +22,8 @@
 # SOFTWARE.
 
 @tool
-extends Resource
 class_name Settings
+extends Resource
 
 @export var definition_map:Dictionary
 @export var lookup:Dictionary
