@@ -20,62 +20,64 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.485682, 0, 1.58403)
 [node name="Player" parent="." instance=ExtResource("2_ia05s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.486, 0.223912, 1.584)
 
-[node name="NutBoltPickup" parent="." instance=ExtResource("4_lkiby")]
+[node name="DezzNuts" type="Node3D" parent="."]
+
+[node name="NutBoltPickup" parent="DezzNuts" instance=ExtResource("4_lkiby")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
 
-[node name="NutBoltPickup2" parent="." instance=ExtResource("4_lkiby")]
+[node name="NutBoltPickup2" parent="DezzNuts" instance=ExtResource("4_lkiby")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
 
-[node name="NutBoltPickup3" parent="." instance=ExtResource("4_lkiby")]
+[node name="NutBoltPickup3" parent="DezzNuts" instance=ExtResource("4_lkiby")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
 
-[node name="NutBoltPickup4" parent="." instance=ExtResource("4_lkiby")]
+[node name="NutBoltPickup4" parent="DezzNuts" instance=ExtResource("4_lkiby")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
 
-[node name="NutBoltPickup5" parent="." instance=ExtResource("4_lkiby")]
+[node name="NutBoltPickup5" parent="DezzNuts" instance=ExtResource("4_lkiby")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
 
-[node name="NutBoltPickup6" parent="." instance=ExtResource("4_lkiby")]
+[node name="NutBoltPickup6" parent="DezzNuts" instance=ExtResource("4_lkiby")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
 
-[node name="NutBoltPickup7" parent="." instance=ExtResource("4_lkiby")]
+[node name="NutBoltPickup7" parent="DezzNuts" instance=ExtResource("4_lkiby")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
 
-[node name="NutBoltPickup8" parent="." instance=ExtResource("4_lkiby")]
+[node name="NutBoltPickup8" parent="DezzNuts" instance=ExtResource("4_lkiby")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
 
-[node name="NutBoltPickup9" parent="." instance=ExtResource("4_lkiby")]
+[node name="NutBoltPickup9" parent="DezzNuts" instance=ExtResource("4_lkiby")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
 
-[node name="NutBoltPickup10" parent="." instance=ExtResource("4_lkiby")]
+[node name="NutBoltPickup10" parent="DezzNuts" instance=ExtResource("4_lkiby")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
 
-[node name="NutBoltPickup11" parent="." instance=ExtResource("4_lkiby")]
+[node name="NutBoltPickup11" parent="DezzNuts" instance=ExtResource("4_lkiby")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
 
-[node name="NutBoltPickup12" parent="." instance=ExtResource("4_lkiby")]
+[node name="NutBoltPickup12" parent="DezzNuts" instance=ExtResource("4_lkiby")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
 
-[node name="NutBoltPickup13" parent="." instance=ExtResource("4_lkiby")]
+[node name="NutBoltPickup13" parent="DezzNuts" instance=ExtResource("4_lkiby")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
 
-[node name="NutBoltPickup14" parent="." instance=ExtResource("4_lkiby")]
+[node name="NutBoltPickup14" parent="DezzNuts" instance=ExtResource("4_lkiby")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
 
-[node name="NutBoltPickup15" parent="." instance=ExtResource("4_lkiby")]
+[node name="NutBoltPickup15" parent="DezzNuts" instance=ExtResource("4_lkiby")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
 
-[node name="NutBoltPickup16" parent="." instance=ExtResource("4_lkiby")]
+[node name="NutBoltPickup16" parent="DezzNuts" instance=ExtResource("4_lkiby")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
 
-[node name="NutBoltPickup17" parent="." instance=ExtResource("4_lkiby")]
+[node name="NutBoltPickup17" parent="DezzNuts" instance=ExtResource("4_lkiby")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
 
-[node name="NutBoltPickup18" parent="." instance=ExtResource("4_lkiby")]
+[node name="NutBoltPickup18" parent="DezzNuts" instance=ExtResource("4_lkiby")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
 
-[node name="NutBoltPickup19" parent="." instance=ExtResource("4_lkiby")]
+[node name="NutBoltPickup19" parent="DezzNuts" instance=ExtResource("4_lkiby")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
 
-[node name="NutBoltPickup20" parent="." instance=ExtResource("4_lkiby")]
+[node name="NutBoltPickup20" parent="DezzNuts" instance=ExtResource("4_lkiby")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)

@@ -9,6 +9,8 @@ extends Node3D
 @onready var magnet: MeshInstance3D = $Magnet;
 @onready var shaft: MeshInstance3D = $Shaft;
 @onready var spring: MeshInstance3D = $Spring;
+@onready var beamSfx: AudioStreamPlayer3D = $BeamSFX;
+
 
 var _animationDuration: float = 0.4;
 var _shootAnimation: Tween = null;
@@ -77,32 +79,21 @@ func _verticalAttackTwinFinish():
 	push_pull_force_applied.emit(false);
 
 func _AttackRangedVertical():
+	beamSfx.play();
+	beamSfx.pitch_scale = 1;
 	var tween = get_tree().create_tween();
 	tween.tween_property(magnet, "position:z", _initialMagnetPosition.z - range_swing, _animationDuration/5);
 	tween.tween_property(magnet, "position:z", _initialMagnetPosition.z, _animationDuration);
 	tween.finished.connect(_animationFinished);
 
 func _AttackRangedHorizontal():
+	beamSfx.play();
+	beamSfx.pitch_scale = 1.6;
 	var tween = get_tree().create_tween();
 	tween.tween_property(magnet, "position:z", _initialMagnetPosition.z - range_swing, _animationDuration);
 	tween.tween_property(magnet, "position:z", _initialMagnetPosition.z, _animationDuration/5);
 	tween.finished.connect(_animationFinished);
 
-func _startShootAnimation():
-	if _shootAnimation == null || _shootAnimation.finished:
-		var tween = get_tree().create_tween().set_parallel(true);
-		tween.tween_property(magnet, "position:z", -1.8, _animationDuration);
-		tween.tween_property(magnet, "rotation:z", deg_to_rad(360), _animationDuration);
-		var chainBack = tween.chain();
-		chainBack.tween_property(magnet, "position:z", _initialMagnetPosition.z, _animationDuration);
-		chainBack.tween_property(magnet, "rotation:z", 0, _animationDuration);
-		chainBack.set_loops(-1)
-		_shootAnimation = chainBack;
-
-func _stopShootAnimation():
-	if _shootAnimation != null:
-		_shootAnimation.set_loops(1);
-		
 
 func _changeMode(newMode: Mode):
 	if newMode == _mode:
@@ -117,3 +108,4 @@ func _animateMagnetToPosition(newPositionDegrees):
 	
 func _animationFinished():
 	_weaponReady = true;
+	beamSfx.stop();

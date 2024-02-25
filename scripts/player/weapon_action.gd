@@ -2,7 +2,7 @@ extends Node
 
 @onready var player: Player = $"..";
 
-@export var magnet_push_force: float = 10.0;
+@export var magnet_push_force: float = 7.0;
 @export var magnetWrench: MagnetWrench;
 
 var _forceForwardDirection = Vector3(0, 0.08, 1);

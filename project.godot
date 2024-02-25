@@ -97,7 +97,8 @@ sprint={
 3d_physics/layer_3="Turret"
 3d_physics/layer_4="Enemy"
 3d_physics/layer_5="Core"
-3d_physics/layer_6="Pickup"
+3d_physics/layer_6="pickup_pickup"
+3d_physics/layer_7="pickup_body"
 
 [rendering]
 

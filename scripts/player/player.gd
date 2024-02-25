@@ -1,10 +1,14 @@
 class_name Player;
 extends CharacterBody3D
 
+
+# Get the gravity from the project settings to be synced with RigidBody nodes.
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity");
+
 @export_group("Player playersettings")
-@export var walk_speed: float = 7.0;
-@export var run_speed: float = 12.0;
-@export var jump_speed: float = 5.0;
+@export var walk_speed: float = 5.0;
+@export var run_speed: float = 7.0;
+@export var jump_speed: float = gravity/2;
 @export var sensitivity: float = 2.0;
 @export_group("Stamina settings")
 @export var stamina_increase_ratio: float = 15.0;
@@ -24,9 +28,7 @@ var _currentStamina: float = 100;
 var _currentHealth: float = 100;
 var _currentAmmo: float = 250;
 var _knockBack: Vector3 = Vector3.ZERO;
-
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity");
+var _wasOnFloor: bool = true;
 
 func _ready():
 	stamina_changed.emit(0, _currentStamina);
@@ -35,6 +37,7 @@ func _ready():
 	
 
 func _physics_process(delta):
+	var isNowOnFlor: bool = is_on_floor();
 	# Add the gravity.
 	apply_gravity(gravity * delta);
 	var mov_speed = walk_speed;
@@ -53,22 +56,25 @@ func _physics_process(delta):
 		stamina_changed.emit(_currentStamina, newStamina);
 		_currentStamina = newStamina	
 	
-	if is_on_floor() && Input.is_action_just_pressed("jump"):
+	if isNowOnFlor && Input.is_action_just_pressed("jump"):
 		velocity.y = jump_speed;
 
 	var direction = get_direction();
-	if  direction == Vector3.ZERO:
+	if direction == Vector3.ZERO:
 		_stop();
 	else:
-		if is_on_floor():
+		if isNowOnFlor:
 			_walk();
 		else:
 			_stop();
 	apply_velocity(direction, mov_speed);
+	if _knockBack != Vector3.ZERO:
+		velocity += _knockBack;
+		_knockBack = Vector3.ZERO;
 	move_and_slide();
-	_knockBack.x = lerp(_knockBack.x, 0.0, 0.2);
-	_knockBack.y = lerp(_knockBack.y, 0.0, 0.5);
-	_knockBack.z = lerp(_knockBack.z, 0.0, 0.2);
+	if isNowOnFlor && !_wasOnFloor:
+		_land();
+	_wasOnFloor = isNowOnFlor;
 
 
 func _walk():
@@ -81,18 +87,26 @@ func _walk():
 func _stop():
 	if model:
 		model.idle();
-	if stepsSfx:
-		stepsSfx.stop();
+	#if stepsSfx:
+		#stepsSfx.stop();
 
+func _land():
+	if model:
+		model.land();
+	if stepsSfx:
+		stepsSfx.reproduceAll(0.04);
 
 func apply_velocity(direction: Vector3, speed: float) -> void:
-	if direction:
-		velocity.x = direction.x * speed;
-		velocity.z = direction.z * speed;
+	if !is_on_floor():
+		velocity.x = lerp(velocity.x, 0.0, 0.01);
+		velocity.z = lerp(velocity.z, 0.0, 0.01);
 	else:
-		velocity.x = move_toward(velocity.x, 0, speed);
-		velocity.z = move_toward(velocity.z, 0, speed);
-	velocity = velocity + _knockBack;
+		if direction:
+			velocity.x = direction.x * speed;
+			velocity.z = direction.z * speed;
+		else:
+			velocity.x = move_toward(velocity.x, 0, speed);
+			velocity.z = move_toward(velocity.z, 0, speed);
 
 
 func get_direction() -> Vector3:
