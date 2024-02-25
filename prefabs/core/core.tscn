@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dafbkuh5h26yx"]
+[gd_scene load_steps=26 format=3 uid="uid://dafbkuh5h26yx"]
 
 [ext_resource type="Script" path="res://scripts/core/core.gd" id="1_p6ywm"]
 [ext_resource type="Texture2D" uid="uid://c3fw4bhrbqcey" path="res://art/models/core/core_base_core.png" id="2_kumrg"]
@@ -418,6 +418,10 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ho5h4")
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_nc67j"]
+height = 5.48473
+radius = 2.93451
+
 [node name="Core" type="Node3D" node_paths=PackedStringArray("sphere", "rotary_item", "wings")]
 script = ExtResource("1_p6ywm")
 sphere = NodePath("Model/pelotita")
@@ -466,3 +470,12 @@ skeleton = NodePath("")
 transform = Transform3D(0.0303215, 0, -0.0933199, 0, 0.380166, 0, 0.0933199, 0, 0.0303215, 0, 5.61626, 0)
 mesh = SubResource("ArrayMesh_7qfs3")
 skeleton = NodePath("")
+
+[node name="StaticBody3D" type="Area3D" parent="."]
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.72842, 0)
+shape = SubResource("CylinderShape3D_nc67j")
+
+[connection signal="body_entered" from="StaticBody3D" to="." method="on_body_entered"]

@@ -9,6 +9,7 @@ signal on_core_damaged(lives_remaining : int);
 @export var max_rotation_speed : float = 720.0;
 
 @export_group("Core structure")
+@export var collider : StaticBody3D = null;
 @export var sphere : MeshInstance3D = null;
 @export var rotary_item : MeshInstance3D = null;
 @export var wings : Array[MeshInstance3D] = [];
@@ -23,9 +24,10 @@ var current_rotation_speed : float;
 func _input(event):
 	if not debug_mode:
 		return;
-		
+
 	if event.is_action_pressed("jump"):
 		damage();
+
 
 func _ready():
 	current_lives = lives;
@@ -40,7 +42,7 @@ func _process(delta):
 func damage():
 	current_lives -= 1;
 	check_wing_integrity();
-	
+
 	if (current_lives < 0):
 		destroy_core();
 
@@ -51,7 +53,6 @@ func check_wing_integrity():
 
 	while (wings.size() > wings_remaining):
 		# @TODO: animar la rotura del ala?
-		
 		var wing_rnd_index = randi_range(0, wings.size() - 1); 
 		wings.pop_at(wing_rnd_index).queue_free();
 
@@ -59,7 +60,13 @@ func check_wing_integrity():
 func destroy_core():
 	var tween_core_sphere = get_tree().create_tween();
 	tween_core_sphere.tween_property(sphere.get_surface_override_material(0), "shader_parameter/Saturation", 0.0, 8);
-	
+
 	var tween_core_base = get_tree().create_tween();
 	tween_core_base.tween_property(self, "current_rotation_speed", 0.0, 4);
 	tween_core_base.tween_callback(func() : emit_signal("on_core_destroyed"));
+
+
+func on_body_entered(body):
+	var enemy = body as BaseEnemyRobot;
+	enemy.die();
+	damage();
