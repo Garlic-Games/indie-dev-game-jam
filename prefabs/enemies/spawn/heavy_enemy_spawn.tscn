@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://byjru80pgt0m2"]
+
+[ext_resource type="PackedScene" uid="uid://cdq1yo5a84fv6" path="res://prefabs/enemies/spawn/base_enemy_spawn.tscn" id="1_xide4"]
+[ext_resource type="PackedScene" uid="uid://drk5m5iq065e3" path="res://prefabs/enemies/heavy/heavy.tscn" id="2_q24dq"]
+
+[node name="HeavyEnemySpawn" instance=ExtResource("1_xide4")]
+enemy_asset = "heavy"
+
+[node name="ResourcePreloader" parent="." index="0"]
+resources = [PackedStringArray("heavy"), [ExtResource("2_q24dq")]]

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmwxc5scvyaa"]
+
+[ext_resource type="PackedScene" uid="uid://cdq1yo5a84fv6" path="res://prefabs/enemies/spawn/base_enemy_spawn.tscn" id="1_dtcup"]
+[ext_resource type="PackedScene" uid="uid://vc5rxouxaeca" path="res://prefabs/enemies/monolapa/monolapa.tscn" id="2_ps0ej"]
+
+[node name="MonolapaEnemySpawn" instance=ExtResource("1_dtcup")]
+enemy_asset = "monolapa"
+
+[node name="ResourcePreloader" parent="." index="0"]
+resources = [PackedStringArray("monolapa"), [ExtResource("2_ps0ej")]]

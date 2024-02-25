@@ -7,6 +7,7 @@ albedo_color = Color(0.486275, 0.0862745, 0.690196, 1)
 metallic = 1.0
 
 [node name="turret_base" instance=ExtResource("1_dgah0")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="Head" parent="." index="0"]
 transform = Transform3D(0.752564, 0.446401, 0, -0.412012, 0.319185, -0.780092, -0.513705, 0.397967, 0.625665, 0, 4.32041, 0)
