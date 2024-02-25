@@ -4,11 +4,10 @@ extends Node3D
 @export var shoot_cooldown: float = 2;
 
 @export var target: Node3D;
-@export var enemy: BaseEnemyRobot;
-@onready var head_mesh: Node3D = %HeadMesh;
 
 var fire: bool = false;
 var cooldown: SceneTreeTimer;
+const FLOOR_MASK = 1;  
 
 signal shoot;
 
@@ -39,7 +38,15 @@ func _on_shoot_area_body_exited(body):
 func open_fire():
 	if cooldown && cooldown.time_left > 0:
 		return; 
+	
 	if fire && target:
+		var ray = PhysicsRayQueryParameters3D.create(global_position, target.global_position, FLOOR_MASK);
+		var collision = get_world_3d().direct_space_state.intersect_ray(ray);
+		if collision.is_empty() || !collision.collider.has_method("damage"):
+			return;
+		
+		collision.collider.call("damage");
 		shoot.emit();
+		
 		cooldown = get_tree().create_timer(shoot_cooldown, false);
 		cooldown.timeout.connect(open_fire);
