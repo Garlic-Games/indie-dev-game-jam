@@ -19,6 +19,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity");
 @export var stepsSfx: SFXRandomPlayer = null;
 @export var pickupSfx: SFXRandomPlayer = null;
 
+signal die_event();
 signal stamina_changed(before: float, after: float);
 signal health_changed(before: float, after: float);
 signal ammo_changed(before: float, after: float);
@@ -120,7 +121,12 @@ func apply_gravity(gravity_value: float) -> void:
 		velocity.y -= gravity_value;
 
 func damage(amount: float):
-	pass;
+	var newHealth = _currentHealth - amount;
+	if(newHealth < 0):
+		die_event.emit(); #DEP
+		return;
+	health_changed.emit(_currentHealth, newHealth);
+	_currentHealth = newHealth;
 
 func LooseAmmo(amount: float):
 	var newAmmo = _currentAmmo - amount;
