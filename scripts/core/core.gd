@@ -13,9 +13,19 @@ signal on_core_damaged(lives_remaining : int);
 @export var rotary_item : MeshInstance3D = null;
 @export var wings : Array[MeshInstance3D] = [];
 
+@export_group("Debug")
+@export var debug_mode : bool = false;
+
 var current_lives : float;
 var current_rotation_speed : float;
 
+
+func _input(event):
+	if not debug_mode:
+		return;
+		
+	if event.is_action_pressed("jump"):
+		damage();
 
 func _ready():
 	current_lives = lives;
@@ -33,7 +43,6 @@ func damage():
 	
 	if (current_lives < 0):
 		destroy_core();
-		emit_signal("on_core_destroyed");
 
 
 func check_wing_integrity():
@@ -42,9 +51,15 @@ func check_wing_integrity():
 
 	while (wings.size() > wings_remaining):
 		# @TODO: animar la rotura del ala?
-		wings.pop_back().queue_free();
+		
+		var wing_rnd_index = randi_range(0, wings.size() - 1); 
+		wings.pop_at(wing_rnd_index).queue_free();
 
 
 func destroy_core():
-	var tween = get_tree().create_tween()
-	tween.tween_property(sphere.get_surface_override_material(0), "shader_parameter/Saturation", 0.0, 3)
+	var tween_core_sphere = get_tree().create_tween();
+	tween_core_sphere.tween_property(sphere.get_surface_override_material(0), "shader_parameter/Saturation", 0.0, 8);
+	
+	var tween_core_base = get_tree().create_tween();
+	tween_core_base.tween_property(self, "current_rotation_speed", 0.0, 4);
+	tween_core_base.tween_callback(func() : emit_signal("on_core_destroyed"));
