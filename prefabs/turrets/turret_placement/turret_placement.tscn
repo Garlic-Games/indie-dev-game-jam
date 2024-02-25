@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://11ncfu1k86ha"]
+[gd_scene load_steps=17 format=3 uid="uid://11ncfu1k86ha"]
 
 [ext_resource type="Shader" path="res://art/shaders/smoke.gdshader" id="1_1u32d"]
 [ext_resource type="Script" path="res://scripts/turret/turret_placement.gd" id="1_j5u5m"]
@@ -59,8 +59,14 @@ top_radius = 3.0
 bottom_radius = 2.0
 height = 20.0
 cap_top = false
+cap_bottom = false
 
-[node name="TurretPlacement" type="Node3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_5coo8"]
+size = Vector3(2, 3, 2)
+
+[node name="TurretPlacement" type="StaticBody3D"]
+collision_layer = 4
+collision_mask = 43
 script = ExtResource("1_j5u5m")
 
 [node name="BodyMesh" type="Node3D" parent="."]
@@ -93,3 +99,7 @@ draw_order = 1
 transform_align = 1
 process_material = SubResource("ParticleProcessMaterial_xcaid")
 draw_pass_1 = SubResource("CylinderMesh_1lhgn")
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49516, 0)
+shape = SubResource("BoxShape3D_5coo8")

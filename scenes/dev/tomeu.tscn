@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://ds3oo16ms1e62"]
+[gd_scene load_steps=10 format=3 uid="uid://ds3oo16ms1e62"]
 
 [ext_resource type="PackedScene" uid="uid://c8n6fvm4iot6m" path="res://prefabs/world/terrain.tscn" id="1_33ynw"]
 [ext_resource type="PackedScene" uid="uid://vc5rxouxaeca" path="res://prefabs/enemies/monolapa/monolapa.tscn" id="2_gpkjg"]
+[ext_resource type="Script" path="res://scripts/test_scripts/camera_click.gd" id="4_pvpqr"]
 [ext_resource type="PackedScene" uid="uid://drk5m5iq065e3" path="res://prefabs/enemies/heavy/heavy.tscn" id="4_qd5w7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nsegu"]
@@ -49,3 +50,6 @@ movement_target_position = NodePath("../Heavy")
 [node name="Heavy" parent="." node_paths=PackedStringArray("movement_target_position") instance=ExtResource("4_qd5w7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.6659, 0, 25.9659)
 movement_target_position = NodePath("../Monolapa")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+script = ExtResource("4_pvpqr")

@@ -1,6 +1,6 @@
 extends CanvasLayer;
 
-@onready var settings_menu: Settings = %SettingsMenu;
+@onready var settings_menu: SettingsContainer = %SettingsMenu;
 @onready var credits: Credits = %Credits;
 @onready var loading_panel: LoadingPanel = %LoadingPanel;
 @export_file("*.tscn") var gameplay_scene: String;

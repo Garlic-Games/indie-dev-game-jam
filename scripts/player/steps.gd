@@ -1,23 +1,19 @@
-class_name SFXRandomPlayer;
+class_name Steps;
 extends Node3D
 
 @export var audioSources: Array[AudioStreamPlayer3D] = [];
 @export var uniquePlay: bool = true;
 
-var random: RandomNumberGenerator = RandomNumberGenerator.new();
-
 func reproduce() -> void:
 	if uniquePlay && _isAnyPlaying():
 		return;
 		
-	if random.randf() > 0.5:
-		step1.play(0);
-	else:
-		step2.play(0);
+	audioSources.pick_random().play();
 		
 func stop() -> void:
-	step1.stop();
-	step2.stop();
+	for audioSource in audioSources:
+		if audioSource.playing:
+			audioSource.stop();
 		
 
 func _isAnyPlaying() -> bool:

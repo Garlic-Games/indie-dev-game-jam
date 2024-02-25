@@ -1,4 +1,4 @@
-class_name Settings;
+class_name SettingsContainer;
 
 extends PanelContainer
 @onready var settings_buttons: SettingsButtons = %SettingsButtons

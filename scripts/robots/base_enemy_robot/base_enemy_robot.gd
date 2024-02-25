@@ -15,7 +15,6 @@ extends CharacterBody3D
 @export var movement_target_position: Node3D;
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 @onready var agent: NavigationAgent3D = %Agent;
-var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity");
 var loaded: bool = false;
 
 signal damaged(dmg: float);
