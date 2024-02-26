@@ -13,6 +13,7 @@ gradient = SubResource("Gradient_o5ph7")
 
 [node name="PauseMenu" type="CanvasLayer"]
 script = ExtResource("1_8nakt")
+main_menu_scene = "res://scenes/main_menu.tscn"
 
 [node name="MainPauseMargin" type="MarginContainer" parent="."]
 anchors_preset = 15

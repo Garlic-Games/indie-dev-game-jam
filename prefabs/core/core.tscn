@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dafbkuh5h26yx"]
+[gd_scene load_steps=27 format=3 uid="uid://dafbkuh5h26yx"]
 
 [ext_resource type="Script" path="res://scripts/core/core.gd" id="1_p6ywm"]
 [ext_resource type="Texture2D" uid="uid://c3fw4bhrbqcey" path="res://art/models/core/core_base_core.png" id="2_kumrg"]
@@ -422,6 +422,10 @@ shadow_mesh = SubResource("ArrayMesh_ho5h4")
 height = 5.48473
 radius = 2.93451
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_4hxww"]
+height = 1.33557
+radius = 1.03438
+
 [node name="Core" type="Node3D" node_paths=PackedStringArray("collider", "sphere", "rotary_item", "wings", "endgame_camera_transform")]
 script = ExtResource("1_p6ywm")
 collider = NodePath("Area3D")
@@ -483,5 +487,11 @@ shape = SubResource("CylinderShape3D_nc67j")
 
 [node name="EndgameTransform" type="Node3D" parent="."]
 transform = Transform3D(0.707107, -0.40558, -0.579228, 0, 0.819152, -0.573576, 0.707107, 0.40558, 0.579228, -2.5361, 0, 2.33018)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.384237, 0)
+shape = SubResource("CylinderShape3D_4hxww")
 
 [connection signal="body_entered" from="Area3D" to="." method="on_body_entered"]

@@ -1,20 +1,217 @@
-[gd_scene load_steps=4 format=3 uid="uid://cohpydgbvkuna"]
+[gd_scene load_steps=29 format=3 uid="uid://cohpydgbvkuna"]
 
 [ext_resource type="PackedScene" uid="uid://bdh0gh5dw180o" path="res://prefabs/pause/pause_menu.tscn" id="1_khjpo"]
+[ext_resource type="Script" path="res://scripts/game_manager/game_manager.gd" id="1_r2osf"]
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="2_kqdcg"]
 [ext_resource type="Script" path="res://scripts/input/meta_gameplay_input.gd" id="2_leaqq"]
+[ext_resource type="Script" path="res://scripts/level/level_manager.gd" id="2_v2esw"]
+[ext_resource type="Script" path="res://scripts/player/player_camera.gd" id="3_8028c"]
 [ext_resource type="PackedScene" uid="uid://dk0dddmpl201" path="res://prefabs/stream_utilities/button_group_sound_when_signal.tscn" id="3_a7qdk"]
+[ext_resource type="PackedScene" uid="uid://c8n6fvm4iot6m" path="res://prefabs/world/terrain.tscn" id="3_xjnpd"]
+[ext_resource type="PackedScene" uid="uid://cuyh01p314qxu" path="res://art/models/weapon/magnet_wrench_scene.tscn" id="4_dnrmb"]
+[ext_resource type="PackedScene" uid="uid://dafbkuh5h26yx" path="res://prefabs/core/core.tscn" id="4_sqa0f"]
+[ext_resource type="PackedScene" uid="uid://11ncfu1k86ha" path="res://prefabs/turrets/turret_placement/turret_placement.tscn" id="5_42qyq"]
+[ext_resource type="Script" path="res://scripts/player/mouse_capture_input.gd" id="5_d5dgm"]
+[ext_resource type="PackedScene" uid="uid://byjru80pgt0m2" path="res://prefabs/enemies/spawn/heavy_enemy_spawn.tscn" id="6_agatk"]
+[ext_resource type="Script" path="res://scripts/player/weapon_action.gd" id="6_imj73"]
+[ext_resource type="PackedScene" uid="uid://4xwpnxm4pnpi" path="res://prefabs/player_hud.tscn" id="7_7uje6"]
+[ext_resource type="PackedScene" path="res://prefabs/enemies/spawn/spider_spawn.tscn" id="7_ah5hu"]
+[ext_resource type="Script" path="res://scripts/robots/spawn/wave.gd" id="8_3w5xk"]
+[ext_resource type="Script" path="res://scripts/player/sfx_random_player.gd" id="8_8mvl7"]
+[ext_resource type="AudioStream" uid="uid://bpu04sv8fkr1v" path="res://art/sounds/step1.wav" id="9_u3hyh"]
+[ext_resource type="Script" path="res://scripts/timer/repeat_timer.gd" id="9_x7lcn"]
+[ext_resource type="AudioStream" uid="uid://c6bomhxmmyvoe" path="res://art/sounds/step2.wav" id="10_mkngl"]
+[ext_resource type="AudioStream" uid="uid://qgisqpjnwe1y" path="res://art/sounds/pickup/pickup_1.wav" id="11_ndf83"]
+[ext_resource type="AudioStream" uid="uid://c8r3rsu53ydad" path="res://art/sounds/pickup/pickup_2.wav" id="12_t2deu"]
+[ext_resource type="PackedScene" uid="uid://c7ntouvjs0t3v" path="res://prefabs/game_over/game_over.tscn" id="23_22lv8"]
+[ext_resource type="PackedScene" uid="uid://bkxcidgjg8oy" path="res://prefabs/transitions/fade_manager.tscn" id="23_t05qc"]
+[ext_resource type="Environment" uid="uid://celdecb2ba0qm" path="res://art/environment/main_environment.tres" id="26_kavve"]
 
-[node name="Gameplay" type="Node3D"]
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_r6sdq"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_neenp"]
+
+[node name="Gameplay" type="Node3D" node_paths=PackedStringArray("hud", "camera", "core", "weapon", "game_over_screen", "fade_manager")]
+script = ExtResource("1_r2osf")
+hud = NodePath("Player/CanvasLayer/PlayerHud")
+camera = NodePath("Player/PlayerCamera")
+core = NodePath("Core")
+weapon = NodePath("Player/PlayerCamera/WeaponHolder/magnet_wrench")
+game_over_screen = NodePath("GameOver")
+fade_manager = NodePath("FadeManager")
+
+[node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("stepsSfx", "pickupSfx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.04159, -0.195314, 1.36254)
+collision_layer = 2
+collision_mask = 63
+script = ExtResource("2_kqdcg")
+stepsSfx = NodePath("SFX/StepPlayer")
+pickupSfx = NodePath("SFX/PickupPlayer")
+
+[node name="PlayerCamera" type="Camera3D" parent="Player"]
+process_priority = -2
+process_physics_priority = -2
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+current = true
+script = ExtResource("3_8028c")
+
+[node name="WeaponHolder" type="Node3D" parent="Player/PlayerCamera"]
+
+[node name="magnet_wrench" parent="Player/PlayerCamera/WeaponHolder" instance=ExtResource("4_dnrmb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, -0.35, -0.259448)
+
+[node name="RayCast3D" type="RayCast3D" parent="Player/PlayerCamera"]
+target_position = Vector3(0, 0, -100)
+collide_with_areas = true
+debug_shape_custom_color = Color(0, 0.862745, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(0.999982, 0.00602135, 0, -0.00602135, 0.999982, 0, 0, 0, 1, 0, 1, 0)
+layers = 3
+mesh = SubResource("CapsuleMesh_r6sdq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_neenp")
+
+[node name="MouseCaptureInput" type="Node" parent="Player"]
+script = ExtResource("5_d5dgm")
+
+[node name="WeaponAction" type="Node" parent="Player" node_paths=PackedStringArray("magnetWrench")]
+script = ExtResource("6_imj73")
+magnetWrench = NodePath("../PlayerCamera/WeaponHolder/magnet_wrench")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Player"]
+layer = 10
+
+[node name="PlayerHud" parent="Player/CanvasLayer" instance=ExtResource("7_7uje6")]
+
+[node name="SFX" type="Node3D" parent="Player"]
+
+[node name="StepPlayer" type="Node3D" parent="Player/SFX" node_paths=PackedStringArray("audioSources")]
+script = ExtResource("8_8mvl7")
+audioSources = [NodePath("step1"), NodePath("step2")]
+
+[node name="step1" type="AudioStreamPlayer3D" parent="Player/SFX/StepPlayer"]
+stream = ExtResource("9_u3hyh")
+bus = &"SFX"
+
+[node name="step2" type="AudioStreamPlayer3D" parent="Player/SFX/StepPlayer"]
+stream = ExtResource("10_mkngl")
+bus = &"SFX"
+
+[node name="PickupPlayer" type="Node3D" parent="Player/SFX" node_paths=PackedStringArray("audioSources")]
+script = ExtResource("8_8mvl7")
+audioSources = [NodePath("pickup_1"), NodePath("pìckup_2")]
+uniquePlay = false
+
+[node name="pickup_1" type="AudioStreamPlayer3D" parent="Player/SFX/PickupPlayer"]
+stream = ExtResource("11_ndf83")
+bus = &"SFX"
+
+[node name="pìckup_2" type="AudioStreamPlayer3D" parent="Player/SFX/PickupPlayer"]
+stream = ExtResource("12_t2deu")
+bus = &"SFX"
+
+[node name="Core" parent="." instance=ExtResource("4_sqa0f")]
+transform = Transform3D(2.10755, 0, 0, 0, 2.10755, 0, 0, 0, 2.10755, -38.4441, 0.264963, 45.2851)
+debug_mode = false
+
+[node name="MainLevel" type="Node3D" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("2_v2esw")
+player = NodePath("../Player")
+
+[node name="Terrain" parent="MainLevel" instance=ExtResource("3_xjnpd")]
+
+[node name="TurretPlacements" type="Node3D" parent="MainLevel"]
+
+[node name="TurretPlacement" parent="MainLevel/TurretPlacements" instance=ExtResource("5_42qyq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.2577, -0.0237656, -3.11565)
+debug = true
+
+[node name="TurretPlacement2" parent="MainLevel/TurretPlacements" instance=ExtResource("5_42qyq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -67.3814, -9.91821e-05, 6.08098)
+debug = true
+
+[node name="TurretPlacement3" parent="MainLevel/TurretPlacements" instance=ExtResource("5_42qyq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.6747, -0.41685, -34.4168)
+debug = true
+
+[node name="TurretPlacement4" parent="MainLevel/TurretPlacements" instance=ExtResource("5_42qyq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.6641, -0.00497437, 31.9662)
+debug = true
+
+[node name="TurretPlacement5" parent="MainLevel/TurretPlacements" instance=ExtResource("5_42qyq")]
+transform = Transform3D(1, 0, 0, 0, 0.982454, 0.186507, 0, -0.186507, 0.982454, -22.6058, 1.20697, 48.5061)
+debug = true
+
+[node name="TurretPlacement6" parent="MainLevel/TurretPlacements" instance=ExtResource("5_42qyq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.7467, 1.0884, 26.6405)
+debug = true
+
+[node name="TurretPlacement7" parent="MainLevel/TurretPlacements" instance=ExtResource("5_42qyq")]
+transform = Transform3D(1, 0, 0, 0, 0.963905, 0.266246, 0, -0.266246, 0.963905, -41.0936, 1.40176, 67.8841)
+debug = true
+
+[node name="TurretPlacement8" parent="MainLevel/TurretPlacements" instance=ExtResource("5_42qyq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -62.6913, 0.16272, 31.5671)
+debug = true
+
+[node name="TurretPlacement9" parent="MainLevel/TurretPlacements" instance=ExtResource("5_42qyq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.0332, -3.88304, 3.05376)
+debug = true
+
+[node name="Spawns" type="Node3D" parent="MainLevel"]
+
+[node name="HeavyEnemySpawn" parent="MainLevel/Spawns" node_paths=PackedStringArray("target") instance=ExtResource("6_agatk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62.1485, 3.67246, -25.2885)
+target = NodePath("../../../Core")
+
+[node name="SpiderSpawn" parent="MainLevel/Spawns" groups=["player_chaser"] instance=ExtResource("7_ah5hu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 71.559, 0.849878, -58.0936)
+
+[node name="Wave" type="Node" parent="MainLevel/Spawns"]
+script = ExtResource("8_3w5xk")
+
+[node name="HeavyEnemy" type="Timer" parent="MainLevel/Spawns/Wave"]
+wait_time = 5.0
+script = ExtResource("9_x7lcn")
+times_to_repeat = 4
+
+[node name="Spider" type="Timer" parent="MainLevel/Spawns/Wave"]
+wait_time = 3.0
+script = ExtResource("9_x7lcn")
+times_to_repeat = 5
 
 [node name="MetaGameplayInput" type="Node" parent="." node_paths=PackedStringArray("pause_menu")]
 script = ExtResource("2_leaqq")
 pause_menu = NodePath("../PauseMenu")
 
 [node name="PauseMenu" parent="." instance=ExtResource("1_khjpo")]
-main_menu_scene = "res://scenes/main_menu.tscn"
+
+[node name="GameOver" parent="." instance=ExtResource("23_22lv8")]
+layer = 128
+visible = false
+
+[node name="FadeManager" parent="." instance=ExtResource("23_t05qc")]
 
 [node name="UiButtonSounds" type="Node" parent="."]
 
 [node name="ButtonHover" parent="UiButtonSounds" instance=ExtResource("3_a7qdk")]
 button_group_name = "MenuButtons"
 signal_name = "mouse_entered"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 36.7578, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("26_kavve")
+
+[connection signal="ammo_changed" from="Player" to="Player/CanvasLayer/PlayerHud" method="AmmoChangedListener"]
+[connection signal="core_health_changed" from="Player" to="Player/CanvasLayer/PlayerHud" method="CoreHealthChangedListener"]
+[connection signal="health_changed" from="Player" to="Player/CanvasLayer/PlayerHud" method="PlayerHealthChangedListener"]
+[connection signal="stamina_changed" from="Player" to="Player/CanvasLayer/PlayerHud" method="StaminaChangedListener"]
+[connection signal="aim_point_physics_update" from="Player/PlayerCamera" to="Player/PlayerCamera/WeaponHolder/magnet_wrench" method="LookAt"]
+[connection signal="level_started" from="MainLevel" to="MainLevel/Spawns/Wave" method="start_wave"]
+[connection signal="timeout" from="MainLevel/Spawns/Wave/HeavyEnemy" to="MainLevel/Spawns/HeavyEnemySpawn" method="spawn"]

@@ -28,4 +28,3 @@ shadow_enabled = true
 transform = Transform3D(-0.605609, 0.280006, -0.744872, -0.0548795, 0.919124, 0.390128, 0.793867, 0.277143, -0.541264, -5.42841, 4.60832, -4.79601)
 
 [node name="Core" parent="." instance=ExtResource("1_gvujq")]
-debug_mode = true

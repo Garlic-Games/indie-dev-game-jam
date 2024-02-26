@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7ntouvjs0t3v"]
+
+[ext_resource type="FontFile" uid="uid://dqudbxqp2cj2c" path="res://art/fonts/junegull.ttf" id="1_2kss0"]
+[ext_resource type="Script" path="res://scripts/game_over/game_over.gd" id="1_am3sc"]
+
+[node name="GameOver" type="CanvasLayer" node_paths=PackedStringArray("time_label")]
+layer = 15
+script = ExtResource("1_am3sc")
+time_label = NodePath("Time")
+main_menu_scene = "res://scenes/main_menu.tscn"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="YouLost" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_2kss0")
+theme_override_font_sizes/font_size = 91
+text = "You lost"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Time" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 57.985
+offset_bottom = 57.985
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_2kss0")
+theme_override_font_sizes/font_size = 22
+text = "Your infrastructure lasted 0 seconds"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
