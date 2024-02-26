@@ -94,8 +94,11 @@ func _on_damage_area_body_entered(body):
 	damage_player();
 
 func damage_player():
-	if (!damage_cooldown && damage_cooldown.time_left >= 0) || !player:
+	if !player:
 		return;
+	if damage_cooldown:
+		if damage_cooldown.time_left >= 0 :
+			return;
 	player.damage(melee_damage);
 	damage_cooldown = get_tree().create_timer(melee_damage_cooldown, false);	
 	await damage_cooldown.timeout;

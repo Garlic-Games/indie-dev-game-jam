@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=3 uid="uid://c8n6fvm4iot6m"]
 
-[ext_resource type="PackedScene" uid="uid://o3v5lxacwnuk" path="res://art/models/props/Viga.tscn" id="3_xqhn7"]
-[ext_resource type="PackedScene" path="res://prefabs/world/bridge.tscn" id="4_5frak"]
-[ext_resource type="PackedScene" uid="uid://b1ghy114l4ekc" path="res://art/models/props/uralita.tscn" id="4_axo83"]
+[ext_resource type="PackedScene" path="res://art/models/props/Viga.tscn" id="3_xqhn7"]
+[ext_resource type="PackedScene" uid="uid://du3xv4l5n6wqs" path="res://prefabs/world/bridge.tscn" id="4_5frak"]
+[ext_resource type="PackedScene" path="res://art/models/props/uralita.tscn" id="4_axo83"]
 [ext_resource type="Material" uid="uid://co6kcx0ud4gn8" path="res://art/materials/water_shader_material.tres" id="5_us5v3"]
 [ext_resource type="PackedScene" uid="uid://niq8vbry2vgq" path="res://prefabs/world/basic_terrain_with_rb.tscn" id="6_ekw7f"]
 

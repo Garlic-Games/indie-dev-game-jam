@@ -76,7 +76,7 @@ emission_texture = ExtResource("8_2ge56")
 material = SubResource("StandardMaterial3D_8cmhu")
 
 [node name="Heavy" node_paths=PackedStringArray("body") instance=ExtResource("1_dsr0k")]
-bolts_dropped = 20.0
+bolts_dropped = 30.0
 max_hp = 20.0
 body = NodePath("BodyContainer")
 
