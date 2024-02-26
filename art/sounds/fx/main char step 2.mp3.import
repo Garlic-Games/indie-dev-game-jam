@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://whi64hve76yf"
+path="res://.godot/imported/main char step 2.mp3-1119ca980ebf772896294c35eeae2d69.mp3str"
+
+[deps]
+
+source_file="res://art/sounds/fx/main char step 2.mp3"
+dest_files=["res://.godot/imported/main char step 2.mp3-1119ca980ebf772896294c35eeae2d69.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

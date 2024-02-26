@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://btu7bmvg76sjy"
+path="res://.godot/imported/screw 2.mp3-01bdb8e386d79f5afe3a91ca4c6130b3.mp3str"
+
+[deps]
+
+source_file="res://art/sounds/fx/screw 2.mp3"
+dest_files=["res://.godot/imported/screw 2.mp3-01bdb8e386d79f5afe3a91ca4c6130b3.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

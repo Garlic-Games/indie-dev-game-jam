@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://o61je3r5uxo"
+path="res://.godot/imported/loose 1 core.mp3-895e92d80e1e94eafeaa319003d41a42.mp3str"
+
+[deps]
+
+source_file="res://art/sounds/fx/loose 1 core.mp3"
+dest_files=["res://.godot/imported/loose 1 core.mp3-895e92d80e1e94eafeaa319003d41a42.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

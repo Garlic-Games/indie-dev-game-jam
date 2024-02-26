@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b6o322t1k38ar"
+path="res://.godot/imported/main char step 1 water.mp3-785c01255f9c48eb8ba2781193bebf95.mp3str"
+
+[deps]
+
+source_file="res://art/sounds/fx/main char step 1 water.mp3"
+dest_files=["res://.godot/imported/main char step 1 water.mp3-785c01255f9c48eb8ba2781193bebf95.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bccfk16jmcaqg"
+path="res://.godot/imported/out water.mp3-ff5c5eb46e0d26b9fe33ac69f80d630d.mp3str"
+
+[deps]
+
+source_file="res://art/sounds/fx/out water.mp3"
+dest_files=["res://.godot/imported/out water.mp3-ff5c5eb46e0d26b9fe33ac69f80d630d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

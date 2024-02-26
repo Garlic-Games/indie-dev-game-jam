@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://destvlhyhtxs8"
+path="res://.godot/imported/loose all cores.mp3-b1ca50ece1e98fa57423f42a2ed71d58.mp3str"
+
+[deps]
+
+source_file="res://art/sounds/fx/loose all cores.mp3"
+dest_files=["res://.godot/imported/loose all cores.mp3-b1ca50ece1e98fa57423f42a2ed71d58.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
