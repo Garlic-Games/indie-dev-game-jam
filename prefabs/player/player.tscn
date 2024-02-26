@@ -40,9 +40,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, -0.35, -0.259448)
 player = NodePath("../../..")
 
 [node name="RayCast3D" type="RayCast3D" parent="PlayerCamera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, 0)
 target_position = Vector3(0, 0, -100)
 collide_with_areas = true
-debug_shape_custom_color = Color(0, 0.862745, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.999982, 0.00602135, 0, -0.00602135, 0.999982, 0, 0, 0, 1, 0, 1, 0)
