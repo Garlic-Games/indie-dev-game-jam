@@ -21,6 +21,9 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity");
 @export var weapon: MagnetWrench = null;
 @export var hud: Control = null;
 
+@export_category("Debug")
+@export var debug_mode: bool = false;
+
 signal die_event();
 signal stamina_changed(before: float, after: float);
 signal health_changed(before: float, after: float);
@@ -37,7 +40,15 @@ func _ready():
 	stamina_changed.emit(0, _currentStamina);
 	health_changed.emit(0, _currentHealth);
 	ammo_changed.emit(0, _currentAmmo);
-	
+
+
+func _input(event):
+	if not debug_mode:
+		return;
+		
+	if event.is_action_pressed("jump"):
+		damage(7);
+		
 
 func _physics_process(delta):
 	var isNowOnFlor: bool = is_on_floor();

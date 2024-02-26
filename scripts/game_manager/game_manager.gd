@@ -22,6 +22,7 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED);
 	
 	fade_manager.connect("on_fade_out_ended", show_game_over_screen);
+	player.connect("die_event", game_over);
 	core.connect("on_core_death_animation", game_over);
 	core.connect("on_core_destroyed", fade_out);
 	core.connect("on_core_damaged", core_damaged);

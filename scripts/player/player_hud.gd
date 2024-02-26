@@ -39,7 +39,7 @@ func CoreHealthChangedListener(max: int, oldCoreHealtLevel: int, newCoreHealtLev
 	
 func PlayerHealthChangedListener(oldPlayerHealthLevel: float, newPlayerHealthLevel: float):
 	_playerHealthLevel = newPlayerHealthLevel;
-	_staminaPB.value = _playerHealthLevel;
+	_playerHealthPB.value = _playerHealthLevel;
 
 func WeaponPositionChanged(oldPosition: MagnetWrench.Mode, newPosition: MagnetWrench.Mode):
 	if newPosition == MagnetWrench.Mode.HORIZONTAL:
