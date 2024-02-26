@@ -95,7 +95,7 @@ func _land():
 	if model:
 		model.land();
 	if stepsSfx:
-		stepsSfx.reproduceAll(0.04);
+		stepsSfx.reproduceAll(0.03);
 
 func apply_velocity(direction: Vector3, speed: float) -> void:
 	if !is_on_floor():

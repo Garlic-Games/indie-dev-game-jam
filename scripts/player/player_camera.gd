@@ -13,6 +13,8 @@ func _physics_process(delta):
 	if _rayCaster.is_colliding():
 		var collidingTo = _rayCaster.get_collision_point();
 		aim_point_physics_update.emit(collidingTo);
+	else:
+		aim_point_physics_update.emit(Vector3.ZERO);
 
 	
 

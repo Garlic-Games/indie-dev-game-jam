@@ -29,11 +29,13 @@ enum Mode {HORIZONTAL = 270, VERTICAL = 0}
 var _mode: Mode = Mode.VERTICAL;
 var _weaponReady = true;
 var _oldLookAtPosition = Vector3.ZERO;
+var _originalLookAtPosition: Transform3D;
 
 signal push_pull_force_applied(forward: bool)
 signal mode_changed(oldPosition: Mode, newPosition: Mode)
 
 func _ready():
+	_originalLookAtPosition = transform;
 	_initialMagnetPosition = magnet.get_position();
 
 func ToogleMode():
@@ -127,11 +129,14 @@ func _animationFinished():
 	_weaponReady = true;
 	beamSfx.stop();
 
-func LookAt(position: Vector3):
+func LookAt(lookPosition: Vector3):
+	if lookPosition == Vector3.ZERO:
+		transform = _originalLookAtPosition;
+		return;
 	if _oldLookAtPosition != Vector3.ZERO:
-		position = lerp(_oldLookAtPosition, position, 0.08);
-	look_at(position);
-	_oldLookAtPosition = position;
+		lookPosition = lerp(_oldLookAtPosition, lookPosition, 0.08);
+	look_at(lookPosition);
+	_oldLookAtPosition = lookPosition;
 
 func _AttractPickups():
 	var impulse = 150;
