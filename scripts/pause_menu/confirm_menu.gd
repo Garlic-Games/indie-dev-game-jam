@@ -1,9 +1,13 @@
 class_name ConfirmMenu;
-extends MarginContainer
+extends Control
 
 signal selection(choice: bool);
 signal opened;
 signal closed;
+
+func _input(event: InputEvent):
+	if event.is_action_pressed("pause"):
+		close();
 
 func _ready() -> void:
 	hide();

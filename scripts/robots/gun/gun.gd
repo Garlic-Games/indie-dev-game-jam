@@ -6,46 +6,39 @@ extends Node3D
 
 @export var target: Node3D;
 
-var fire: bool = false;
 var cooldown: SceneTreeTimer;
 const FLOOR_MASK = 1;  
 
-signal shoot(impact: Vector3);
-
+signal shoot();
+signal bullet_hit(position: Vector3);
 	
-func _process(_delta: float):
+func _process(delta: float):
 	if !target:
+		rotation = lerp(rotation, Vector3.ZERO, delta * rotation_speed);
 		return;
 
+	var ray = PhysicsRayQueryParameters3D.create(global_position, target.global_position, FLOOR_MASK);
+	var collision = get_world_3d().direct_space_state.intersect_ray(ray);
+	if !collision.is_empty():
+			return;
 	look_at(target.global_position, Vector3.UP);
-
-func _on_detection_sensor_body_entered(body: Node3D) -> void:
-	target = body;# Replace with function body.
-
-func _on_detection_sensor_body_exited(_body: Node3D):
-	target = null;	
-
-
-func _on_shoot_area_body_entered(_body):
-	fire = true;
 	open_fire();
+	
+func _on_detection_sensor_body_entered(body: Node3D) -> void:
+	target = body;
 
-
-func _on_shoot_area_body_exited(_body):
-	fire = false;
+func _on_detection_sensor_body_exited(body: Node3D):
+	if target.get_instance_id() == body.get_instance_id():
+		target = null;
 
 func open_fire():
 	if cooldown && cooldown.time_left > 0:
 		return; 
-	
-	if fire && target:
-		var ray = PhysicsRayQueryParameters3D.create(global_position, target.global_position, FLOOR_MASK);
-		var collision = get_world_3d().direct_space_state.intersect_ray(ray);
-		if collision.is_empty() || !collision.collider.has_method("damage"):
-			return;
-
-		collision.collider.call("damage", damage);
-		shoot.emit(collision.position);
 		
+	if target:
+		shoot.emit();
+		if target.has_method("damage"):
+			target.call("damage", damage);
+		bullet_hit.emit(target.global_position);
 		cooldown = get_tree().create_timer(shoot_cooldown, false);
-		cooldown.timeout.connect(open_fire);
+

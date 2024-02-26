@@ -1,5 +1,5 @@
 class_name FadeManager
-extends Control
+extends CanvasLayer
 
 signal on_fade_in_ended();
 signal on_fade_out_ended();

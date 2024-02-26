@@ -1,32 +1,41 @@
-[gd_scene load_steps=4 format=3 uid="uid://bef835xco60kq"]
+[gd_scene load_steps=7 format=3 uid="uid://bef835xco60kq"]
 
 [ext_resource type="Script" path="res://scripts/pause_menu/confirm_menu.gd" id="1_uhj86"]
+[ext_resource type="FontFile" uid="uid://dqudbxqp2cj2c" path="res://art/fonts/junegull.ttf" id="2_71mpm"]
 
-[sub_resource type="Gradient" id="Gradient_o5ph7"]
-offsets = PackedFloat32Array(0, 0.538961, 1)
-colors = PackedColorArray(1, 0.576471, 1, 1, 0.917647, 0.227451, 0.780392, 1, 1, 0.498039, 1, 1)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a50tu"]
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_amcwi"]
-gradient = SubResource("Gradient_o5ph7")
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_703g3"]
 
-[node name="ConfirmMenu" type="MarginContainer"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_magth"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3tlm1"]
+
+[node name="ConfirmMenu" type="Control"]
+z_index = 20
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 400
-theme_override_constants/margin_top = 200
-theme_override_constants/margin_right = 400
-theme_override_constants/margin_bottom = 300
 script = ExtResource("1_uhj86")
 
-[node name="ConfirmBackground" type="TextureRect" parent="."]
-layout_mode = 2
-texture = SubResource("GradientTexture2D_amcwi")
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [node name="ConfirmPadding" type="MarginContainer" parent="."]
 layout_mode = 2
+offset_left = 400.0
+offset_top = 200.0
+offset_right = 880.0
+offset_bottom = 420.0
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
@@ -37,7 +46,11 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="ConfirmPadding/VBoxContainer"]
 layout_mode = 2
-text = "Are you sure?"
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_71mpm")
+theme_override_font_sizes/font_size = 60
+text = "TILTED?"
 horizontal_alignment = 1
 
 [node name="ButtonLayout" type="HBoxContainer" parent="ConfirmPadding/VBoxContainer"]
@@ -53,6 +66,16 @@ size_flags_vertical = 3
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 size_flags_vertical = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.603922, 1, 0.996078, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_71mpm")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxEmpty_a50tu")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_703g3")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_magth")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3tlm1")
 text = "Yes"
 
 [node name="Fill" type="Control" parent="ConfirmPadding/VBoxContainer/ButtonLayout"]
@@ -64,6 +87,16 @@ size_flags_vertical = 3
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 size_flags_vertical = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.603922, 1, 0.996078, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_71mpm")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxEmpty_a50tu")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_703g3")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_magth")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3tlm1")
 text = "No"
 
 [node name="Fill3" type="Control" parent="ConfirmPadding/VBoxContainer/ButtonLayout"]

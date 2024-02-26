@@ -37,7 +37,7 @@ func _input(event):
 func _ready():
 	current_lives = lives;
 	current_rotation_speed = min_rotation_speed;
-	print(sphere.get_surface_override_material(0).get("shader_parameter/Saturation"));
+	sphere.get_surface_override_material(0).set("shader_parameter/Saturation", 1.0);
 
 
 func _process(delta):
@@ -64,7 +64,7 @@ func check_wing_integrity():
 
 func start_core_destroy_animation(camera : Camera3D):
 	var tween_camera = get_tree().create_tween();
-	tween_camera.tween_property(camera, "transform", endgame_camera_transform.transform, 3.0);
+	tween_camera.tween_property(camera, "global_transform", endgame_camera_transform.global_transform, 3.0);
 	tween_camera.tween_callback(destroy_core);
 
 

@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkxcidgjg8oy"]
+
+[ext_resource type="Script" path="res://scripts/transition/fade_manager.gd" id="1_qa2bu"]
+
+[node name="FadeManager" type="CanvasLayer"]
+layer = 11
+script = ExtResource("1_qa2bu")
+
+[node name="FadeBackground" type="ColorRect" parent="."]
+unique_name_in_owner = true
+z_index = 205
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)

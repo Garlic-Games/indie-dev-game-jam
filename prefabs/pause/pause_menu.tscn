@@ -1,20 +1,44 @@
-[gd_scene load_steps=6 format=3 uid="uid://bdh0gh5dw180o"]
+[gd_scene load_steps=18 format=3 uid="uid://bdh0gh5dw180o"]
 
 [ext_resource type="Script" path="res://scripts/pause_menu/pause_menu.gd" id="1_8nakt"]
-[ext_resource type="PackedScene" uid="uid://bms34wbd0mko4" path="res://prefabs/menu/settings_menu.tscn" id="2_hbhjv"]
+[ext_resource type="FontFile" uid="uid://dqudbxqp2cj2c" path="res://art/fonts/junegull.ttf" id="2_vekwv"]
 [ext_resource type="PackedScene" uid="uid://bef835xco60kq" path="res://prefabs/pause/confirm_menu.tscn" id="3_eexx2"]
+[ext_resource type="Script" path="res://scripts/main_menu/settings.gd" id="3_rvvd2"]
+[ext_resource type="Script" path="res://scripts/main_menu/settings_buttons.gd" id="5_hpm14"]
 
-[sub_resource type="Gradient" id="Gradient_o5ph7"]
-offsets = PackedFloat32Array(0, 0.538961, 1)
-colors = PackedColorArray(1, 0.576471, 1, 1, 0.917647, 0.227451, 0.780392, 1, 1, 0.498039, 1, 1)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_npt0u"]
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_amcwi"]
-gradient = SubResource("Gradient_o5ph7")
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bt7dx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_unn2v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hkge5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u5yv8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ljinh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nhyy1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ahhk5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rjsgx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0llrq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0x6lr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cpj8i"]
 
 [node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
+layer = 5
 script = ExtResource("1_8nakt")
+main_menu_scene = "res://scenes/main_menu.tscn"
 
-[node name="MainPauseMargin" type="MarginContainer" parent="."]
+[node name="MainPauseMenu" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+z_index = 185
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -25,59 +49,244 @@ theme_override_constants/margin_top = 100
 theme_override_constants/margin_right = 400
 theme_override_constants/margin_bottom = 100
 
-[node name="MainPauseBackground" type="TextureRect" parent="MainPauseMargin"]
-layout_mode = 2
-texture = SubResource("GradientTexture2D_amcwi")
-
-[node name="MainPausePadding" type="MarginContainer" parent="MainPauseMargin"]
+[node name="MainPausePadding" type="MarginContainer" parent="MainPauseMenu"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="SettingsLayout" type="VBoxContainer" parent="MainPauseMargin/MainPausePadding"]
+[node name="MainLayout" type="VBoxContainer" parent="MainPauseMenu/MainPausePadding"]
 layout_mode = 2
+theme_override_constants/separation = 15
 
-[node name="Pause" type="Label" parent="MainPauseMargin/MainPausePadding/SettingsLayout"]
+[node name="Title" type="Label" parent="MainPauseMenu/MainPausePadding/MainLayout"]
 layout_mode = 2
-text = "PAUSE"
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_vekwv")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxEmpty_npt0u")
+text = "You stopped time in your property. Better be important:"
 horizontal_alignment = 1
 
-[node name="Resume" type="Button" parent="MainPauseMargin/MainPausePadding/SettingsLayout" groups=["MenuButtons"]]
+[node name="HSeparator" type="HSeparator" parent="MainPauseMenu/MainPausePadding/MainLayout"]
 layout_mode = 2
+theme_override_constants/separation = 80
+theme_override_styles/separator = SubResource("StyleBoxEmpty_bt7dx")
+
+[node name="Resume" type="Button" parent="MainPauseMenu/MainPausePadding/MainLayout" groups=["MenuButtons"]]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.603922, 1, 0.996078, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_vekwv")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_unn2v")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_hkge5")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_u5yv8")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ljinh")
 text = "Resume"
 
-[node name="Settings" type="Button" parent="MainPauseMargin/MainPausePadding/SettingsLayout" groups=["MenuButtons"]]
+[node name="Settings" type="Button" parent="MainPauseMenu/MainPausePadding/MainLayout" groups=["MenuButtons"]]
 layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.603922, 1, 0.996078, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_vekwv")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_unn2v")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_hkge5")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_u5yv8")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ljinh")
 text = "Settings"
 
-[node name="Fill" type="Control" parent="MainPauseMargin/MainPausePadding/SettingsLayout"]
+[node name="MainMenu" type="Button" parent="MainPauseMenu/MainPausePadding/MainLayout" groups=["MenuButtons"]]
 layout_mode = 2
-size_flags_vertical = 3
-
-[node name="MainMenu" type="Button" parent="MainPauseMargin/MainPausePadding/SettingsLayout" groups=["MenuButtons"]]
-layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.603922, 1, 0.996078, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_vekwv")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_unn2v")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_hkge5")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_u5yv8")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ljinh")
 text = "Main Menu"
 
-[node name="ExitGame" type="Button" parent="MainPauseMargin/MainPausePadding/SettingsLayout" groups=["MenuButtons"]]
+[node name="ExitGame" type="Button" parent="MainPauseMenu/MainPausePadding/MainLayout" groups=["MenuButtons"]]
 layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.603922, 1, 0.996078, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_vekwv")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_unn2v")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_hkge5")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_u5yv8")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ljinh")
 text = "Exit Game"
 
-[node name="SettingsMenu" parent="." instance=ExtResource("2_hbhjv")]
+[node name="SettingsMenu" type="PanelContainer" parent="."]
 unique_name_in_owner = true
-visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -550.0
+offset_top = -272.5
+offset_right = 550.0
+offset_bottom = 272.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_nhyy1")
+script = ExtResource("3_rvvd2")
+
+[node name="SettingsLayout" type="VBoxContainer" parent="SettingsMenu"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Title" type="Label" parent="SettingsMenu/SettingsLayout"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_vekwv")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxEmpty_npt0u")
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="SettingsMenu/SettingsLayout"]
+layout_mode = 2
+theme_override_constants/separation = 40
+theme_override_styles/separator = SubResource("StyleBoxEmpty_bt7dx")
+
+[node name="SettingsButtons" type="VBoxContainer" parent="SettingsMenu/SettingsLayout"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 25
+script = ExtResource("5_hpm14")
+
+[node name="FullscreenRow" type="HBoxContainer" parent="SettingsMenu/SettingsLayout/SettingsButtons"]
+layout_mode = 2
+
+[node name="Fullscreen" type="Label" parent="SettingsMenu/SettingsLayout/SettingsButtons/FullscreenRow"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_vekwv")
+theme_override_font_sizes/font_size = 30
+text = "Fullscreen"
+horizontal_alignment = 1
+
+[node name="FullscreenToggle" type="CheckButton" parent="SettingsMenu/SettingsLayout/SettingsButtons/FullscreenRow"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="SettingsMenu/SettingsLayout/SettingsButtons"]
+layout_mode = 2
+theme_override_constants/separation = 20
+theme_override_styles/separator = SubResource("StyleBoxEmpty_ahhk5")
+
+[node name="MasterVolumeRow" type="VBoxContainer" parent="SettingsMenu/SettingsLayout/SettingsButtons"]
+layout_mode = 2
+
+[node name="MasterVolume" type="Label" parent="SettingsMenu/SettingsLayout/SettingsButtons/MasterVolumeRow"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_vekwv")
+theme_override_font_sizes/font_size = 30
+text = "Main Volume"
+
+[node name="MasterSlider" type="HSlider" parent="SettingsMenu/SettingsLayout/SettingsButtons/MasterVolumeRow"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+
+[node name="MusicVolumeRow" type="VBoxContainer" parent="SettingsMenu/SettingsLayout/SettingsButtons"]
+layout_mode = 2
+
+[node name="Music" type="Label" parent="SettingsMenu/SettingsLayout/SettingsButtons/MusicVolumeRow"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_vekwv")
+theme_override_font_sizes/font_size = 30
+text = "Music"
+
+[node name="MusicSlider" type="HSlider" parent="SettingsMenu/SettingsLayout/SettingsButtons/MusicVolumeRow"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+
+[node name="SFXVolumeRow2" type="VBoxContainer" parent="SettingsMenu/SettingsLayout/SettingsButtons"]
+layout_mode = 2
+
+[node name="SFX" type="Label" parent="SettingsMenu/SettingsLayout/SettingsButtons/SFXVolumeRow2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_vekwv")
+theme_override_font_sizes/font_size = 30
+text = "SFX"
+
+[node name="SFXSlider" type="HSlider" parent="SettingsMenu/SettingsLayout/SettingsButtons/SFXVolumeRow2"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+
+[node name="HSeparator2" type="HSeparator" parent="SettingsMenu/SettingsLayout"]
+layout_mode = 2
+theme_override_constants/separation = 80
+theme_override_styles/separator = SubResource("StyleBoxEmpty_bt7dx")
+
+[node name="Back" type="Button" parent="SettingsMenu/SettingsLayout" groups=["MenuButtons"]]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.603922, 1, 0.996078, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_vekwv")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rjsgx")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_0llrq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_0x6lr")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cpj8i")
+text = "Back"
 
 [node name="ExitGameConfirmMenu" parent="." instance=ExtResource("3_eexx2")]
 unique_name_in_owner = true
 visible = false
+z_index = 190
 
 [node name="MainMenuConfirmMenu" parent="." instance=ExtResource("3_eexx2")]
 unique_name_in_owner = true
 visible = false
+z_index = 190
 
-[connection signal="pressed" from="MainPauseMargin/MainPausePadding/SettingsLayout/Settings" to="." method="open_settings"]
-[connection signal="pressed" from="MainPauseMargin/MainPausePadding/SettingsLayout/MainMenu" to="." method="open_main_confirmation"]
-[connection signal="pressed" from="MainPauseMargin/MainPausePadding/SettingsLayout/ExitGame" to="." method="open_exit_confirmation"]
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.737255)
+
+[connection signal="pressed" from="MainPauseMenu/MainPausePadding/MainLayout/Resume" to="." method="close"]
+[connection signal="pressed" from="MainPauseMenu/MainPausePadding/MainLayout/Settings" to="." method="open_settings"]
+[connection signal="pressed" from="MainPauseMenu/MainPausePadding/MainLayout/MainMenu" to="." method="open_main_confirmation"]
+[connection signal="pressed" from="MainPauseMenu/MainPausePadding/MainLayout/ExitGame" to="." method="open_exit_confirmation"]
+[connection signal="pressed" from="SettingsMenu/SettingsLayout/Back" to="SettingsMenu" method="close"]
 [connection signal="selection" from="ExitGameConfirmMenu" to="." method="choose_exit_game"]
 [connection signal="selection" from="MainMenuConfirmMenu" to="." method="choose_main_menu"]
