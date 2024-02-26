@@ -47,6 +47,8 @@ func _process(delta):
 
 
 func core_damaged(a,b,c):
+	if is_game_over:
+		return;
 	coreDamagedSound.play();
 
 
@@ -55,6 +57,8 @@ func core_destroyed():
 
 
 func game_over():
+	if is_game_over:
+		return;
 	is_game_over = true;
 	player.can_move = false;
 	gameMusic.stop();
