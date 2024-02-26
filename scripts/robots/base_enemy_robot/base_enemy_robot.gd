@@ -1,6 +1,7 @@
 class_name BaseEnemyRobot;
 extends CharacterBody3D
 
+@export var bolts_dropped: float = 5;
 @export var max_hp: float = 10;
 @onready var current_hp: float = max_hp :
 	get:
@@ -14,8 +15,9 @@ extends CharacterBody3D
 @export var movement_target_position: Node3D;
 
 @export var body: Node3D;
-
 @onready var agent: NavigationAgent3D = %Agent;
+const NUT_BOLT_PICKUP = preload("res://prefabs/pickup/nut_bolt_pickup.tscn");
+
 var loaded: bool = false;
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity");
 signal damaged(dmg: float);
@@ -63,6 +65,7 @@ func damage(ammount: float):
 
 func die():
 	dead.emit();
+	_spawn_bolts();
 	queue_free();	
 
 func _on_agent_velocity_computed(safe_velocity: Vector3):
@@ -73,3 +76,9 @@ func _on_agent_velocity_computed(safe_velocity: Vector3):
 
 func _on_agent_target_reached():
 	velocity = Vector3.ZERO;
+	
+func _spawn_bolts():
+	for i in bolts_dropped:
+		var pickup = NUT_BOLT_PICKUP.instantiate() as NutBoltPickup;
+		get_parent().add_child(pickup);
+		pickup.global_position = global_position;
