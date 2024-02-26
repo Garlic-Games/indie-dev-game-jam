@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://c0kysbw474wqn"]
+[gd_scene load_steps=30 format=3 uid="uid://c0kysbw474wqn"]
 
 [ext_resource type="Environment" uid="uid://celdecb2ba0qm" path="res://art/environment/main_environment.tres" id="1_4aiub"]
 [ext_resource type="Script" path="res://scripts/main_menu/main_menu.gd" id="1_7w5a6"]
@@ -46,6 +46,8 @@ size = Vector3(30.3227, 0.475922, 7.67651)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8cwer"]
 size = Vector3(3.55566, 0.402466, 8.18982)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gtinr"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ix0w4"]
 
@@ -181,6 +183,26 @@ shape = SubResource("BoxShape3D_8cwer")
 script = ExtResource("1_7w5a6")
 gameplay_scene = "res://scenes/gameplay.tscn"
 
+[node name="Label" type="Label" parent="MainMenu"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -537.41
+offset_top = 15.63
+offset_right = -61.4099
+offset_bottom = 95.63
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0.654902, 0.729412, 0.929412, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 10
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("8_tvqj4")
+theme_override_font_sizes/font_size = 80
+theme_override_styles/normal = SubResource("StyleBoxEmpty_gtinr")
+text = "WARMED CORE"
+
 [node name="MainContainer" type="PanelContainer" parent="MainMenu"]
 unique_name_in_owner = true
 anchors_preset = 9
@@ -285,6 +307,7 @@ unique_name_in_owner = true
 
 [node name="FadeManager" parent="MainMenu" instance=ExtResource("14_uxo00")]
 unique_name_in_owner = true
+visible = false
 
 [connection signal="pressed" from="MainMenu/MainContainer/MainMargin/Buttons/Play" to="MainMenu" method="start_game"]
 [connection signal="pressed" from="MainMenu/MainContainer/MainMargin/Buttons/Settings" to="MainMenu" method="open_settings"]
