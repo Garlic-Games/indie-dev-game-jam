@@ -1,9 +1,10 @@
 class_name Core
 extends Node3D
 
-signal on_core_damaged(lives_remaining : int);
-signal on_core_destroy_started();
 signal on_core_destroyed();
+signal on_core_destroy_started();
+signal on_core_death_animation();
+signal on_core_damaged(max_lives: int, beforeLives: int, afterLives: int);
 
 @export_group("Core settings")
 @export var lives : int = 5;
@@ -29,10 +30,10 @@ var current_rotation_speed : float;
 func _input(event):
 	if not debug_mode:
 		return;
-
+		
 	if event.is_action_pressed("jump"):
 		damage();
-
+		
 
 func _ready():
 	current_lives = lives;
@@ -46,10 +47,11 @@ func _process(delta):
 
 func damage():
 	current_lives -= 1;
+	on_core_damaged.emit(lives, current_lives+1, current_lives);
 	check_wing_integrity();
-
+	
 	if (current_lives < 0):
-		emit_signal("on_core_destroy_started");
+		emit_signal("on_core_death_animation");
 
 
 func check_wing_integrity():
@@ -58,6 +60,7 @@ func check_wing_integrity():
 
 	while (wings.size() > wings_remaining):
 		# @TODO: animar la rotura del ala?
+		
 		var wing_rnd_index = randi_range(0, wings.size() - 1); 
 		wings.pop_at(wing_rnd_index).queue_free();
 
@@ -69,6 +72,7 @@ func start_core_destroy_animation(camera : Camera3D):
 
 
 func destroy_core():
+	emit_signal("on_core_destroy_started");
 	var tween_core_sphere = get_tree().create_tween();
 	tween_core_sphere.tween_property(sphere.get_surface_override_material(0), "shader_parameter/Saturation", 0.0, 8.0);
 

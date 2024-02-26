@@ -18,12 +18,14 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity");
 @export var model: MaleBody = null;
 @export var stepsSfx: SFXRandomPlayer = null;
 @export var pickupSfx: SFXRandomPlayer = null;
+@export var weapon: MagnetWrench = null;
+@export var hud: Control = null;
 
 signal die_event();
 signal stamina_changed(before: float, after: float);
 signal health_changed(before: float, after: float);
 signal ammo_changed(before: float, after: float);
-signal core_health_changed(before: float, after: float);
+signal core_health_changed(max: int, before: int, after: int);
 
 var _currentStamina: float = 100;
 var _currentHealth: float = 100;
@@ -140,9 +142,15 @@ func AddAmmo(amount: float):
 	_currentAmmo = newAmmo;
 	pickupSfx.reproduce();
 
-func CoreHealthChangedListener(oldValue: float, newValue: float):
-	core_health_changed.emit(oldValue, newValue);
+func CoreHealthChangedListener(maxValue: int, oldValue: int, newValue: int):
+	core_health_changed.emit(maxValue, oldValue, newValue);
 	
 
 func HasEnoughAmmo(amount: float) -> bool:
 	return _currentAmmo > amount;
+	
+func hideWeapon():
+	weapon.hide();
+
+func hideHud():
+	hud.hide();

@@ -32,9 +32,10 @@ func StaminaChangedListener(oldStamina: float, newStamina: float):
 	_staminaLevel = newStamina;
 	_staminaPB.value = _staminaLevel;
 	
-func CoreHealthChangedListener(oldCoreHealtLevel: float, newCoreHealtLevel: float):
+func CoreHealthChangedListener(max: int, oldCoreHealtLevel: int, newCoreHealtLevel: int):
 	_coreHealthLevel = newCoreHealtLevel;
-	_coreHealthPB.value = _staminaLevel;
+	_coreHealthPB.max_value = max;
+	_coreHealthPB.value = _coreHealthLevel;
 	
 func PlayerHealthChangedListener(oldPlayerHealthLevel: float, newPlayerHealthLevel: float):
 	_playerHealthLevel = newPlayerHealthLevel;
