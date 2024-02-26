@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://4xwpnxm4pnpi"]
+[gd_scene load_steps=12 format=3 uid="uid://4xwpnxm4pnpi"]
 
 [ext_resource type="Texture2D" uid="uid://c135qafciujvo" path="res://art/gradient/blue_progress_bar.tres" id="1_4o41m"]
 [ext_resource type="Script" path="res://scripts/player/player_hud.gd" id="1_mihol"]
 [ext_resource type="Texture2D" uid="uid://dmemd26vs0v0y" path="res://art/gradient/green_progress_bar.tres" id="2_agry7"]
 [ext_resource type="Shader" path="res://art/shaders/glitch_ondemand.gdshader" id="2_m1pbh"]
+[ext_resource type="FontFile" uid="uid://dqudbxqp2cj2c" path="res://art/fonts/junegull.ttf" id="3_diw30"]
 [ext_resource type="Texture2D" uid="uid://3f00m4x3dq4l" path="res://art/images/crosshair/crosshair.png" id="4_o4ch6"]
 [ext_resource type="Texture2D" uid="uid://drrfxsrtmdf3e" path="res://art/images/crosshair/crosshair_vertical.png" id="5_cxx4x"]
 
@@ -20,6 +21,8 @@ shader_parameter/doeet = null
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_b16yd"]
 gradient = SubResource("Gradient_win8n")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_11hdf"]
 
 [node name="PlayerHud" type="Control"]
 layout_mode = 3
@@ -68,13 +71,17 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 21.0001
+offset_left = -14.0
 offset_top = -30.0
-offset_right = 96.0001
+offset_right = 102.0
 offset_bottom = -5.0
 grow_vertical = 0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(0.658824, 0.588235, 0.243137, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_diw30")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxEmpty_11hdf")
 text = "30/3000
 "
 

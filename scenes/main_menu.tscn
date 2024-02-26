@@ -6,9 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://niq8vbry2vgq" path="res://prefabs/world/basic_terrain_with_rb.tscn" id="2_hr3g3"]
 [ext_resource type="PackedScene" uid="uid://crxdwuvlnrsuk" path="res://prefabs/menu/credits.tscn" id="3_juipk"]
 [ext_resource type="Material" uid="uid://co6kcx0ud4gn8" path="res://art/materials/water_shader_material.tres" id="3_kqxmd"]
-[ext_resource type="PackedScene" path="res://art/models/props/Viga.tscn" id="4_0tbih"]
+[ext_resource type="PackedScene" uid="uid://o3v5lxacwnuk" path="res://art/models/props/Viga.tscn" id="4_0tbih"]
 [ext_resource type="PackedScene" uid="uid://dk0dddmpl201" path="res://prefabs/stream_utilities/button_group_sound_when_signal.tscn" id="4_nwlex"]
-[ext_resource type="PackedScene" path="res://art/models/props/uralita.tscn" id="5_65v8f"]
+[ext_resource type="PackedScene" uid="uid://b1ghy114l4ekc" path="res://art/models/props/uralita.tscn" id="5_65v8f"]
 [ext_resource type="PackedScene" uid="uid://dcxkowmduxb5y" path="res://prefabs/menu/loading_panel.tscn" id="7_y4405"]
 [ext_resource type="FontFile" uid="uid://dqudbxqp2cj2c" path="res://art/fonts/junegull.ttf" id="8_tvqj4"]
 [ext_resource type="AudioStream" uid="uid://y5tw7ip02odj" path="res://art/sounds/music/menu_music.mp3" id="11_f50bc"]
@@ -307,7 +307,6 @@ unique_name_in_owner = true
 
 [node name="FadeManager" parent="MainMenu" instance=ExtResource("14_uxo00")]
 unique_name_in_owner = true
-visible = false
 
 [connection signal="pressed" from="MainMenu/MainContainer/MainMargin/Buttons/Play" to="MainMenu" method="start_game"]
 [connection signal="pressed" from="MainMenu/MainContainer/MainMargin/Buttons/Settings" to="MainMenu" method="open_settings"]

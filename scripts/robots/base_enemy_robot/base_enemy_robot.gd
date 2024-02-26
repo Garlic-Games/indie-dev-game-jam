@@ -92,15 +92,16 @@ var damage_cooldown: SceneTreeTimer;
 func _on_damage_area_body_entered(body):
 	player = body as Player;
 	damage_player();
-
+	
 func damage_player():
 	if !player:
 		return;
 	if damage_cooldown:
-		if damage_cooldown.time_left >= 0 :
+		if damage_cooldown.time_left > 0:
 			return;
 	player.damage(melee_damage);
 	damage_cooldown = get_tree().create_timer(melee_damage_cooldown, false);	
-	await damage_cooldown.timeout;
-	damage_player();
+	damage_cooldown.timeout.connect(damage_player);
 	
+func _on_damage_area_body_exited(body):
+	player = null; # Replace with function body.

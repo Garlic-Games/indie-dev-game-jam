@@ -1,13 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://drk5m5iq065e3"]
+[gd_scene load_steps=22 format=3 uid="uid://drk5m5iq065e3"]
 
 [ext_resource type="PackedScene" uid="uid://dop0nlsoshcok" path="res://prefabs/enemies/base_enemy.tscn" id="1_dsr0k"]
 [ext_resource type="Script" path="res://scripts/robots/gun/gun.gd" id="2_jionj"]
 [ext_resource type="ArrayMesh" uid="uid://bssdoa3udrx3i" path="res://art/models/enemies/grunt/walking/WalkingRobot_Robot_robot_003.res" id="3_fj3fa"]
 [ext_resource type="ArrayMesh" uid="uid://81sa35tewd04" path="res://art/models/enemies/grunt/walking/WalkingRobot_Robot_robot_001.res" id="4_3unna"]
-[ext_resource type="Material" uid="uid://e1iksr0ph052" path="res://art/materials/uralita_material.tres" id="4_vu7se"]
 [ext_resource type="Script" path="res://scripts/turret/recoil.gd" id="5_1wg7e"]
 [ext_resource type="ArrayMesh" uid="uid://13w2fj21mvfd" path="res://art/models/enemies/grunt/walking/WalkingRobot_Robot_robot_002.res" id="5_8fn8r"]
-[ext_resource type="Material" uid="uid://cfob4ua3waaob" path="res://art/materials/viga_material.tres" id="6_ymc1q"]
 [ext_resource type="Texture2D" uid="uid://bryrl20bvssra" path="res://art/images/particles/void.png" id="7_vfad0"]
 [ext_resource type="Texture2D" uid="uid://ca8cpl3xg7uwg" path="res://art/images/particles/hit.png" id="8_2ge56"]
 [ext_resource type="Script" path="res://scripts/turret/GunHit.gd" id="9_gafkf"]
@@ -101,11 +99,9 @@ rotation_speed = 100.0
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.638, 0)
 mesh = ExtResource("3_fj3fa")
 skeleton = NodePath("../../..")
-surface_material_override/0 = ExtResource("4_vu7se")
 
 [node name="ArmR" type="MeshInstance3D" parent="BodyContainer/HeadMesh/Head" index="0"]
 mesh = ExtResource("4_3unna")
-surface_material_override/0 = ExtResource("6_ymc1q")
 script = ExtResource("5_1wg7e")
 
 [node name="Smoke" type="GPUParticles3D" parent="BodyContainer/HeadMesh/Head/ArmR" index="0"]
@@ -121,7 +117,6 @@ draw_pass_1 = SubResource("QuadMesh_iweuv")
 
 [node name="ArmL" type="MeshInstance3D" parent="BodyContainer/HeadMesh/Head" index="1"]
 mesh = ExtResource("5_8fn8r")
-surface_material_override/0 = ExtResource("6_ymc1q")
 script = ExtResource("5_1wg7e")
 
 [node name="Smoke" type="GPUParticles3D" parent="BodyContainer/HeadMesh/Head/ArmL" index="0"]
