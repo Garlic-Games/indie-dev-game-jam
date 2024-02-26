@@ -40,6 +40,7 @@ transform = Transform3D(-0.0784591, -0.357263, 0.930702, 0, 0.93358, 0.358368, -
 
 [node name="Core" parent="." instance=ExtResource("4_sqa0f")]
 transform = Transform3D(2.10755, 0, 0, 0, 2.10755, 0, 0, 0, 2.10755, -38.4441, 0.264963, 45.2851)
+debug_mode = false
 
 [node name="MainLevel" type="Node3D" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("2_v2esw")
