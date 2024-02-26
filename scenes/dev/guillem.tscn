@@ -83,5 +83,65 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
 [node name="NutBoltPickup20" parent="DezzNuts" instance=ExtResource("4_lkiby")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
 
+[node name="NutBoltPickup21" parent="DezzNuts" instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup22" parent="DezzNuts" instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup23" parent="DezzNuts" instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup24" parent="DezzNuts" instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup25" parent="DezzNuts" instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup26" parent="DezzNuts" instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup27" parent="DezzNuts" instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup28" parent="DezzNuts" instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup29" parent="DezzNuts" instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup30" parent="DezzNuts" instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup31" parent="DezzNuts" instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup32" parent="DezzNuts" instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup33" parent="DezzNuts" instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup34" parent="DezzNuts" instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup35" parent="DezzNuts" instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup36" parent="DezzNuts" instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup37" parent="DezzNuts" instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup38" parent="DezzNuts" instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup39" parent="DezzNuts" instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
+[node name="NutBoltPickup40" parent="DezzNuts" instance=ExtResource("4_lkiby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84264, 4.5081, -12.1935)
+
 [node name="Heavy" parent="." instance=ExtResource("5_3n8bb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.59138, -9.72748e-05, 27.3588)
