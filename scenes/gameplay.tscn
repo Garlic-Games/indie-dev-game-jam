@@ -134,9 +134,11 @@ environment = ExtResource("26_kavve")
 
 [node name="CoreDamaged" type="AudioStreamPlayer" parent="Player/FX"]
 stream = ExtResource("17_kmcoq")
+bus = &"SFX"
 
 [node name="CoreDead" type="AudioStreamPlayer" parent="Player/FX"]
 stream = ExtResource("18_gqyh3")
+bus = &"SFX"
 
 [connection signal="level_started" from="MainLevel" to="MainLevel/Spawns/Wave" method="start_wave"]
 [connection signal="timeout" from="MainLevel/Spawns/Wave/HeavyEnemy" to="MainLevel/Spawns/HeavyEnemySpawn" method="spawn"]
