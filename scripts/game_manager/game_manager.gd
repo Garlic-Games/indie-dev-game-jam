@@ -5,6 +5,7 @@ extends Node
 @export var player: Player = null;
 @export var game_over_screen : CanvasLayer = null;
 @export var fade_manager : FadeManager = null;
+@export var tutorial : Tutorial = null;
 
 @export_group("FX")
 @export var coreDamagedSound: AudioStreamPlayer = null;
@@ -29,6 +30,7 @@ func _ready():
 	game_over_screen.hide();
 	PlayMusic();
 	fade_manager.fade_in(2.0);
+	tutorial.start();
 	
 func PlayMusic():
 	if !is_game_over:

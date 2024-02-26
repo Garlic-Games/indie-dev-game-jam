@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cohpydgbvkuna"]
+[gd_scene load_steps=23 format=3 uid="uid://cohpydgbvkuna"]
 
 [ext_resource type="PackedScene" uid="uid://bdh0gh5dw180o" path="res://prefabs/pause/pause_menu.tscn" id="1_khjpo"]
 [ext_resource type="Script" path="res://scripts/game_manager/game_manager.gd" id="1_r2osf"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" path="res://prefabs/enemies/spawn/spider_spawn.tscn" id="7_ah5hu"]
 [ext_resource type="Script" path="res://scripts/robots/spawn/wave.gd" id="8_3w5xk"]
 [ext_resource type="Script" path="res://scripts/timer/repeat_timer.gd" id="9_x7lcn"]
+[ext_resource type="PackedScene" uid="uid://b8qcaqqy4oldg" path="res://prefabs/tutorial/tutorial_ui.tscn" id="14_ijgij"]
 [ext_resource type="PackedScene" uid="uid://gli4qu8qcdb4" path="res://prefabs/player/player.tscn" id="16_hp848"]
 [ext_resource type="AudioStream" uid="uid://o61je3r5uxo" path="res://art/sounds/fx/loose 1 core.mp3" id="17_kmcoq"]
 [ext_resource type="AudioStream" uid="uid://destvlhyhtxs8" path="res://art/sounds/fx/loose all cores.mp3" id="18_gqyh3"]
@@ -22,13 +23,14 @@
 [ext_resource type="PackedScene" uid="uid://bkxcidgjg8oy" path="res://prefabs/transitions/fade_manager.tscn" id="23_t05qc"]
 [ext_resource type="Environment" uid="uid://celdecb2ba0qm" path="res://art/environment/main_environment.tres" id="26_kavve"]
 
-[node name="Gameplay" type="Node3D" node_paths=PackedStringArray("_endGameCamera", "core", "player", "game_over_screen", "fade_manager", "coreDamagedSound", "coreDeadSound", "gameMusic", "gameOverMusic", "winMusic")]
+[node name="Gameplay" type="Node3D" node_paths=PackedStringArray("_endGameCamera", "core", "player", "game_over_screen", "fade_manager", "tutorial", "coreDamagedSound", "coreDeadSound", "gameMusic", "gameOverMusic", "winMusic")]
 script = ExtResource("1_r2osf")
 _endGameCamera = NodePath("GameOvercamera")
 core = NodePath("Core")
 player = NodePath("Player")
 game_over_screen = NodePath("GameOver")
 fade_manager = NodePath("FadeManager")
+tutorial = NodePath("TutorialUI")
 coreDamagedSound = NodePath("Player/FX/CoreDamaged")
 coreDeadSound = NodePath("Player/FX/CoreDead")
 gameMusic = NodePath("Player/FX/GameMusic")
@@ -121,6 +123,8 @@ layer = 128
 
 [node name="FadeManager" parent="." instance=ExtResource("23_t05qc")]
 
+[node name="TutorialUI" parent="." instance=ExtResource("14_ijgij")]
+
 [node name="UiButtonSounds" type="Node" parent="."]
 
 [node name="ButtonHover" parent="UiButtonSounds" instance=ExtResource("3_a7qdk")]
@@ -135,6 +139,7 @@ shadow_enabled = true
 environment = ExtResource("26_kavve")
 
 [node name="Player" parent="." instance=ExtResource("16_hp848")]
+transform = Transform3D(0.655005, 0, -0.755625, 0, 1, 0, 0.755625, 0, 0.655005, -66.7214, 3.29327, 68.0918)
 
 [node name="FX" type="Node3D" parent="Player"]
 
