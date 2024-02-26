@@ -10,6 +10,7 @@ extends CanvasLayer;
 
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE);
 	assert(gameplay_scene != "", "A gameplay scene resource must be provided to main menu");
 	
 	settings_menu.connect("closed", open);

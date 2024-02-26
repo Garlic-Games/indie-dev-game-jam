@@ -39,6 +39,7 @@ func _ready():
 	current_rotation_speed = min_rotation_speed;
 	sphere.get_surface_override_material(0).set("shader_parameter/Saturation", 1.0);
 
+
 func _process(delta):
 	rotary_item.rotate_y(current_rotation_speed * 2.0 * PI / 360.0 * delta);
 
