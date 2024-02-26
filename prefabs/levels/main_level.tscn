@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dafbkuh5h26yx" path="res://prefabs/core/core.tscn" id="3_7thnq"]
 [ext_resource type="Script" path="res://scripts/robots/spawn/wave.gd" id="5_76eiv"]
 [ext_resource type="PackedScene" uid="uid://byjru80pgt0m2" path="res://prefabs/enemies/spawn/heavy_enemy_spawn.tscn" id="5_lchtv"]
-[ext_resource type="PackedScene" path="res://prefabs/enemies/spawn/spider_spawn.tscn" id="5_ome6d"]
+[ext_resource type="PackedScene" uid="uid://dq36w1s8eda55" path="res://prefabs/enemies/spawn/spider_spawn.tscn" id="5_ome6d"]
 [ext_resource type="Script" path="res://scripts/timer/repeat_timer.gd" id="7_ggrqk"]
 
 [node name="MainLevel" type="Node3D"]

@@ -1,8 +1,67 @@
-[gd_scene load_steps=3 format=3 uid="uid://c7bjmikn02g2g"]
+[gd_scene load_steps=10 format=3 uid="uid://c7bjmikn02g2g"]
 
 [ext_resource type="PackedScene" uid="uid://bq0rkcomj6wjv" path="res://prefabs/turrets/base_turret/base_turret.tscn" id="1_job2p"]
-[ext_resource type="PackedScene" uid="uid://b43qhnxayx4oy" path="res://prefabs/turrets/NormalTurret/turret_base_behaviour.tscn" id="2_5a0eb"]
+[ext_resource type="ArrayMesh" uid="uid://c7iosxpj1loyx" path="res://art/models/turrets/base/meshes/turret_base_Cube_002.res" id="3_6v7mw"]
+[ext_resource type="ArrayMesh" uid="uid://dhqri0wvbwhy5" path="res://art/models/turrets/base/meshes/turret_base_Cube_001.res" id="4_jdf78"]
+[ext_resource type="Script" path="res://scripts/robots/gun/gun.gd" id="4_r82oo"]
+[ext_resource type="ArrayMesh" uid="uid://cq1l3myyg7fa6" path="res://art/models/turrets/base/meshes/turret_base_Cylinder_003.res" id="5_kkpoe"]
+[ext_resource type="ArrayMesh" uid="uid://clvn42xfwmqmo" path="res://art/models/turrets/base/meshes/turret_base_Cylinder_013.res" id="6_7eld3"]
+[ext_resource type="ArrayMesh" uid="uid://bcdglbw58eoce" path="res://art/models/turrets/base/meshes/turret_base_Sphere_001.res" id="7_kngd7"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ceffb"]
+height = 25.0
+radius = 0.64009
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_lqovo"]
+height = 20.0
+radius = 25.0
 
 [node name="NormalTurret" instance=ExtResource("1_job2p")]
 
-[node name="turret_base" parent="." index="1" instance=ExtResource("2_5a0eb")]
+[node name="mesh" type="Node3D" parent="." index="1"]
+
+[node name="body" type="MeshInstance3D" parent="mesh" index="0"]
+transform = Transform3D(0.81, 0, 0, 0, 0.177, 0, 0, 0, 0.889, 0, 1, 0)
+mesh = ExtResource("3_6v7mw")
+
+[node name="rotator" type="Node3D" parent="mesh" index="1"]
+script = ExtResource("4_r82oo")
+
+[node name="head" type="MeshInstance3D" parent="mesh/rotator" index="0"]
+transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, 0, 2.18859, 0)
+mesh = ExtResource("4_jdf78")
+skeleton = NodePath("../..")
+
+[node name="cannon" type="MeshInstance3D" parent="mesh/rotator/head" index="0"]
+transform = Transform3D(-8.74228e-09, 0.1, 1.77636e-15, -0.2, -4.37114e-09, 5.47019e-23, 1.32349e-22, -8.88178e-16, 0.2, 1.06353, 0, 4.64882e-08)
+mesh = ExtResource("5_kkpoe")
+
+[node name="ball" type="MeshInstance3D" parent="mesh/rotator/head" index="1"]
+transform = Transform3D(-0.073, -5.70566e-15, -1.11022e-15, 5.70566e-15, -0.073, -6.18333e-23, 1.11022e-15, 6.18334e-23, -0.073, -0.668814, 1.93683, 2.90582e-10)
+mesh = ExtResource("7_kngd7")
+skeleton = NodePath("../antena")
+
+[node name="antena" type="MeshInstance3D" parent="mesh/rotator/head" index="2"]
+transform = Transform3D(-0.0362909, 0, 0, 0, -0.0362909, 0, 0, 0, -0.0362909, -0.331084, 1.00769, -1.44721e-08)
+mesh = ExtResource("6_7eld3")
+
+[node name="ShootArea" type="Area3D" parent="mesh/rotator" index="1"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 2.1, 0)
+collision_layer = 0
+collision_mask = 8
+
+[node name="ShootCollision" type="CollisionShape3D" parent="mesh/rotator/ShootArea" index="0"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 13, 0, 0)
+shape = SubResource("CylinderShape3D_ceffb")
+
+[node name="DetectionSensor" type="Area3D" parent="mesh" index="2"]
+collision_layer = 0
+collision_mask = 8
+
+[node name="DetectionCollider" type="CollisionShape3D" parent="mesh/DetectionSensor" index="0"]
+shape = SubResource("CylinderShape3D_lqovo")
+
+[connection signal="body_entered" from="mesh/rotator/ShootArea" to="mesh/rotator" method="_on_shoot_area_body_entered"]
+[connection signal="body_exited" from="mesh/rotator/ShootArea" to="mesh/rotator" method="_on_shoot_area_body_exited"]
+[connection signal="body_entered" from="mesh/DetectionSensor" to="mesh/rotator" method="_on_detection_sensor_body_entered"]
+[connection signal="body_exited" from="mesh/DetectionSensor" to="mesh/rotator" method="_on_detection_sensor_body_exited"]
