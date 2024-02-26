@@ -18,8 +18,7 @@ func _ready():
 
 func _process(delta):
 	if not is_visible():
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED);
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED);
 
 
 func toogle() -> bool:
