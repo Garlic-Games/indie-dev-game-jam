@@ -36,6 +36,7 @@ var _currentHealth: float = 100;
 var _currentAmmo: float = 250;
 var _knockBack: Vector3 = Vector3.ZERO;
 var _wasOnFloor: bool = true;
+var can_move = true;
 
 func _ready():
 	stamina_changed.emit(0, _currentStamina);
@@ -82,7 +83,8 @@ func _physics_process(delta):
 			_walk();
 		else:
 			_stop();
-	apply_velocity(direction, mov_speed);
+	if can_move:
+		apply_velocity(direction, mov_speed);
 	if _knockBack != Vector3.ZERO:
 		velocity += _knockBack;
 		_knockBack = Vector3.ZERO;

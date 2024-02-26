@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dafbkuh5h26yx" path="res://prefabs/core/core.tscn" id="4_sqa0f"]
 [ext_resource type="PackedScene" uid="uid://11ncfu1k86ha" path="res://prefabs/turrets/turret_placement/turret_placement.tscn" id="5_42qyq"]
 [ext_resource type="PackedScene" uid="uid://byjru80pgt0m2" path="res://prefabs/enemies/spawn/heavy_enemy_spawn.tscn" id="6_agatk"]
-[ext_resource type="PackedScene" uid="uid://dq36w1s8eda55" path="res://prefabs/enemies/spawn/spider_spawn.tscn" id="7_ah5hu"]
+[ext_resource type="PackedScene" path="res://prefabs/enemies/spawn/spider_spawn.tscn" id="7_ah5hu"]
 [ext_resource type="Script" path="res://scripts/robots/spawn/wave.gd" id="8_3w5xk"]
 [ext_resource type="PackedScene" uid="uid://bmwxc5scvyaa" path="res://prefabs/enemies/spawn/monolapa_enemy_spawn.tscn" id="8_j6r6j"]
 [ext_resource type="Script" path="res://scripts/timer/repeat_timer.gd" id="9_x7lcn"]
@@ -24,9 +24,8 @@
 [ext_resource type="PackedScene" uid="uid://bkxcidgjg8oy" path="res://prefabs/transitions/fade_manager.tscn" id="23_t05qc"]
 [ext_resource type="Environment" uid="uid://celdecb2ba0qm" path="res://art/environment/main_environment.tres" id="26_kavve"]
 
-[node name="Gameplay" type="Node3D" node_paths=PackedStringArray("_endGameCamera", "core", "player", "game_over_screen", "fade_manager", "tutorial", "coreDamagedSound", "coreDeadSound", "gameMusic", "gameOverMusic", "winMusic")]
+[node name="Gameplay" type="Node3D" node_paths=PackedStringArray("core", "player", "game_over_screen", "fade_manager", "tutorial", "coreDamagedSound", "coreDeadSound", "gameMusic", "gameOverMusic", "winMusic")]
 script = ExtResource("1_r2osf")
-_endGameCamera = NodePath("")
 core = NodePath("Core")
 player = NodePath("Player")
 game_over_screen = NodePath("GameOver")
@@ -40,6 +39,7 @@ winMusic = NodePath("Player/FX/WinMusic")
 
 [node name="Core" parent="." instance=ExtResource("4_sqa0f")]
 transform = Transform3D(2.10755, 0, 0, 0, 2.10755, 0, 0, 0, 2.10755, -38.4441, 0.264963, 45.2851)
+debug_mode = false
 
 [node name="MainLevel" type="Node3D" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("2_v2esw")

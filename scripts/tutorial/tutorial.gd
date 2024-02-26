@@ -4,6 +4,7 @@ extends Control
 @export var label_subtitles : Label = null;
 @export var panel : ColorRect = null;
 
+signal tutorial_ended();
 
 func start():
 	var tween_subtitle = get_tree().create_tween();
@@ -36,3 +37,4 @@ func start():
 	tween_subtitle.tween_property(label_subtitles, "text", "", 0.0);
 	tween_subtitle.tween_property(panel, "color:a", 0.0, 0.5);
 	tween_subtitle.is_queued_for_deletion();
+	tutorial_ended.emit();

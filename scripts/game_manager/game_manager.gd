@@ -28,6 +28,7 @@ func _ready():
 	core.connect("on_core_damaged", core_damaged);
 	core.connect("on_core_destroy_started", core_destroyed);
 
+	player.can_move = true;
 	game_over_screen.hide();
 	PlayMusic();
 	fade_manager.fade_in(2.0);
@@ -55,6 +56,7 @@ func core_destroyed():
 
 func game_over():
 	is_game_over = true;
+	player.can_move = false;
 	gameMusic.stop();
 	player.hideWeapon();
 	player.hideHud();
