@@ -3,14 +3,24 @@ extends Node3D
 
 @export var audioSources: Array[AudioStreamPlayer3D] = [];
 @export var uniquePlay: bool = true;
+@export var ordered: bool = false;
 
 var _rng: RandomNumberGenerator = RandomNumberGenerator.new();
+var _lastPlayed = -1;
 
 func reproduce() -> void:
 	if uniquePlay && _isAnyPlaying():
 		return;
-	var audioToPlayIdx: int = _rng.randi_range(0,audioSources.size()-1);
+	var arrSize = audioSources.size()-1;
+	var audioToPlayIdx: int= 0;
+	if ordered:
+		audioToPlayIdx = _lastPlayed +1;
+		if audioToPlayIdx > arrSize:
+			audioToPlayIdx = 0;
+	else:
+		audioToPlayIdx = _rng.randi_range(0, arrSize);
 	audioSources[audioToPlayIdx].play();
+	_lastPlayed = audioToPlayIdx
 
 func reproduceAll(delay: float) -> void:
 	var delayAccumulated = 0;

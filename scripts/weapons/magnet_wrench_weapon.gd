@@ -15,6 +15,8 @@ extends Node3D
 @onready var beamSfx: AudioStreamPlayer3D = $BeamSFX;
 @onready var nutsNBolts: NutsBoltsEmitter = $NutsBoltsEmitter;
 @onready var beamArea: Area3D = $BeamArea;
+@onready var verticalMeleeArea: Area3D = $MeleeAreaVertical;
+@onready var horizontalMeleeArea: Area3D = $MeleeAreaHorizontal;
 
 var _animationDuration: float = 0.4;
 var _shootAnimation: Tween = null;
@@ -74,6 +76,7 @@ func _AttackMeleeHorizontal(damage: float):
 	tween.tween_property(magnet, "position:x", melee_swing, _animationDuration/2);
 	tween.tween_property(magnet, "position:x", _initialMagnetPosition.x, _animationDuration/4);
 	tween.finished.connect(_animationFinished);
+	_DealMeleeDamageToEnemies(horizontalMeleeArea, damage);
 
 func _AttackMeleeVertical(damage: float):
 	var tween = get_tree().create_tween();
@@ -82,6 +85,8 @@ func _AttackMeleeVertical(damage: float):
 	tween.tween_property(magnet, "position:y", _initialMagnetPosition.x, _animationDuration/4);
 	tween.finished.connect(_animationFinished);
 	tween.finished.connect(_verticalAttackTwinFinish);
+	_DealMeleeDamageToEnemies(verticalMeleeArea, damage);
+
 
 func _verticalAttackTwinFinish():
 	push_pull_force_applied.emit(false);
@@ -144,3 +149,8 @@ func _DealDamageToEnemies(damage: float):
 			body.damage(damage);
 		if body is TurretPlacement:
 			body.build();
+
+func _DealMeleeDamageToEnemies(shape: Area3D, damage: float):
+	for body in shape.get_overlapping_bodies():
+		if body is BaseEnemyRobot:
+			body.damage(damage);

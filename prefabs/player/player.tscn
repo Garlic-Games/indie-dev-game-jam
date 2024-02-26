@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://gli4qu8qcdb4"]
+[gd_scene load_steps=17 format=3 uid="uid://gli4qu8qcdb4"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_pa3ln"]
 [ext_resource type="Script" path="res://scripts/player/player_camera.gd" id="2_g3eqh"]
@@ -9,8 +9,11 @@
 [ext_resource type="AudioStream" uid="uid://c6bomhxmmyvoe" path="res://art/sounds/step2.wav" id="4_ht1sk"]
 [ext_resource type="PackedScene" uid="uid://4xwpnxm4pnpi" path="res://prefabs/player_hud.tscn" id="5_ojnom"]
 [ext_resource type="Script" path="res://scripts/player/sfx_random_player.gd" id="8_4qvy0"]
-[ext_resource type="AudioStream" uid="uid://qgisqpjnwe1y" path="res://art/sounds/pickup/pickup_1.wav" id="11_jqfms"]
-[ext_resource type="AudioStream" uid="uid://c8r3rsu53ydad" path="res://art/sounds/pickup/pickup_2.wav" id="12_nyq0f"]
+[ext_resource type="AudioStream" uid="uid://ctnmrc5y70324" path="res://art/sounds/fx/screw 1.mp3" id="10_5v3ow"]
+[ext_resource type="AudioStream" uid="uid://btu7bmvg76sjy" path="res://art/sounds/fx/screw 2.mp3" id="11_xj5qm"]
+[ext_resource type="AudioStream" uid="uid://bgnw0rl1x5t81" path="res://art/sounds/fx/screw 3.mp3" id="12_gfonn"]
+[ext_resource type="AudioStream" uid="uid://t8w6jfkhw7mf" path="res://art/sounds/fx/screw 5.mp3" id="13_4gx62"]
+[ext_resource type="AudioStream" uid="uid://b64qfk2bxi4ne" path="res://art/sounds/fx/screw 4.mp3" id="13_yx6dt"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_r6sdq"]
 
@@ -78,15 +81,28 @@ bus = &"SFX"
 
 [node name="PickupPlayer" type="Node3D" parent="SFX" node_paths=PackedStringArray("audioSources")]
 script = ExtResource("8_4qvy0")
-audioSources = [NodePath("pickup_1"), NodePath("pìckup_2")]
+audioSources = [NodePath("pickup_1"), NodePath("pickup_2"), NodePath("pickup_3"), NodePath("pickup_4"), NodePath("pickup_5")]
 uniquePlay = false
+ordered = true
 
 [node name="pickup_1" type="AudioStreamPlayer3D" parent="SFX/PickupPlayer"]
-stream = ExtResource("11_jqfms")
+stream = ExtResource("10_5v3ow")
 bus = &"SFX"
 
-[node name="pìckup_2" type="AudioStreamPlayer3D" parent="SFX/PickupPlayer"]
-stream = ExtResource("12_nyq0f")
+[node name="pickup_2" type="AudioStreamPlayer3D" parent="SFX/PickupPlayer"]
+stream = ExtResource("11_xj5qm")
+bus = &"SFX"
+
+[node name="pickup_3" type="AudioStreamPlayer3D" parent="SFX/PickupPlayer"]
+stream = ExtResource("12_gfonn")
+bus = &"SFX"
+
+[node name="pickup_4" type="AudioStreamPlayer3D" parent="SFX/PickupPlayer"]
+stream = ExtResource("13_yx6dt")
+bus = &"SFX"
+
+[node name="pickup_5" type="AudioStreamPlayer3D" parent="SFX/PickupPlayer"]
+stream = ExtResource("13_4gx62")
 bus = &"SFX"
 
 [connection signal="ammo_changed" from="." to="CanvasLayer/PlayerHud" method="AmmoChangedListener"]
