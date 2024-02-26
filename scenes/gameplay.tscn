@@ -116,7 +116,6 @@ bus = &"SFX"
 
 [node name="Core" parent="." instance=ExtResource("4_sqa0f")]
 transform = Transform3D(2.10755, 0, 0, 0, 2.10755, 0, 0, 0, 2.10755, -38.4441, 0.264963, 45.2851)
-lives = 2
 debug_mode = false
 
 [node name="MainLevel" type="Node3D" parent="." node_paths=PackedStringArray("player")]

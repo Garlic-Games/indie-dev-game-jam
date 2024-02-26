@@ -16,6 +16,12 @@ func _ready():
 	hide();
 
 
+func _process(delta):
+	if not is_visible():
+		if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED);
+
+
 func toogle() -> bool:
 	if visible:
 		get_tree().paused = false;
