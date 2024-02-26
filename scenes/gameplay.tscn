@@ -157,5 +157,6 @@ stream = ExtResource("20_davfg")
 stream = ExtResource("21_1spds")
 bus = &"Music"
 
+[connection signal="on_core_damaged" from="Core" to="Player" method="CoreHealthChangedListener"]
 [connection signal="level_started" from="MainLevel" to="MainLevel/Spawns/Wave" method="start_wave"]
 [connection signal="timeout" from="MainLevel/Spawns/Wave/HeavyEnemy" to="MainLevel/Spawns/HeavyEnemySpawn" method="spawn"]
