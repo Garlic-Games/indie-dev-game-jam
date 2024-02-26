@@ -99,4 +99,5 @@ func damage_player():
 	player.damage(melee_damage);
 	damage_cooldown = get_tree().create_timer(melee_damage_cooldown, false);	
 	await damage_cooldown.timeout;
-	 damage_player();
+	damage_player();
+	

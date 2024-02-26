@@ -12,7 +12,8 @@ extends Node3D
 @onready var magnet: MeshInstance3D = $Magnet;
 @onready var shaft: MeshInstance3D = $Shaft;
 @onready var spring: MeshInstance3D = $Spring;
-@onready var beamSfx: AudioStreamPlayer3D = $BeamSFX;
+@onready var beamShootSfx: AudioStreamPlayer3D = $BeamSoot;
+@onready var beamPullSfx: AudioStreamPlayer3D = $BeamPull;
 @onready var nutsNBolts: NutsBoltsEmitter = $NutsBoltsEmitter;
 @onready var beamArea: Area3D = $BeamArea;
 @onready var verticalMeleeArea: Area3D = $MeleeAreaVertical;
@@ -94,9 +95,8 @@ func _verticalAttackTwinFinish():
 	push_pull_force_applied.emit(false);
 
 func _AttackRangedVertical(damage: float):
-	beamSfx.play();
+	beamShootSfx.play();
 	nutsNBolts.play();
-	beamSfx.pitch_scale = 1;
 	_DealDamageToEnemies(damage);
 	var tween = get_tree().create_tween();
 	tween.tween_property(magnet, "position:z", _initialMagnetPosition.z - range_swing, _animationDuration/5);
@@ -104,8 +104,7 @@ func _AttackRangedVertical(damage: float):
 	tween.finished.connect(_animationFinished);
 
 func _AttackRangedHorizontal():
-	beamSfx.play();
-	beamSfx.pitch_scale = 1.6;
+	beamPullSfx.play();
 	_AttractPickups();
 	var tween = get_tree().create_tween();
 	tween.tween_property(magnet, "position:z", _initialMagnetPosition.z - range_swing, _animationDuration);
@@ -127,7 +126,8 @@ func _animateMagnetToPosition(newPositionDegrees):
 func _animationFinished():
 	nutsNBolts.stop();
 	_weaponReady = true;
-	beamSfx.stop();
+	beamShootSfx.stop();
+	beamPullSfx.stop();
 
 func LookAt(lookPosition: Vector3):
 	if lookPosition == Vector3.ZERO:

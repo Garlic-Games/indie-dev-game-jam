@@ -3,15 +3,15 @@
 [ext_resource type="Environment" uid="uid://celdecb2ba0qm" path="res://art/environment/main_environment.tres" id="1_4aiub"]
 [ext_resource type="Script" path="res://scripts/main_menu/main_menu.gd" id="1_7w5a6"]
 [ext_resource type="PackedScene" uid="uid://bms34wbd0mko4" path="res://prefabs/menu/settings_menu.tscn" id="2_eli5e"]
-[ext_resource type="PackedScene" path="res://prefabs/world/basic_terrain_with_rb.tscn" id="2_hr3g3"]
-[ext_resource type="AudioStream" uid="uid://dny66k8gw1dwu" path="res://art/music/main_menu/Intro options screen .mp3" id="3_hng3u"]
+[ext_resource type="PackedScene" uid="uid://niq8vbry2vgq" path="res://prefabs/world/basic_terrain_with_rb.tscn" id="2_hr3g3"]
 [ext_resource type="PackedScene" uid="uid://crxdwuvlnrsuk" path="res://prefabs/menu/credits.tscn" id="3_juipk"]
 [ext_resource type="Material" uid="uid://co6kcx0ud4gn8" path="res://art/materials/water_shader_material.tres" id="3_kqxmd"]
-[ext_resource type="PackedScene" path="res://art/models/props/Viga.tscn" id="4_0tbih"]
+[ext_resource type="PackedScene" uid="uid://o3v5lxacwnuk" path="res://art/models/props/Viga.tscn" id="4_0tbih"]
 [ext_resource type="PackedScene" uid="uid://dk0dddmpl201" path="res://prefabs/stream_utilities/button_group_sound_when_signal.tscn" id="4_nwlex"]
-[ext_resource type="PackedScene" path="res://art/models/props/uralita.tscn" id="5_65v8f"]
+[ext_resource type="PackedScene" uid="uid://b1ghy114l4ekc" path="res://art/models/props/uralita.tscn" id="5_65v8f"]
 [ext_resource type="PackedScene" uid="uid://dcxkowmduxb5y" path="res://prefabs/menu/loading_panel.tscn" id="7_y4405"]
 [ext_resource type="FontFile" uid="uid://dqudbxqp2cj2c" path="res://art/fonts/junegull.ttf" id="8_tvqj4"]
+[ext_resource type="AudioStream" uid="uid://y5tw7ip02odj" path="res://art/sounds/music/menu_music.mp3" id="11_f50bc"]
 [ext_resource type="PackedScene" uid="uid://dafbkuh5h26yx" path="res://prefabs/core/core.tscn" id="12_ei3cb"]
 [ext_resource type="PackedScene" uid="uid://bkxcidgjg8oy" path="res://prefabs/transitions/fade_manager.tscn" id="14_uxo00"]
 
@@ -270,7 +270,7 @@ unique_name_in_owner = true
 visible = false
 
 [node name="MainMenuMusic" type="AudioStreamPlayer" parent="MainMenu"]
-stream = ExtResource("3_hng3u")
+stream = ExtResource("11_f50bc")
 autoplay = true
 bus = &"Music"
 

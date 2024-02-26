@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cuyh01p314qxu"]
+[gd_scene load_steps=9 format=3 uid="uid://cuyh01p314qxu"]
 
 [ext_resource type="PackedScene" uid="uid://d1fs22shg0acj" path="res://art/models/weapon/magnet_wrench.glb" id="1_0oegk"]
 [ext_resource type="Script" path="res://scripts/weapons/magnet_wrench_weapon.gd" id="2_tym7w"]
 [ext_resource type="AudioStream" uid="uid://dgfo8mebo5ylc" path="res://art/sounds/fx/shoot.mp3" id="3_d52be"]
 [ext_resource type="PackedScene" uid="uid://cx5b0bdvrgjeo" path="res://art/particles/nuts_bolts_emitter.tscn" id="4_h2a0c"]
+[ext_resource type="AudioStream" uid="uid://c60dbjm3wjp5i" path="res://art/sounds/fx/beam.mp3" id="4_tfxl6"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_kix61"]
 height = 200.0
@@ -17,6 +18,8 @@ size = Vector3(4, 0.4, 1.5)
 
 [node name="magnet_wrench" instance=ExtResource("1_0oegk")]
 script = ExtResource("2_tym7w")
+melee_swing = null
+range_swing = null
 
 [node name="Magnet" parent="." index="0"]
 gi_mode = 0
@@ -24,12 +27,17 @@ gi_mode = 0
 [node name="Shaft" parent="." index="1"]
 gi_mode = 0
 
-[node name="BeamSFX" type="AudioStreamPlayer3D" parent="." index="3"]
+[node name="BeamSoot" type="AudioStreamPlayer3D" parent="." index="3"]
 stream = ExtResource("3_d52be")
 volume_db = -15.0
 bus = &"SFX"
 
-[node name="BeamArea" type="Area3D" parent="." index="4"]
+[node name="BeamPull" type="AudioStreamPlayer3D" parent="." index="4"]
+stream = ExtResource("4_tfxl6")
+volume_db = -15.0
+bus = &"SFX"
+
+[node name="BeamArea" type="Area3D" parent="." index="5"]
 collision_layer = 0
 collision_mask = 124
 
@@ -37,10 +45,10 @@ collision_mask = 124
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -50)
 shape = SubResource("CylinderShape3D_kix61")
 
-[node name="NutsBoltsEmitter" parent="." index="5" instance=ExtResource("4_h2a0c")]
+[node name="NutsBoltsEmitter" parent="." index="6" instance=ExtResource("4_h2a0c")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -2.305)
 
-[node name="MeleeAreaVertical" type="Area3D" parent="." index="6"]
+[node name="MeleeAreaVertical" type="Area3D" parent="." index="7"]
 collision_layer = 0
 collision_mask = 124
 
@@ -48,7 +56,7 @@ collision_mask = 124
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.5)
 shape = SubResource("BoxShape3D_iised")
 
-[node name="MeleeAreaHorizontal" type="Area3D" parent="." index="7"]
+[node name="MeleeAreaHorizontal" type="Area3D" parent="." index="8"]
 collision_layer = 0
 collision_mask = 124
 

@@ -41,6 +41,8 @@ script = ExtResource("2_g3eqh")
 
 [node name="magnet_wrench" parent="PlayerCamera/WeaponHolder" node_paths=PackedStringArray("player") instance=ExtResource("2_u8ekd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, -0.35, -0.259448)
+melee_swing = null
+range_swing = null
 player = NodePath("../../..")
 
 [node name="RayCast3D" type="RayCast3D" parent="PlayerCamera"]
