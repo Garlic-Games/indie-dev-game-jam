@@ -20,6 +20,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity");
 @export var pickupSfx: SFXRandomPlayer = null;
 @export var weapon: MagnetWrench = null;
 @export var hud: Control = null;
+@export var camera : Camera3D = null;
 
 signal die_event();
 signal stamina_changed(before: float, after: float);

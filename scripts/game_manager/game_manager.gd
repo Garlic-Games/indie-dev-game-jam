@@ -31,30 +31,33 @@ func _ready():
 	PlayMusic();
 	fade_manager.fade_in(2.0);
 	tutorial.start();
-	
+
+
 func PlayMusic():
 	if !is_game_over:
 		gameMusic.play();
 		gameMusic.finished.connect(PlayMusic);
 
+
 func _process(delta):
 	if not is_game_over:
 		game_time += delta;
 
+
 func core_damaged(a,b,c):
 	coreDamagedSound.play();
-	
-	
+
+
 func core_destroyed():
 	coreDeadSound.play();
+
 
 func game_over():
 	is_game_over = true;
 	gameMusic.stop();
 	player.hideWeapon();
 	player.hideHud();
-	core.start_core_destroy_animation(_endGameCamera);
-	_endGameCamera.make_current();
+	core.start_core_destroy_animation(player.camera);
 
 
 func fade_out():

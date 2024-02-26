@@ -21,7 +21,7 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_neenp"]
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("stepsSfx", "pickupSfx", "weapon", "hud")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("stepsSfx", "pickupSfx", "weapon", "hud", "camera")]
 collision_layer = 2
 collision_mask = 63
 script = ExtResource("1_pa3ln")
@@ -29,6 +29,7 @@ stepsSfx = NodePath("SFX/StepPlayer")
 pickupSfx = NodePath("SFX/PickupPlayer")
 weapon = NodePath("PlayerCamera/WeaponHolder/magnet_wrench")
 hud = NodePath("CanvasLayer/PlayerHud")
+camera = NodePath("PlayerCamera")
 
 [node name="PlayerCamera" type="Camera3D" parent="."]
 process_priority = -2

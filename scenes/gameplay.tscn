@@ -25,7 +25,7 @@
 
 [node name="Gameplay" type="Node3D" node_paths=PackedStringArray("_endGameCamera", "core", "player", "game_over_screen", "fade_manager", "tutorial", "coreDamagedSound", "coreDeadSound", "gameMusic", "gameOverMusic", "winMusic")]
 script = ExtResource("1_r2osf")
-_endGameCamera = NodePath("GameOvercamera")
+_endGameCamera = NodePath("")
 core = NodePath("Core")
 player = NodePath("Player")
 game_over_screen = NodePath("GameOver")
@@ -37,12 +37,8 @@ gameMusic = NodePath("Player/FX/GameMusic")
 gameOverMusic = NodePath("Player/FX/GameOverMusic")
 winMusic = NodePath("Player/FX/WinMusic")
 
-[node name="GameOvercamera" type="Camera3D" parent="."]
-transform = Transform3D(-0.0784591, -0.357263, 0.930702, 0, 0.93358, 0.358368, -0.996917, 0.0281172, -0.0732479, 56.92, 11.471, -10.423)
-
 [node name="Core" parent="." instance=ExtResource("4_sqa0f")]
 transform = Transform3D(2.10755, 0, 0, 0, 2.10755, 0, 0, 0, 2.10755, -38.4441, 0.264963, 45.2851)
-debug_mode = false
 
 [node name="MainLevel" type="Node3D" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("2_v2esw")
