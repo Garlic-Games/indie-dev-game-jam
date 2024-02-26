@@ -11,8 +11,7 @@ func start_wave():
 	wave_start.emit();
 	if wave_seconds > 0:
 		var timer = get_tree().create_timer(wave_seconds, false);
-		await timer.timeout;
-		stop_wave();
+		timer.timeout.connect(stop_wave);
 	
 func stop_wave():
 	for timer in get_children():
