@@ -307,7 +307,6 @@ unique_name_in_owner = true
 
 [node name="FadeManager" parent="MainMenu" instance=ExtResource("14_uxo00")]
 unique_name_in_owner = true
-visible = false
 
 [connection signal="pressed" from="MainMenu/MainContainer/MainMargin/Buttons/Play" to="MainMenu" method="start_game"]
 [connection signal="pressed" from="MainMenu/MainContainer/MainMargin/Buttons/Settings" to="MainMenu" method="open_settings"]
