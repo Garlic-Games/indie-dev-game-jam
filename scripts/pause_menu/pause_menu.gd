@@ -18,8 +18,10 @@ func _ready():
 
 func toogle() -> bool:
 	if visible:
+		get_tree().paused = false;
 		close();
 	else:
+		get_tree().paused = true;
 		open();
 	return visible;
 

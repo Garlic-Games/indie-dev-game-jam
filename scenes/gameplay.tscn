@@ -75,6 +75,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_neenp")
 
 [node name="MouseCaptureInput" type="Node" parent="Player"]
+process_mode = 3
 script = ExtResource("5_d5dgm")
 
 [node name="WeaponAction" type="Node" parent="Player" node_paths=PackedStringArray("magnetWrench")]
@@ -115,6 +116,7 @@ bus = &"SFX"
 
 [node name="Core" parent="." instance=ExtResource("4_sqa0f")]
 transform = Transform3D(2.10755, 0, 0, 0, 2.10755, 0, 0, 0, 2.10755, -38.4441, 0.264963, 45.2851)
+lives = 2
 debug_mode = false
 
 [node name="MainLevel" type="Node3D" parent="." node_paths=PackedStringArray("player")]
@@ -184,6 +186,7 @@ script = ExtResource("9_x7lcn")
 times_to_repeat = 5
 
 [node name="MetaGameplayInput" type="Node" parent="." node_paths=PackedStringArray("pause_menu")]
+process_mode = 3
 script = ExtResource("2_leaqq")
 pause_menu = NodePath("../PauseMenu")
 
