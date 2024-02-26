@@ -23,7 +23,7 @@ func _ready():
 	fade_manager.fade_in(2.0);
 
 
-func _process(delta):	
+func _process(delta):
 	if not is_game_over:
 		game_time += delta;
 

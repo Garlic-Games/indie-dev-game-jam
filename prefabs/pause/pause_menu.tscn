@@ -283,6 +283,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0.737255)
 
+[connection signal="pressed" from="MainPauseMenu/MainPausePadding/MainLayout/Resume" to="." method="close"]
 [connection signal="pressed" from="MainPauseMenu/MainPausePadding/MainLayout/Settings" to="." method="open_settings"]
 [connection signal="pressed" from="MainPauseMenu/MainPausePadding/MainLayout/MainMenu" to="." method="open_main_confirmation"]
 [connection signal="pressed" from="MainPauseMenu/MainPausePadding/MainLayout/ExitGame" to="." method="open_exit_confirmation"]
