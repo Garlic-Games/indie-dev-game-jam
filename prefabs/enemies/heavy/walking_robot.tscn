@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b7ihwbvlp8rc4"]
+[gd_scene load_steps=6 format=3 uid="uid://b7ihwbvlp8rc4"]
 
 [ext_resource type="PackedScene" uid="uid://b5ggt16q3pi5h" path="res://art/models/enemies/grunt/WalkingRobot.glb" id="1_wc1f4"]
 [ext_resource type="Script" path="res://scripts/robots/gun/gun.gd" id="2_7l3fn"]
+[ext_resource type="Material" uid="uid://cfob4ua3waaob" path="res://art/materials/viga_material.tres" id="2_l0qu6"]
+[ext_resource type="Material" uid="uid://e1iksr0ph052" path="res://art/materials/uralita_material.tres" id="3_vxfpg"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ge6hb"]
 height = 50.0
@@ -12,15 +14,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 
 [node name="legs" parent="." index="0"]
 transform = Transform3D(-1, 8.74228e-08, 0, 3.82137e-15, 4.37114e-08, -1, -8.74228e-08, -1, -4.37114e-08, 0, 0, 0)
+surface_material_override/0 = ExtResource("2_l0qu6")
 
 [node name="hand_L" parent="." index="1"]
 transform = Transform3D(-1, 8.74228e-08, 0, 3.82137e-15, 4.37114e-08, -1, -8.74228e-08, -1, -4.37114e-08, 0, 0, 0)
+surface_material_override/0 = ExtResource("2_l0qu6")
 
 [node name="hand_R" parent="." index="2"]
 transform = Transform3D(-1, 8.74228e-08, 0, 3.82137e-15, 4.37114e-08, -1, -8.74228e-08, -1, -4.37114e-08, 0, 0, 0)
+surface_material_override/0 = ExtResource("2_l0qu6")
 
 [node name="body" parent="." index="3"]
 transform = Transform3D(-1, 8.74228e-08, 0, 3.82137e-15, 4.37114e-08, -1, -8.74228e-08, -1, -4.37114e-08, 0, 0, 0)
+surface_material_override/0 = ExtResource("3_vxfpg")
 script = ExtResource("2_7l3fn")
 
 [node name="ShootArea" type="Area3D" parent="body" index="0"]
