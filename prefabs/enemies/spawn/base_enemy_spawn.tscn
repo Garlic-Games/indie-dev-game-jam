@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cdq1yo5a84fv6"]
+[gd_scene load_steps=3 format=3 uid="uid://cdq1yo5a84fv6"]
 
 [ext_resource type="Script" path="res://scripts/robots/spawn/enemy_spawn.gd" id="1_ls2ii"]
+[ext_resource type="AudioStream" uid="uid://mgfj8x1me5yk" path="res://art/sounds/fx/enemy dead.mp3" id="2_hpqba"]
 
 [node name="BaseEnemySpawn" type="Node3D"]
 script = ExtResource("1_ls2ii")
@@ -10,3 +11,8 @@ unique_name_in_owner = true
 
 [node name="Marker3D" type="Marker3D" parent="."]
 gizmo_extents = 0.75
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_hpqba")
+bus = &"SFX"

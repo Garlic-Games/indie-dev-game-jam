@@ -1,4 +1,4 @@
-extends MeshInstance3D
+extends Node3D
 
 func recoil():
 	var tween = get_tree().create_tween();

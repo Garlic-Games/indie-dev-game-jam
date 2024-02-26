@@ -99,6 +99,7 @@ rotation_speed = 100.0
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.638, 0)
 mesh = ExtResource("3_fj3fa")
 skeleton = NodePath("../../..")
+script = ExtResource("5_1wg7e")
 
 [node name="ArmR" type="MeshInstance3D" parent="BodyContainer/HeadMesh/Head" index="0"]
 mesh = ExtResource("4_3unna")
@@ -151,6 +152,7 @@ process_material = SubResource("ParticleProcessMaterial_llegv")
 draw_pass_1 = SubResource("QuadMesh_4dhkg")
 script = ExtResource("9_gafkf")
 
+[connection signal="damaged" from="." to="BodyContainer/HeadMesh/Head" method="recoil"]
 [connection signal="bullet_hit" from="BodyContainer/HeadMesh" to="Hit" method="_on_rotator_bullet_hit"]
 [connection signal="shoot" from="BodyContainer/HeadMesh" to="BodyContainer/HeadMesh/Head/ArmR" method="recoil"]
 [connection signal="shoot" from="BodyContainer/HeadMesh" to="BodyContainer/HeadMesh/Head/ArmL" method="recoil"]

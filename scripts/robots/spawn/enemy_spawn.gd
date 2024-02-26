@@ -1,5 +1,5 @@
 extends Node3D
-
+@onready var audio_stream_player_3d = %AudioStreamPlayer3D
 @onready var resource_preloader: ResourcePreloader = %ResourcePreloader
 @export var enemy_asset: String;
 @export var target: Node3D;
@@ -24,3 +24,4 @@ func spawn() -> void:
 	get_parent().add_child(enemy);
 	enemy.movement_target_position = target;
 	enemy.global_position = global_position;
+	enemy.dead.connect(audio_stream_player_3d.play);
