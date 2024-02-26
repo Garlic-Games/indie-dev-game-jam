@@ -82,3 +82,21 @@ func _spawn_bolts():
 		var pickup = NUT_BOLT_PICKUP.instantiate() as NutBoltPickup;
 		get_parent().add_child(pickup);
 		pickup.global_position = global_position;
+
+
+var player: Player;
+var damage_cooldown: SceneTreeTimer;
+@export_category("Melee atack")
+@export var melee_damage: float = 1;
+@export var melee_damage_cooldown: float = 0.5;
+func _on_damage_area_body_entered(body):
+	player = body as Player;
+	damage_player();
+
+func damage_player():
+	if (!damage_cooldown && damage_cooldown.time_left >= 0) || !player:
+		return;
+	player.damage(melee_damage);
+	damage_cooldown = get_tree().create_timer(melee_damage_cooldown, false);	
+	await damage_cooldown.timeout;
+	 damage_player();
