@@ -34,12 +34,12 @@ func StaminaChangedListener(oldStamina: float, newStamina: float):
 	
 func CoreHealthChangedListener(max: int, oldCoreHealtLevel: int, newCoreHealtLevel: int):
 	_coreHealthLevel = newCoreHealtLevel;
-	_coreHealthPB.max_value = max;
+	_coreHealthPB.max_value = max + 2; #+1 porque tiene "max" patas y el toque final
 	_coreHealthPB.value = _coreHealthLevel;
 	
 func PlayerHealthChangedListener(oldPlayerHealthLevel: float, newPlayerHealthLevel: float):
 	_playerHealthLevel = newPlayerHealthLevel;
-	_staminaPB.value = _playerHealthLevel;
+	_playerHealthPB.value = _playerHealthLevel;
 
 func WeaponPositionChanged(oldPosition: MagnetWrench.Mode, newPosition: MagnetWrench.Mode):
 	if newPosition == MagnetWrench.Mode.HORIZONTAL:

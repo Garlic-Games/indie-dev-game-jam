@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cohpydgbvkuna"]
+[gd_scene load_steps=24 format=3 uid="uid://cohpydgbvkuna"]
 
 [ext_resource type="PackedScene" uid="uid://bdh0gh5dw180o" path="res://prefabs/pause/pause_menu.tscn" id="1_khjpo"]
 [ext_resource type="Script" path="res://scripts/game_manager/game_manager.gd" id="1_r2osf"]
@@ -9,8 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://dafbkuh5h26yx" path="res://prefabs/core/core.tscn" id="4_sqa0f"]
 [ext_resource type="PackedScene" uid="uid://11ncfu1k86ha" path="res://prefabs/turrets/turret_placement/turret_placement.tscn" id="5_42qyq"]
 [ext_resource type="PackedScene" uid="uid://byjru80pgt0m2" path="res://prefabs/enemies/spawn/heavy_enemy_spawn.tscn" id="6_agatk"]
-[ext_resource type="PackedScene" path="res://prefabs/enemies/spawn/spider_spawn.tscn" id="7_ah5hu"]
+[ext_resource type="PackedScene" uid="uid://dq36w1s8eda55" path="res://prefabs/enemies/spawn/spider_spawn.tscn" id="7_ah5hu"]
 [ext_resource type="Script" path="res://scripts/robots/spawn/wave.gd" id="8_3w5xk"]
+[ext_resource type="PackedScene" uid="uid://bmwxc5scvyaa" path="res://prefabs/enemies/spawn/monolapa_enemy_spawn.tscn" id="8_j6r6j"]
 [ext_resource type="Script" path="res://scripts/timer/repeat_timer.gd" id="9_x7lcn"]
 [ext_resource type="PackedScene" uid="uid://b8qcaqqy4oldg" path="res://prefabs/tutorial/tutorial_ui.tscn" id="14_ijgij"]
 [ext_resource type="PackedScene" uid="uid://gli4qu8qcdb4" path="res://prefabs/player/player.tscn" id="16_hp848"]
@@ -42,6 +43,7 @@ transform = Transform3D(2.10755, 0, 0, 0, 2.10755, 0, 0, 0, 2.10755, -38.4441, 0
 
 [node name="MainLevel" type="Node3D" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("2_v2esw")
+level_start_timer = 20
 player = NodePath("../Player")
 
 [node name="Terrain" parent="MainLevel" instance=ExtResource("3_xjnpd")]
@@ -50,39 +52,30 @@ player = NodePath("../Player")
 
 [node name="TurretPlacement" parent="MainLevel/TurretPlacements" instance=ExtResource("5_42qyq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.2577, -0.0237656, -3.11565)
-debug = true
 
 [node name="TurretPlacement2" parent="MainLevel/TurretPlacements" instance=ExtResource("5_42qyq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -67.3814, -9.91821e-05, 6.08098)
-debug = true
 
 [node name="TurretPlacement3" parent="MainLevel/TurretPlacements" instance=ExtResource("5_42qyq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.6747, -0.41685, -34.4168)
-debug = true
 
 [node name="TurretPlacement4" parent="MainLevel/TurretPlacements" instance=ExtResource("5_42qyq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.6641, -0.00497437, 31.9662)
-debug = true
 
 [node name="TurretPlacement5" parent="MainLevel/TurretPlacements" instance=ExtResource("5_42qyq")]
 transform = Transform3D(1, 0, 0, 0, 0.982454, 0.186507, 0, -0.186507, 0.982454, -22.6058, 1.20697, 48.5061)
-debug = true
 
 [node name="TurretPlacement6" parent="MainLevel/TurretPlacements" instance=ExtResource("5_42qyq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.7467, 1.0884, 26.6405)
-debug = true
 
 [node name="TurretPlacement7" parent="MainLevel/TurretPlacements" instance=ExtResource("5_42qyq")]
 transform = Transform3D(1, 0, 0, 0, 0.963905, 0.266246, 0, -0.266246, 0.963905, -41.0936, 1.40176, 67.8841)
-debug = true
 
 [node name="TurretPlacement8" parent="MainLevel/TurretPlacements" instance=ExtResource("5_42qyq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -62.6913, 0.16272, 31.5671)
-debug = true
 
 [node name="TurretPlacement9" parent="MainLevel/TurretPlacements" instance=ExtResource("5_42qyq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.0332, -3.88304, 3.05376)
-debug = true
 
 [node name="Spawns" type="Node3D" parent="MainLevel"]
 
@@ -90,21 +83,80 @@ debug = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62.1485, 3.67246, -25.2885)
 target = NodePath("../../../Core")
 
+[node name="HeavyEnemySpawn2" parent="MainLevel/Spawns" node_paths=PackedStringArray("target") instance=ExtResource("6_agatk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62.1485, 3.67246, -29.79)
+target = NodePath("../../../Core")
+
 [node name="SpiderSpawn" parent="MainLevel/Spawns" groups=["player_chaser"] instance=ExtResource("7_ah5hu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 71.559, 0.849878, -58.0936)
 
+[node name="MonolapaEnemySpawn" parent="MainLevel/Spawns" node_paths=PackedStringArray("target") instance=ExtResource("8_j6r6j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62.7459, 1.42522, -54.4405)
+target = NodePath("../../../Core")
+
 [node name="Wave" type="Node" parent="MainLevel/Spawns"]
 script = ExtResource("8_3w5xk")
+wave_seconds = 30.0
 
-[node name="HeavyEnemy" type="Timer" parent="MainLevel/Spawns/Wave"]
+[node name="Monolapa" type="Timer" parent="MainLevel/Spawns/Wave"]
 wait_time = 5.0
 script = ExtResource("9_x7lcn")
-times_to_repeat = 4
 
 [node name="Spider" type="Timer" parent="MainLevel/Spawns/Wave"]
+wait_time = 5.0
+script = ExtResource("9_x7lcn")
+
+[node name="Wave2" type="Node" parent="MainLevel/Spawns"]
+script = ExtResource("8_3w5xk")
+wave_seconds = 30.0
+
+[node name="Heavy" type="Timer" parent="MainLevel/Spawns/Wave2"]
+wait_time = 5.0
+script = ExtResource("9_x7lcn")
+
+[node name="Spider" type="Timer" parent="MainLevel/Spawns/Wave2"]
 wait_time = 3.0
 script = ExtResource("9_x7lcn")
-times_to_repeat = 5
+
+[node name="Wave3" type="Node" parent="MainLevel/Spawns"]
+script = ExtResource("8_3w5xk")
+wave_seconds = 30.0
+
+[node name="Heavy" type="Timer" parent="MainLevel/Spawns/Wave3"]
+wait_time = 5.0
+script = ExtResource("9_x7lcn")
+
+[node name="Heavy2" type="Timer" parent="MainLevel/Spawns/Wave3"]
+wait_time = 15.0
+script = ExtResource("9_x7lcn")
+
+[node name="Spider" type="Timer" parent="MainLevel/Spawns/Wave3"]
+wait_time = 3.0
+script = ExtResource("9_x7lcn")
+
+[node name="Monolapa" type="Timer" parent="MainLevel/Spawns/Wave3"]
+wait_time = 10.0
+script = ExtResource("9_x7lcn")
+
+[node name="Endless" type="Node" parent="MainLevel/Spawns"]
+script = ExtResource("8_3w5xk")
+wave_seconds = 30.0
+
+[node name="Heavy" type="Timer" parent="MainLevel/Spawns/Endless"]
+wait_time = 5.0
+script = ExtResource("9_x7lcn")
+
+[node name="Spider" type="Timer" parent="MainLevel/Spawns/Endless"]
+wait_time = 5.0
+script = ExtResource("9_x7lcn")
+
+[node name="Monolapa" type="Timer" parent="MainLevel/Spawns/Endless"]
+wait_time = 10.0
+script = ExtResource("9_x7lcn")
+
+[node name="Heavy2" type="Timer" parent="MainLevel/Spawns/Endless"]
+wait_time = 15.0
+script = ExtResource("9_x7lcn")
 
 [node name="MetaGameplayInput" type="Node" parent="." node_paths=PackedStringArray("pause_menu")]
 process_mode = 3
@@ -158,5 +210,20 @@ stream = ExtResource("20_davfg")
 stream = ExtResource("21_1spds")
 bus = &"Music"
 
+[connection signal="on_core_damaged" from="Core" to="Player" method="CoreHealthChangedListener"]
 [connection signal="level_started" from="MainLevel" to="MainLevel/Spawns/Wave" method="start_wave"]
-[connection signal="timeout" from="MainLevel/Spawns/Wave/HeavyEnemy" to="MainLevel/Spawns/HeavyEnemySpawn" method="spawn"]
+[connection signal="wave_end" from="MainLevel/Spawns/Wave" to="MainLevel/Spawns/Wave2" method="start_wave"]
+[connection signal="timeout" from="MainLevel/Spawns/Wave/Monolapa" to="MainLevel/Spawns/MonolapaEnemySpawn" method="spawn"]
+[connection signal="timeout" from="MainLevel/Spawns/Wave/Spider" to="MainLevel/Spawns/SpiderSpawn" method="spawn"]
+[connection signal="wave_end" from="MainLevel/Spawns/Wave2" to="MainLevel/Spawns/Wave3" method="start_wave"]
+[connection signal="timeout" from="MainLevel/Spawns/Wave2/Heavy" to="MainLevel/Spawns/MonolapaEnemySpawn" method="spawn"]
+[connection signal="timeout" from="MainLevel/Spawns/Wave2/Spider" to="MainLevel/Spawns/SpiderSpawn" method="spawn"]
+[connection signal="wave_end" from="MainLevel/Spawns/Wave3" to="MainLevel/Spawns/Endless" method="start_wave"]
+[connection signal="timeout" from="MainLevel/Spawns/Wave3/Heavy" to="MainLevel/Spawns/MonolapaEnemySpawn" method="spawn"]
+[connection signal="timeout" from="MainLevel/Spawns/Wave3/Heavy2" to="MainLevel/Spawns/HeavyEnemySpawn2" method="spawn"]
+[connection signal="timeout" from="MainLevel/Spawns/Wave3/Spider" to="MainLevel/Spawns/SpiderSpawn" method="spawn"]
+[connection signal="timeout" from="MainLevel/Spawns/Wave3/Monolapa" to="MainLevel/Spawns/MonolapaEnemySpawn" method="spawn"]
+[connection signal="timeout" from="MainLevel/Spawns/Endless/Heavy" to="MainLevel/Spawns/MonolapaEnemySpawn" method="spawn"]
+[connection signal="timeout" from="MainLevel/Spawns/Endless/Spider" to="MainLevel/Spawns/SpiderSpawn" method="burst_spawn" binds= [3]]
+[connection signal="timeout" from="MainLevel/Spawns/Endless/Monolapa" to="MainLevel/Spawns/MonolapaEnemySpawn" method="spawn"]
+[connection signal="timeout" from="MainLevel/Spawns/Endless/Heavy2" to="MainLevel/Spawns/HeavyEnemySpawn2" method="spawn"]

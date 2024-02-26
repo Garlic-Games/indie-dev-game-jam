@@ -7,9 +7,10 @@ signal on_core_death_animation();
 signal on_core_damaged(max_lives: int, beforeLives: int, afterLives: int);
 
 @export_group("Core settings")
-@export var lives : int = 5;
+@export var wing_health : int = 1;
+@export var core_health : int = 2;
 @export var min_rotation_speed : float = 22.5;
-@export var max_rotation_speed : float = 720.0;
+@export var max_rotation_speed : float = 920.0;
 
 @export_group("Core structure")
 @export var collider : Area3D = null;
@@ -23,7 +24,8 @@ signal on_core_damaged(max_lives: int, beforeLives: int, afterLives: int);
 @export_group("Debug")
 @export var debug_mode : bool = false;
 
-var current_lives : float;
+var _totalHealth: int;
+var _currentHealth : int;
 var current_rotation_speed : float;
 
 
@@ -32,11 +34,12 @@ func _input(event):
 		return;
 		
 	if event.is_action_pressed("jump"):
-		damage();
+		damage(1);
 		
 
 func _ready():
-	current_lives = lives;
+	_totalHealth = (wing_health * wings.size()) + core_health;
+	_currentHealth = _totalHealth;
 	current_rotation_speed = min_rotation_speed;
 	sphere.get_surface_override_material(0).set("shader_parameter/Saturation", 1.0);
 
@@ -45,24 +48,32 @@ func _process(delta):
 	rotary_item.rotate_y(current_rotation_speed * 2.0 * PI / 360.0 * delta);
 
 
-func damage():
-	current_lives -= 1;
-	on_core_damaged.emit(lives, current_lives+1, current_lives);
+func damage(amount: int):
+	var newHealth = _currentHealth - amount;
+	on_core_damaged.emit(_totalHealth, _currentHealth, newHealth);
+	_currentHealth = newHealth;
 	check_wing_integrity();
 	
-	if (current_lives < 0):
+	if (_currentHealth <= 0):
 		emit_signal("on_core_death_animation");
 
 
 func check_wing_integrity():
-	current_rotation_speed = lerp(min_rotation_speed, max_rotation_speed, 1.0 - float(current_lives / lives));
-	var wings_remaining = ceili(current_lives / lives * wings.size());
+	var wingsHealth = _currentHealth - core_health;
+	var wings_remaining = ceili(wingsHealth / wing_health);
 
-	while (wings.size() > wings_remaining):
+	while (wings.size() > wings_remaining && wings.size() > 0):
 		# @TODO: animar la rotura del ala?
-		
 		var wing_rnd_index = randi_range(0, wings.size() - 1); 
 		wings.pop_at(wing_rnd_index).queue_free();
+		
+	if _currentHealth <= 0:
+		return;
+	
+	var remainingHealthPercent = 1.0 - (float(_currentHealth) / float(_totalHealth));
+	current_rotation_speed = min_rotation_speed + (max_rotation_speed - min_rotation_speed) * remainingHealthPercent;
+
+
 
 
 func start_core_destroy_animation(camera : Camera3D):
@@ -84,4 +95,4 @@ func destroy_core():
 func on_body_entered(body):
 	var enemy = body as BaseEnemyRobot;
 	enemy.die();
-	damage();
+	damage(1);

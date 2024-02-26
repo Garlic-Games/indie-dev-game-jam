@@ -12,12 +12,9 @@ height = 1.03227
 radius = 0.992643
 
 [node name="Spider" node_paths=PackedStringArray("body") instance=ExtResource("1_sjf7b")]
-bolts_dropped = null
-max_hp = null
+bolts_dropped = 15.0
 movement_speed = 15.0
 body = NodePath("BodyContainer")
-melee_damage = null
-melee_damage_cooldown = null
 
 [node name="Agent" parent="." index="0"]
 target_desired_distance = 2.0

@@ -20,6 +20,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.485682, 0, 1.58403)
 
 [node name="Player" parent="." instance=ExtResource("2_ia05s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.486, 0.223912, 1.584)
+debug_mode = true
 
 [node name="DezzNuts" type="Node3D" parent="."]
 
