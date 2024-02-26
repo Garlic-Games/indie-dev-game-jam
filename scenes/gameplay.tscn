@@ -188,6 +188,7 @@ script = ExtResource("2_leaqq")
 pause_menu = NodePath("../PauseMenu")
 
 [node name="PauseMenu" parent="." instance=ExtResource("1_khjpo")]
+layer = 15
 
 [node name="GameOver" parent="." instance=ExtResource("23_22lv8")]
 layer = 128

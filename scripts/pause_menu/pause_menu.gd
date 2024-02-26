@@ -5,13 +5,16 @@ signal opened;
 signal closed;
 @onready var settings_menu: SettingsContainer = %SettingsMenu;
 @onready var exit_game_confirm_menu: ConfirmMenu = %ExitGameConfirmMenu;
-@onready var main_menu_confirm_menu: ConfirmMenu = %MainMenuConfirmMenu ;
+@onready var main_menu_confirm_menu: ConfirmMenu = %MainMenuConfirmMenu;
+@onready var main_pause_menu: Control = %MainPauseMenu;
 @export_file("*.tscn") var main_menu_scene: String;
 
 
 func _ready():
 	assert(main_menu_scene, "Set a main menu scene for the pause menu");
+	settings_menu.connect("closed", main_pause_menu.show);
 	hide();
+
 
 func toogle() -> bool:
 	if visible:
@@ -19,6 +22,7 @@ func toogle() -> bool:
 	else:
 		open();
 	return visible;
+
 
 func open() -> void:
 	opened.emit();
@@ -29,6 +33,7 @@ func close() -> void:
 	hide();
 
 func open_settings() -> void:
+	main_pause_menu.hide();
 	settings_menu.open();
 	
 func open_exit_confirmation() -> void:
