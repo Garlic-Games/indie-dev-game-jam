@@ -74,6 +74,7 @@ emission_texture = ExtResource("8_2ge56")
 material = SubResource("StandardMaterial3D_8cmhu")
 
 [node name="Heavy" node_paths=PackedStringArray("body") instance=ExtResource("1_dsr0k")]
+bolts_dropped = 20.0
 max_hp = 20.0
 body = NodePath("BodyContainer")
 
@@ -153,7 +154,7 @@ script = ExtResource("9_gafkf")
 [connection signal="bullet_hit" from="BodyContainer/HeadMesh" to="Hit" method="_on_rotator_bullet_hit"]
 [connection signal="shoot" from="BodyContainer/HeadMesh" to="BodyContainer/HeadMesh/Head/ArmR" method="recoil"]
 [connection signal="shoot" from="BodyContainer/HeadMesh" to="BodyContainer/HeadMesh/Head/ArmL" method="recoil"]
-[connection signal="shoot" from="BodyContainer/HeadMesh" to="BodyContainer/HeadMesh/Head/ArmL/Smoke" method="set_emitting" binds= [true]]
 [connection signal="shoot" from="BodyContainer/HeadMesh" to="BodyContainer/HeadMesh/Head/ArmR/Smoke" method="set_emitting" binds= [true]]
+[connection signal="shoot" from="BodyContainer/HeadMesh" to="BodyContainer/HeadMesh/Head/ArmL/Smoke" method="set_emitting" binds= [true]]
 [connection signal="body_entered" from="DetectionSensor" to="BodyContainer/HeadMesh" method="_on_detection_sensor_body_entered"]
 [connection signal="body_exited" from="DetectionSensor" to="BodyContainer/HeadMesh" method="_on_detection_sensor_body_exited"]
