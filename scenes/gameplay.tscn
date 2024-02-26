@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dafbkuh5h26yx" path="res://prefabs/core/core.tscn" id="4_sqa0f"]
 [ext_resource type="PackedScene" uid="uid://11ncfu1k86ha" path="res://prefabs/turrets/turret_placement/turret_placement.tscn" id="5_42qyq"]
 [ext_resource type="PackedScene" uid="uid://byjru80pgt0m2" path="res://prefabs/enemies/spawn/heavy_enemy_spawn.tscn" id="6_agatk"]
-[ext_resource type="PackedScene" uid="uid://dq36w1s8eda55" path="res://prefabs/enemies/spawn/spider_spawn.tscn" id="7_ah5hu"]
+[ext_resource type="PackedScene" path="res://prefabs/enemies/spawn/spider_spawn.tscn" id="7_ah5hu"]
 [ext_resource type="Script" path="res://scripts/robots/spawn/wave.gd" id="8_3w5xk"]
 [ext_resource type="PackedScene" uid="uid://bmwxc5scvyaa" path="res://prefabs/enemies/spawn/monolapa_enemy_spawn.tscn" id="8_j6r6j"]
 [ext_resource type="Script" path="res://scripts/timer/repeat_timer.gd" id="9_x7lcn"]

@@ -61,7 +61,10 @@ text = "[font_size=25]Game developed by: 		[color=9afffe][url=\"https://soteck.i
 [font_size=35][u]External assets[/u]
 [font_size=25]
 Font: 						[color=9afffe][url=\"https://www.1001freefonts.com/junegull.font\"]Junegull[/url][/color]
-Core shader:			[color=9afffe][url=\"https://godotengine.org/asset-library/asset/449\"]PulseGlow Shader[/url][/color]"
+Core shader:			[color=9afffe][url=\"https://godotengine.org/asset-library/asset/449\"]PulseGlow Shader[/url][/color]
+Heavy Bot:				[color=9afffe][url=\"https://blackbugit.itch.io/3d-robot\"]3D Robot[/url][/color]
+T-Pose BOSS:			[color=9afffe][url=\"https://luanrocha.itch.io/3d-robot\"]3D Robot[/url][/color]
+AnnoyiBot:			[color=9afffe][url=\"https://sketchfab.com/3d-models/spiderbot-a75a2685c4864f0a8bd02ded885e46af\"]SpiderBot[/url][/color]"
 fit_content = true
 
 [node name="Fill" type="Control" parent="SettingsLayout"]
