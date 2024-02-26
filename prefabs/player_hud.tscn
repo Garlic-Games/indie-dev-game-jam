@@ -1,13 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://4xwpnxm4pnpi"]
+[gd_scene load_steps=6 format=3 uid="uid://4xwpnxm4pnpi"]
 
 [ext_resource type="Texture2D" uid="uid://c135qafciujvo" path="res://art/gradient/blue_progress_bar.tres" id="1_4o41m"]
 [ext_resource type="Script" path="res://scripts/player/player_hud.gd" id="1_mihol"]
-[ext_resource type="FontFile" uid="uid://dqudbxqp2cj2c" path="res://art/fonts/junegull.ttf" id="2_3ub5x"]
 [ext_resource type="Texture2D" uid="uid://dmemd26vs0v0y" path="res://art/gradient/green_progress_bar.tres" id="2_agry7"]
 [ext_resource type="Texture2D" uid="uid://3f00m4x3dq4l" path="res://art/images/crosshair/crosshair.png" id="4_o4ch6"]
 [ext_resource type="Texture2D" uid="uid://drrfxsrtmdf3e" path="res://art/images/crosshair/crosshair_vertical.png" id="5_cxx4x"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tqmx6"]
 
 [node name="PlayerHud" type="Control"]
 layout_mode = 3
@@ -45,17 +42,13 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = -11.0
-offset_top = -31.0
-offset_right = 102.0
+offset_left = 21.0001
+offset_top = -30.0
+offset_right = 96.0001
 offset_bottom = -5.0
 grow_vertical = 0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource("2_3ub5x")
-theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("StyleBoxEmpty_tqmx6")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.658824, 0.588235, 0.243137, 1)
 text = "30/3000
 "
 
