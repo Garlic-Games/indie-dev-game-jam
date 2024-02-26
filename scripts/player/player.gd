@@ -10,6 +10,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity");
 @export var run_speed: float = 7.0;
 @export var jump_speed: float = gravity/2;
 @export var sensitivity: float = 2.0;
+@export var max_ammo : int = 3000;
 @export_group("Stamina settings")
 @export var stamina_increase_ratio: float = 15.0;
 @export var stamina_decrease_ratio: float = 30.0;
@@ -151,7 +152,7 @@ func LooseAmmo(amount: float):
 	
 
 func AddAmmo(amount: float):
-	var newAmmo = _currentAmmo + amount;
+	var newAmmo = min(max_ammo, _currentAmmo + amount);
 	ammo_changed.emit(_currentAmmo, newAmmo);
 	_currentAmmo = newAmmo;
 	pickupSfx.reproduce();
