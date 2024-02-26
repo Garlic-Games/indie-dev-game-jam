@@ -9,7 +9,7 @@ signal built;
 
 @export_category("Debug")
 @export var debug: bool = false;
-static var turret_prefab = preload("res://prefabs/turrets/NormalTurret/normal_turret.tscn");
+var turret_prefab = preload("res://prefabs/turrets/NormalTurret/normal_turret.tscn");
 
 var current_build: float = 0:
 	get:

@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://scripts/robots/base_enemy_robot/base_enemy_robot.gd" id="1_7q5aa"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b6k72"]
-radius = 0.573867
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lbj3q"]
+radius = 0.573865
 height = 1.14773
 
 [node name="base_enemy" type="CharacterBody3D"]
 collision_layer = 8
-collision_mask = 25
+collision_mask = 31
 script = ExtResource("1_7q5aa")
 
 [node name="Agent" type="NavigationAgent3D" parent="."]
@@ -18,7 +18,7 @@ radius = 1.0
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.59409, 0)
-shape = SubResource("CapsuleShape3D_b6k72")
+shape = SubResource("CapsuleShape3D_lbj3q")
 
 [connection signal="target_reached" from="Agent" to="." method="_on_agent_target_reached"]
 [connection signal="velocity_computed" from="Agent" to="." method="_on_agent_velocity_computed"]

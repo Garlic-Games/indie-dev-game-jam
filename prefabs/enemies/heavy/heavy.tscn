@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://drk5m5iq065e3"]
+[gd_scene load_steps=8 format=3 uid="uid://drk5m5iq065e3"]
 
 [ext_resource type="PackedScene" uid="uid://dop0nlsoshcok" path="res://prefabs/enemies/base_enemy.tscn" id="1_dsr0k"]
 [ext_resource type="Script" path="res://scripts/robots/gun/gun.gd" id="2_jionj"]
@@ -10,15 +10,12 @@
 radius = 1.13392
 height = 5.68768
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_armmf"]
-height = 50.0
-radius = 0.933
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_ye3ep"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ecurh"]
 height = 16.7042
 radius = 49.374
 
 [node name="Heavy" node_paths=PackedStringArray("body") instance=ExtResource("1_dsr0k")]
+max_hp = 20.0
 body = NodePath("BodyContainer")
 
 [node name="Agent" parent="." index="0"]
@@ -43,31 +40,20 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.6
 mesh = ExtResource("3_fj3fa")
 skeleton = NodePath("../../..")
 
-[node name="ShootArea" type="Area3D" parent="BodyContainer/HeadMesh/Head" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-collision_layer = 4
-collision_mask = 6
-
-[node name="ShootCollision" type="CollisionShape3D" parent="BodyContainer/HeadMesh/Head/ShootArea" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25, 0)
-shape = SubResource("CylinderShape3D_armmf")
-
-[node name="ArmR" type="MeshInstance3D" parent="BodyContainer/HeadMesh/Head" index="1"]
+[node name="ArmR" type="MeshInstance3D" parent="BodyContainer/HeadMesh/Head" index="0"]
 mesh = ExtResource("4_3unna")
 
-[node name="ArmL" type="MeshInstance3D" parent="BodyContainer/HeadMesh/Head" index="2"]
+[node name="ArmL" type="MeshInstance3D" parent="BodyContainer/HeadMesh/Head" index="1"]
 mesh = ExtResource("5_8fn8r")
 
 [node name="DetectionSensor" type="Area3D" parent="." index="3"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 5.35727, 0)
-collision_layer = 12
-collision_mask = 2
+collision_layer = 0
+collision_mask = 6
 
 [node name="DetectionReach" type="CollisionShape3D" parent="DetectionSensor" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, 0)
-shape = SubResource("CylinderShape3D_ye3ep")
+shape = SubResource("CylinderShape3D_ecurh")
 
-[connection signal="body_entered" from="BodyContainer/HeadMesh/Head/ShootArea" to="BodyContainer/HeadMesh" method="_on_shoot_area_body_entered"]
-[connection signal="body_exited" from="BodyContainer/HeadMesh/Head/ShootArea" to="BodyContainer/HeadMesh" method="_on_shoot_area_body_exited"]
 [connection signal="body_entered" from="DetectionSensor" to="BodyContainer/HeadMesh" method="_on_detection_sensor_body_entered"]
 [connection signal="body_exited" from="DetectionSensor" to="BodyContainer/HeadMesh" method="_on_detection_sensor_body_exited"]

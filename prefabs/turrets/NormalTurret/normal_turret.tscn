@@ -1,18 +1,73 @@
-[gd_scene load_steps=10 format=3 uid="uid://c7bjmikn02g2g"]
+[gd_scene load_steps=23 format=3 uid="uid://c7bjmikn02g2g"]
 
 [ext_resource type="PackedScene" uid="uid://bq0rkcomj6wjv" path="res://prefabs/turrets/base_turret/base_turret.tscn" id="1_job2p"]
 [ext_resource type="ArrayMesh" uid="uid://c7iosxpj1loyx" path="res://art/models/turrets/base/meshes/turret_base_Cube_002.res" id="3_6v7mw"]
 [ext_resource type="ArrayMesh" uid="uid://dhqri0wvbwhy5" path="res://art/models/turrets/base/meshes/turret_base_Cube_001.res" id="4_jdf78"]
 [ext_resource type="Script" path="res://scripts/robots/gun/gun.gd" id="4_r82oo"]
+[ext_resource type="Script" path="res://scripts/turret/recoil.gd" id="5_726dd"]
 [ext_resource type="ArrayMesh" uid="uid://cq1l3myyg7fa6" path="res://art/models/turrets/base/meshes/turret_base_Cylinder_003.res" id="5_kkpoe"]
 [ext_resource type="ArrayMesh" uid="uid://clvn42xfwmqmo" path="res://art/models/turrets/base/meshes/turret_base_Cylinder_013.res" id="6_7eld3"]
 [ext_resource type="ArrayMesh" uid="uid://bcdglbw58eoce" path="res://art/models/turrets/base/meshes/turret_base_Sphere_001.res" id="7_kngd7"]
+[ext_resource type="Texture2D" uid="uid://bryrl20bvssra" path="res://art/images/particles/void.png" id="8_btrb0"]
+[ext_resource type="Texture2D" uid="uid://ca8cpl3xg7uwg" path="res://art/images/particles/hit.png" id="9_ww32t"]
+[ext_resource type="Script" path="res://scripts/turret/GunHit.gd" id="10_ug305"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_ceffb"]
-height = 25.0
-radius = 0.64009
+[sub_resource type="Gradient" id="Gradient_2bufn"]
+offsets = PackedFloat32Array(0, 0.390533, 0.650888, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.478431, 0.478431, 0.478431, 1, 0.701961, 0.701961, 0.701961, 0.894118, 1, 1, 1, 0)
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_lqovo"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_264ox"]
+gradient = SubResource("Gradient_2bufn")
+
+[sub_resource type="Curve" id="Curve_6pgo0"]
+_data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_pky5e"]
+curve = SubResource("Curve_6pgo0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sb6av"]
+spread = 80.0
+gravity = Vector3(0, 1, 0)
+linear_accel_min = 1.0
+linear_accel_max = 1.0
+attractor_interaction_enabled = false
+scale_min = 0.0
+scale_curve = SubResource("CurveTexture_pky5e")
+color_ramp = SubResource("GradientTexture1D_264ox")
+turbulence_noise_strength = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0y82w"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("8_btrb0")
+
+[sub_resource type="QuadMesh" id="QuadMesh_l1lhq"]
+lightmap_size_hint = Vector2i(7, 7)
+material = SubResource("StandardMaterial3D_0y82w")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wxmuo"]
+emission_shape = 1
+emission_sphere_radius = 0.8
+radial_velocity_min = 3.0
+radial_velocity_max = 6.0
+gravity = Vector3(0, 0, 0)
+attractor_interaction_enabled = false
+scale_max = 2.0
+color = Color(1, 1, 0.498039, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8cmhu"]
+transparency = 1
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("9_ww32t")
+emission = Color(1, 1, 0, 1)
+emission_texture = ExtResource("9_ww32t")
+
+[sub_resource type="QuadMesh" id="QuadMesh_s0ync"]
+material = SubResource("StandardMaterial3D_8cmhu")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_xb8ia"]
 height = 20.0
 radius = 25.0
 
@@ -26,11 +81,13 @@ mesh = ExtResource("3_6v7mw")
 
 [node name="rotator" type="Node3D" parent="mesh" index="1"]
 script = ExtResource("4_r82oo")
+damage = 1.0
 
 [node name="head" type="MeshInstance3D" parent="mesh/rotator" index="0"]
 transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, 0, 2.18859, 0)
 mesh = ExtResource("4_jdf78")
 skeleton = NodePath("../..")
+script = ExtResource("5_726dd")
 
 [node name="cannon" type="MeshInstance3D" parent="mesh/rotator/head" index="0"]
 transform = Transform3D(-8.74228e-09, 0.1, 1.77636e-15, -0.2, -4.37114e-09, 5.47019e-23, 1.32349e-22, -8.88178e-16, 0.2, 1.06353, 0, 4.64882e-08)
@@ -45,23 +102,37 @@ skeleton = NodePath("../antena")
 transform = Transform3D(-0.0362909, 0, 0, 0, -0.0362909, 0, 0, 0, -0.0362909, -0.331084, 1.00769, -1.44721e-08)
 mesh = ExtResource("6_7eld3")
 
-[node name="ShootArea" type="Area3D" parent="mesh/rotator" index="1"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 2.1, 0)
-collision_layer = 0
-collision_mask = 8
+[node name="Smoke" type="GPUParticles3D" parent="mesh/rotator" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00679588, 2.24112, -1.46592)
+emitting = false
+amount = 20
+one_shot = true
+explosiveness = 0.75
+visibility_aabb = AABB(-4, -4, -4.04541, 8, 8, 8)
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_sb6av")
+draw_pass_1 = SubResource("QuadMesh_l1lhq")
 
-[node name="ShootCollision" type="CollisionShape3D" parent="mesh/rotator/ShootArea" index="0"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 13, 0, 0)
-shape = SubResource("CylinderShape3D_ceffb")
+[node name="Hit" type="GPUParticles3D" parent="mesh/rotator" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.60586, -3.77239)
+emitting = false
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_wxmuo")
+draw_pass_1 = SubResource("QuadMesh_s0ync")
+script = ExtResource("10_ug305")
 
 [node name="DetectionSensor" type="Area3D" parent="mesh" index="2"]
 collision_layer = 0
 collision_mask = 8
 
 [node name="DetectionCollider" type="CollisionShape3D" parent="mesh/DetectionSensor" index="0"]
-shape = SubResource("CylinderShape3D_lqovo")
+shape = SubResource("CylinderShape3D_xb8ia")
 
-[connection signal="body_entered" from="mesh/rotator/ShootArea" to="mesh/rotator" method="_on_shoot_area_body_entered"]
-[connection signal="body_exited" from="mesh/rotator/ShootArea" to="mesh/rotator" method="_on_shoot_area_body_exited"]
+[connection signal="bullet_hit" from="mesh/rotator" to="mesh/rotator/Hit" method="_on_rotator_bullet_hit"]
+[connection signal="shoot" from="mesh/rotator" to="mesh/rotator/head" method="recoil"]
+[connection signal="shoot" from="mesh/rotator" to="mesh/rotator/Smoke" method="set_emitting" binds= [true]]
 [connection signal="body_entered" from="mesh/DetectionSensor" to="mesh/rotator" method="_on_detection_sensor_body_entered"]
 [connection signal="body_exited" from="mesh/DetectionSensor" to="mesh/rotator" method="_on_detection_sensor_body_exited"]
