@@ -6,6 +6,8 @@ extends Control
 @onready var _playerHealthPB: TextureProgressBar = $Left/BottomLeft/PlayerHealthProgressBar;
 @onready var _VCrossHair: Sprite2D = $Center/Crosshair;
 @onready var _HCrossHair: Sprite2D = $Center/CrosshairVertical;
+@onready var _texture_rect = %TextureRect;
+
 
 var _actualAmmo = 150;
 var _maxAmmo = 3000;
@@ -40,7 +42,11 @@ func CoreHealthChangedListener(max: int, oldCoreHealtLevel: int, newCoreHealtLev
 func PlayerHealthChangedListener(oldPlayerHealthLevel: float, newPlayerHealthLevel: float):
 	_playerHealthLevel = newPlayerHealthLevel;
 	_playerHealthPB.value = _playerHealthLevel;
-
+	
+	_texture_rect.material.set_shader_parameter("doeet", true);
+	await get_tree().create_timer(0.5).timeout;
+	_texture_rect.material.set_shader_parameter("doeet", false);
+	
 func WeaponPositionChanged(oldPosition: MagnetWrench.Mode, newPosition: MagnetWrench.Mode):
 	if newPosition == MagnetWrench.Mode.HORIZONTAL:
 		_HCrossHair.visible = false;

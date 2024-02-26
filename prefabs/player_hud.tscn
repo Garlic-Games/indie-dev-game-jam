@@ -1,10 +1,25 @@
-[gd_scene load_steps=6 format=3 uid="uid://4xwpnxm4pnpi"]
+[gd_scene load_steps=10 format=3 uid="uid://4xwpnxm4pnpi"]
 
 [ext_resource type="Texture2D" uid="uid://c135qafciujvo" path="res://art/gradient/blue_progress_bar.tres" id="1_4o41m"]
 [ext_resource type="Script" path="res://scripts/player/player_hud.gd" id="1_mihol"]
 [ext_resource type="Texture2D" uid="uid://dmemd26vs0v0y" path="res://art/gradient/green_progress_bar.tres" id="2_agry7"]
+[ext_resource type="Shader" path="res://art/shaders/glitch_ondemand.gdshader" id="2_m1pbh"]
 [ext_resource type="Texture2D" uid="uid://3f00m4x3dq4l" path="res://art/images/crosshair/crosshair.png" id="4_o4ch6"]
 [ext_resource type="Texture2D" uid="uid://drrfxsrtmdf3e" path="res://art/images/crosshair/crosshair_vertical.png" id="5_cxx4x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d3p7m"]
+shader = ExtResource("2_m1pbh")
+shader_parameter/shake_power = 0.03
+shader_parameter/shake_rate = 0.2
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.01
+shader_parameter/doeet = null
+
+[sub_resource type="Gradient" id="Gradient_win8n"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_b16yd"]
+gradient = SubResource("Gradient_win8n")
 
 [node name="PlayerHud" type="Control"]
 layout_mode = 3
@@ -14,6 +29,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mihol")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_d3p7m")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_b16yd")
 
 [node name="Right" type="Control" parent="."]
 layout_mode = 1

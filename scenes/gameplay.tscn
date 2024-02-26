@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dafbkuh5h26yx" path="res://prefabs/core/core.tscn" id="4_sqa0f"]
 [ext_resource type="PackedScene" uid="uid://11ncfu1k86ha" path="res://prefabs/turrets/turret_placement/turret_placement.tscn" id="5_42qyq"]
 [ext_resource type="PackedScene" uid="uid://byjru80pgt0m2" path="res://prefabs/enemies/spawn/heavy_enemy_spawn.tscn" id="6_agatk"]
-[ext_resource type="PackedScene" path="res://prefabs/enemies/spawn/spider_spawn.tscn" id="7_ah5hu"]
+[ext_resource type="PackedScene" uid="uid://dq36w1s8eda55" path="res://prefabs/enemies/spawn/spider_spawn.tscn" id="7_ah5hu"]
 [ext_resource type="Script" path="res://scripts/robots/spawn/wave.gd" id="8_3w5xk"]
 [ext_resource type="PackedScene" uid="uid://bmwxc5scvyaa" path="res://prefabs/enemies/spawn/monolapa_enemy_spawn.tscn" id="8_j6r6j"]
 [ext_resource type="Script" path="res://scripts/timer/repeat_timer.gd" id="9_x7lcn"]
@@ -43,7 +43,7 @@ debug_mode = false
 
 [node name="MainLevel" type="Node3D" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("2_v2esw")
-level_start_timer = 5
+level_start_timer = 20
 player = NodePath("../Player")
 
 [node name="Terrain" parent="MainLevel" instance=ExtResource("3_xjnpd")]
@@ -96,7 +96,7 @@ target = NodePath("../../../Core")
 
 [node name="Wave" type="Node" parent="MainLevel/Spawns"]
 script = ExtResource("8_3w5xk")
-wave_seconds = 5.0
+wave_seconds = 30.0
 
 [node name="Monolapa" type="Timer" parent="MainLevel/Spawns/Wave"]
 wait_time = 5.0
