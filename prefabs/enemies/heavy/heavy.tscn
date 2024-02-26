@@ -1,18 +1,77 @@
-[gd_scene load_steps=8 format=3 uid="uid://drk5m5iq065e3"]
+[gd_scene load_steps=22 format=3 uid="uid://drk5m5iq065e3"]
 
 [ext_resource type="PackedScene" uid="uid://dop0nlsoshcok" path="res://prefabs/enemies/base_enemy.tscn" id="1_dsr0k"]
 [ext_resource type="Script" path="res://scripts/robots/gun/gun.gd" id="2_jionj"]
 [ext_resource type="ArrayMesh" uid="uid://bssdoa3udrx3i" path="res://art/models/enemies/grunt/walking/WalkingRobot_Robot_robot_003.res" id="3_fj3fa"]
 [ext_resource type="ArrayMesh" uid="uid://81sa35tewd04" path="res://art/models/enemies/grunt/walking/WalkingRobot_Robot_robot_001.res" id="4_3unna"]
+[ext_resource type="Script" path="res://scripts/turret/recoil.gd" id="5_1wg7e"]
 [ext_resource type="ArrayMesh" uid="uid://13w2fj21mvfd" path="res://art/models/enemies/grunt/walking/WalkingRobot_Robot_robot_002.res" id="5_8fn8r"]
+[ext_resource type="Texture2D" uid="uid://bryrl20bvssra" path="res://art/images/particles/void.png" id="7_vfad0"]
+[ext_resource type="Texture2D" uid="uid://ca8cpl3xg7uwg" path="res://art/images/particles/hit.png" id="8_2ge56"]
+[ext_resource type="Script" path="res://scripts/turret/GunHit.gd" id="9_gafkf"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ryi5s"]
 radius = 1.13392
 height = 5.68768
 
+[sub_resource type="Gradient" id="Gradient_tija0"]
+offsets = PackedFloat32Array(0, 0.390533, 0.650888, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.478431, 0.478431, 0.478431, 1, 0.701961, 0.701961, 0.701961, 0.894118, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_p2hdm"]
+gradient = SubResource("Gradient_tija0")
+
+[sub_resource type="Curve" id="Curve_5rqhn"]
+_data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_x6efs"]
+curve = SubResource("Curve_5rqhn")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yk2iq"]
+spread = 1.0
+gravity = Vector3(0, 1, 0)
+linear_accel_min = 1.0
+linear_accel_max = 1.0
+attractor_interaction_enabled = false
+scale_min = 0.0
+scale_curve = SubResource("CurveTexture_x6efs")
+color_ramp = SubResource("GradientTexture1D_p2hdm")
+turbulence_noise_strength = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1wo2t"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("7_vfad0")
+
+[sub_resource type="QuadMesh" id="QuadMesh_iweuv"]
+lightmap_size_hint = Vector2i(7, 7)
+material = SubResource("StandardMaterial3D_1wo2t")
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ecurh"]
 height = 16.7042
 radius = 49.374
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_llegv"]
+emission_shape = 1
+emission_sphere_radius = 0.8
+radial_velocity_min = 3.0
+radial_velocity_max = 6.0
+gravity = Vector3(0, 0, 0)
+attractor_interaction_enabled = false
+scale_max = 2.0
+color = Color(1, 1, 0.498039, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8cmhu"]
+transparency = 1
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("8_2ge56")
+emission = Color(1, 1, 0, 1)
+emission_texture = ExtResource("8_2ge56")
+
+[sub_resource type="QuadMesh" id="QuadMesh_4dhkg"]
+material = SubResource("StandardMaterial3D_8cmhu")
 
 [node name="Heavy" node_paths=PackedStringArray("body") instance=ExtResource("1_dsr0k")]
 max_hp = 20.0
@@ -42,9 +101,33 @@ skeleton = NodePath("../../..")
 
 [node name="ArmR" type="MeshInstance3D" parent="BodyContainer/HeadMesh/Head" index="0"]
 mesh = ExtResource("4_3unna")
+script = ExtResource("5_1wg7e")
+
+[node name="Smoke" type="GPUParticles3D" parent="BodyContainer/HeadMesh/Head/ArmR" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.97057, 3.90944, -0.430424)
+emitting = false
+amount = 20
+one_shot = true
+explosiveness = 0.75
+visibility_aabb = AABB(-4, -4, -4.04541, 8, 8, 8)
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_yk2iq")
+draw_pass_1 = SubResource("QuadMesh_iweuv")
 
 [node name="ArmL" type="MeshInstance3D" parent="BodyContainer/HeadMesh/Head" index="1"]
 mesh = ExtResource("5_8fn8r")
+script = ExtResource("5_1wg7e")
+
+[node name="Smoke" type="GPUParticles3D" parent="BodyContainer/HeadMesh/Head/ArmL" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.84376, 3.90944, -0.430424)
+emitting = false
+amount = 20
+one_shot = true
+explosiveness = 0.75
+visibility_aabb = AABB(-4, -4, -4.04541, 8, 8, 8)
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_yk2iq")
+draw_pass_1 = SubResource("QuadMesh_iweuv")
 
 [node name="DetectionSensor" type="Area3D" parent="." index="3"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 5.35727, 0)
@@ -55,5 +138,22 @@ collision_mask = 6
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, 0)
 shape = SubResource("CylinderShape3D_ecurh")
 
+[node name="Hit" type="GPUParticles3D" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.60586, -3.77239)
+emitting = false
+lifetime = 0.4
+interp_to_end = 1.0
+one_shot = true
+explosiveness = 1.0
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_llegv")
+draw_pass_1 = SubResource("QuadMesh_4dhkg")
+script = ExtResource("9_gafkf")
+
+[connection signal="bullet_hit" from="BodyContainer/HeadMesh" to="Hit" method="_on_rotator_bullet_hit"]
+[connection signal="shoot" from="BodyContainer/HeadMesh" to="BodyContainer/HeadMesh/Head/ArmR" method="recoil"]
+[connection signal="shoot" from="BodyContainer/HeadMesh" to="BodyContainer/HeadMesh/Head/ArmL" method="recoil"]
+[connection signal="shoot" from="BodyContainer/HeadMesh" to="BodyContainer/HeadMesh/Head/ArmL/Smoke" method="set_emitting" binds= [true]]
+[connection signal="shoot" from="BodyContainer/HeadMesh" to="BodyContainer/HeadMesh/Head/ArmR/Smoke" method="set_emitting" binds= [true]]
 [connection signal="body_entered" from="DetectionSensor" to="BodyContainer/HeadMesh" method="_on_detection_sensor_body_entered"]
 [connection signal="body_exited" from="DetectionSensor" to="BodyContainer/HeadMesh" method="_on_detection_sensor_body_exited"]

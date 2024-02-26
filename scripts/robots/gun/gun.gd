@@ -28,6 +28,8 @@ func _on_detection_sensor_body_entered(body: Node3D) -> void:
 	target = body;
 
 func _on_detection_sensor_body_exited(body: Node3D):
+	if !target:
+		return;
 	if target.get_instance_id() == body.get_instance_id():
 		target = null;
 
